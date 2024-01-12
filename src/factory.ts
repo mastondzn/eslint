@@ -17,6 +17,7 @@ import {
   sortTsconfig,
   stylistic,
   svelte,
+  tailwindcss,
   test,
   toml,
   typescript,
@@ -60,6 +61,7 @@ export async function defineConfig(
     jsx,
     react: enableReact = false,
     svelte: enableSvelte = false,
+    tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
@@ -166,6 +168,13 @@ export async function defineConfig(
     configs.push(unocss({
       ...resolveSubOptions(options, 'unocss'),
       overrides: getOverrides(options, 'unocss'),
+    }));
+  }
+
+  if (enableTailwindCSS) {
+    configs.push(tailwindcss({
+      ...resolveSubOptions(options, 'tailwindcss'),
+      overrides: getOverrides(options, 'tailwindcss'),
     }));
   }
 

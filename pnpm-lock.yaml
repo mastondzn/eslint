@@ -4,218 +4,221 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@antfu/eslint-define-config':
+    specifier: ^1.23.0-2
+    version: 1.23.0-2
+  '@antfu/install-pkg':
+    specifier: ^0.3.1
+    version: 0.3.1
+  '@eslint-types/jsdoc':
+    specifier: 46.8.2-1
+    version: 46.8.2-1
+  '@eslint-types/typescript-eslint':
+    specifier: ^6.17.0
+    version: 6.17.0
+  '@eslint-types/unicorn':
+    specifier: ^50.0.1
+    version: 50.0.1
+  '@stylistic/eslint-plugin':
+    specifier: ^1.5.3
+    version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
+  '@typescript-eslint/eslint-plugin':
+    specifier: ^6.18.0
+    version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
+  '@typescript-eslint/parser':
+    specifier: ^6.18.0
+    version: 6.18.0(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
+  eslint-config-flat-gitignore:
+    specifier: ^0.1.2
+    version: 0.1.2
+  eslint-merge-processors:
+    specifier: ^0.1.0
+    version: 0.1.0(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-antfu:
+    specifier: ^2.1.1
+    version: 2.1.1(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-eslint-comments:
+    specifier: ^3.2.0
+    version: 3.2.0(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-i:
+    specifier: ^2.29.1
+    version: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-jsdoc:
+    specifier: ^48.0.2
+    version: 48.0.2(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-jsonc:
+    specifier: ^2.11.2
+    version: 2.11.2(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-markdown:
+    specifier: ^3.0.1
+    version: 3.0.1(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-n:
+    specifier: ^16.6.1
+    version: 16.6.1(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-no-only-tests:
+    specifier: ^3.1.0
+    version: 3.1.0
+  eslint-plugin-perfectionist:
+    specifier: ^2.5.0
+    version: 2.5.0(eslint-ts-patch@8.56.0-0)(svelte-eslint-parser@0.33.1)(svelte@4.2.8)(typescript@5.3.3)(vue-eslint-parser@9.3.2)
+  eslint-plugin-toml:
+    specifier: ^0.8.0
+    version: 0.8.0(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-unicorn:
+    specifier: ^50.0.1
+    version: 50.0.1(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-unused-imports:
+    specifier: ^3.0.0
+    version: 3.0.0(@typescript-eslint/eslint-plugin@6.18.0)(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-vitest:
+    specifier: ^0.3.20
+    version: 0.3.20(@typescript-eslint/eslint-plugin@6.18.0)(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)(vitest@1.1.3)
+  eslint-plugin-vue:
+    specifier: ^9.19.2
+    version: 9.19.2(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-yml:
+    specifier: ^1.11.0
+    version: 1.11.0(eslint-ts-patch@8.56.0-0)
+  eslint-processor-vue-blocks:
+    specifier: ^0.1.1
+    version: 0.1.1(@vue/compiler-sfc@3.4.5)(eslint-ts-patch@8.56.0-0)
+  globals:
+    specifier: ^13.24.0
+    version: 13.24.0
+  jsonc-eslint-parser:
+    specifier: ^2.4.0
+    version: 2.4.0
+  local-pkg:
+    specifier: ^0.5.0
+    version: 0.5.0
+  parse-gitignore:
+    specifier: ^2.0.0
+    version: 2.0.0
+  picocolors:
+    specifier: ^1.0.0
+    version: 1.0.0
+  prompts:
+    specifier: ^2.4.2
+    version: 2.4.2
+  toml-eslint-parser:
+    specifier: ^0.9.3
+    version: 0.9.3
+  vue-eslint-parser:
+    specifier: ^9.3.2
+    version: 9.3.2(eslint-ts-patch@8.56.0-0)
+  yaml-eslint-parser:
+    specifier: ^1.2.2
+    version: 1.2.2
+  yargs:
+    specifier: ^17.7.2
+    version: 17.7.2
 
-  .:
-    dependencies:
-      '@antfu/eslint-define-config':
-        specifier: ^1.23.0-2
-        version: 1.23.0-2
-      '@antfu/install-pkg':
-        specifier: ^0.3.1
-        version: 0.3.1
-      '@eslint-types/jsdoc':
-        specifier: 46.8.2-1
-        version: 46.8.2-1
-      '@eslint-types/typescript-eslint':
-        specifier: ^6.17.0
-        version: 6.17.0
-      '@eslint-types/unicorn':
-        specifier: ^50.0.1
-        version: 50.0.1
-      '@stylistic/eslint-plugin':
-        specifier: ^1.5.3
-        version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.18.0
-        version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
-      '@typescript-eslint/parser':
-        specifier: ^6.18.0
-        version: 6.18.0(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
-      eslint-config-flat-gitignore:
-        specifier: ^0.1.2
-        version: 0.1.2
-      eslint-merge-processors:
-        specifier: ^0.1.0
-        version: 0.1.0(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-antfu:
-        specifier: ^2.1.1
-        version: 2.1.1(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-i:
-        specifier: ^2.29.1
-        version: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-jsdoc:
-        specifier: ^48.0.2
-        version: 48.0.2(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-jsonc:
-        specifier: ^2.11.2
-        version: 2.11.2(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-markdown:
-        specifier: ^3.0.1
-        version: 3.0.1(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-n:
-        specifier: ^16.6.1
-        version: 16.6.1(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-no-only-tests:
-        specifier: ^3.1.0
-        version: 3.1.0
-      eslint-plugin-perfectionist:
-        specifier: ^2.5.0
-        version: 2.5.0(eslint-ts-patch@8.56.0-0)(svelte-eslint-parser@0.33.1)(svelte@4.2.8)(typescript@5.3.3)(vue-eslint-parser@9.3.2)
-      eslint-plugin-toml:
-        specifier: ^0.8.0
-        version: 0.8.0(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-unicorn:
-        specifier: ^50.0.1
-        version: 50.0.1(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-unused-imports:
-        specifier: ^3.0.0
-        version: 3.0.0(@typescript-eslint/eslint-plugin@6.18.0)(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-vitest:
-        specifier: ^0.3.20
-        version: 0.3.20(@typescript-eslint/eslint-plugin@6.18.0)(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)(vitest@1.1.3)
-      eslint-plugin-vue:
-        specifier: ^9.19.2
-        version: 9.19.2(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-yml:
-        specifier: ^1.11.0
-        version: 1.11.0(eslint-ts-patch@8.56.0-0)
-      eslint-processor-vue-blocks:
-        specifier: ^0.1.1
-        version: 0.1.1(@vue/compiler-sfc@3.4.5)(eslint-ts-patch@8.56.0-0)
-      globals:
-        specifier: ^13.24.0
-        version: 13.24.0
-      jsonc-eslint-parser:
-        specifier: ^2.4.0
-        version: 2.4.0
-      local-pkg:
-        specifier: ^0.5.0
-        version: 0.5.0
-      parse-gitignore:
-        specifier: ^2.0.0
-        version: 2.0.0
-      picocolors:
-        specifier: ^1.0.0
-        version: 1.0.0
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
-      toml-eslint-parser:
-        specifier: ^0.9.3
-        version: 0.9.3
-      vue-eslint-parser:
-        specifier: ^9.3.2
-        version: 9.3.2(eslint-ts-patch@8.56.0-0)
-      yaml-eslint-parser:
-        specifier: ^1.2.2
-        version: 1.2.2
-      yargs:
-        specifier: ^17.7.2
-        version: 17.7.2
-    devDependencies:
-      '@antfu/eslint-config':
-        specifier: workspace:*
-        version: 'link:'
-      '@antfu/eslint-plugin-prettier':
-        specifier: ^5.0.1-1
-        version: 5.0.1-1(@types/eslint@8.56.1)(eslint-ts-patch@8.56.0-0)(prettier@3.1.0)
-      '@antfu/ni':
-        specifier: ^0.21.12
-        version: 0.21.12
-      '@stylistic/eslint-plugin-migrate':
-        specifier: ^1.5.3
-        version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
-      '@types/eslint':
-        specifier: ^8.56.1
-        version: 8.56.1
-      '@types/fs-extra':
-        specifier: ^11.0.4
-        version: 11.0.4
-      '@types/node':
-        specifier: ^20.10.7
-        version: 20.10.7
-      '@types/prompts':
-        specifier: ^2.4.9
-        version: 2.4.9
-      '@types/yargs':
-        specifier: ^17.0.32
-        version: 17.0.32
-      '@unocss/eslint-plugin':
-        specifier: ^0.58.3
-        version: 0.58.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
-      bumpp:
-        specifier: ^9.2.1
-        version: 9.2.1
-      eslint:
-        specifier: npm:eslint-ts-patch@^8.56.0-0
-        version: /eslint-ts-patch@8.56.0-0
-      eslint-flat-config-viewer:
-        specifier: ^0.1.4
-        version: 0.1.4
-      eslint-plugin-format:
-        specifier: ^0.1.0
-        version: 0.1.0(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-react:
-        specifier: ^7.33.2
-        version: 7.33.2(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.0
-        version: 4.6.0(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.5
-        version: 0.4.5(eslint-ts-patch@8.56.0-0)
-      eslint-plugin-svelte:
-        specifier: ^2.35.1
-        version: 2.35.1(eslint-ts-patch@8.56.0-0)(svelte@4.2.8)
-      eslint-ts-patch:
-        specifier: ^8.56.0-0
-        version: 8.56.0-0
-      esno:
-        specifier: ^4.0.0
-        version: 4.0.0
-      execa:
-        specifier: ^8.0.1
-        version: 8.0.1
-      fast-glob:
-        specifier: ^3.3.2
-        version: 3.3.2
-      fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
-      lint-staged:
-        specifier: ^15.2.0
-        version: 15.2.0
-      rimraf:
-        specifier: ^5.0.5
-        version: 5.0.5
-      svelte:
-        specifier: ^4.2.8
-        version: 4.2.8
-      svelte-eslint-parser:
-        specifier: ^0.33.1
-        version: 0.33.1(svelte@4.2.8)
-      tsup:
-        specifier: ^8.0.1
-        version: 8.0.1(postcss@8.4.32)(typescript@5.3.3)
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-      vitest:
-        specifier: ^1.1.3
-        version: 1.1.3(@types/node@20.10.7)
-      vue:
-        specifier: ^3.4.5
-        version: 3.4.5(typescript@5.3.3)
+devDependencies:
+  '@antfu/eslint-plugin-prettier':
+    specifier: ^5.0.1-1
+    version: 5.0.1-1(@types/eslint@8.56.1)(eslint-ts-patch@8.56.0-0)(prettier@3.1.0)
+  '@antfu/ni':
+    specifier: ^0.21.12
+    version: 0.21.12
+  '@stylistic/eslint-plugin-migrate':
+    specifier: ^1.5.3
+    version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
+  '@types/eslint':
+    specifier: ^8.56.1
+    version: 8.56.1
+  '@types/fs-extra':
+    specifier: ^11.0.4
+    version: 11.0.4
+  '@types/node':
+    specifier: ^20.10.7
+    version: 20.10.7
+  '@types/prompts':
+    specifier: ^2.4.9
+    version: 2.4.9
+  '@types/yargs':
+    specifier: ^17.0.32
+    version: 17.0.32
+  '@unocss/eslint-plugin':
+    specifier: ^0.58.3
+    version: 0.58.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
+  bumpp:
+    specifier: ^9.2.1
+    version: 9.2.1
+  eslint:
+    specifier: npm:eslint-ts-patch@^8.56.0-0
+    version: /eslint-ts-patch@8.56.0-0
+  eslint-flat-config-viewer:
+    specifier: ^0.1.4
+    version: 0.1.4
+  eslint-plugin-format:
+    specifier: ^0.1.0
+    version: 0.1.0(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-react:
+    specifier: ^7.33.2
+    version: 7.33.2(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-react-hooks:
+    specifier: ^4.6.0
+    version: 4.6.0(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-react-refresh:
+    specifier: ^0.4.5
+    version: 0.4.5(eslint-ts-patch@8.56.0-0)
+  eslint-plugin-svelte:
+    specifier: ^2.35.1
+    version: 2.35.1(eslint-ts-patch@8.56.0-0)(svelte@4.2.8)
+  eslint-plugin-tailwindcss:
+    specifier: ^3.13.1
+    version: 3.13.1(tailwindcss@3.4.1)
+  eslint-ts-patch:
+    specifier: ^8.56.0-0
+    version: 8.56.0-0
+  esno:
+    specifier: ^4.0.0
+    version: 4.0.0
+  execa:
+    specifier: ^8.0.1
+    version: 8.0.1
+  fast-glob:
+    specifier: ^3.3.2
+    version: 3.3.2
+  fs-extra:
+    specifier: ^11.2.0
+    version: 11.2.0
+  lint-staged:
+    specifier: ^15.2.0
+    version: 15.2.0
+  rimraf:
+    specifier: ^5.0.5
+    version: 5.0.5
+  svelte:
+    specifier: ^4.2.8
+    version: 4.2.8
+  svelte-eslint-parser:
+    specifier: ^0.33.1
+    version: 0.33.1(svelte@4.2.8)
+  tsup:
+    specifier: ^8.0.1
+    version: 8.0.1(postcss@8.4.32)(typescript@5.3.3)
+  typescript:
+    specifier: ^5.3.3
+    version: 5.3.3
+  vitest:
+    specifier: ^1.1.3
+    version: 1.1.3(@types/node@20.10.7)
+  vue:
+    specifier: ^3.4.5
+    version: 3.4.5(typescript@5.3.3)
 
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  /@alloc/quick-lru@5.2.0:
+    resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
+    engines: {node: '>=10'}
+    dev: true
 
   /@ampproject/remapping@2.2.1:
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
@@ -1437,6 +1440,10 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /arg@5.0.2:
+    resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
+    dev: true
+
   /argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
@@ -1653,6 +1660,11 @@ packages:
   /callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+
+  /camelcase-css@2.0.1:
+    resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
+    engines: {node: '>= 6'}
+    dev: true
 
   /caniuse-lite@1.0.30001571:
     resolution: {integrity: sha512-tYq/6MoXhdezDLFZuCO/TKboTzuQ/xR5cFdgXPfDtM7/kchBO3b4VWghE/OAi/DV7tTdhmLjZiZBZi1fA/GheQ==}
@@ -1931,6 +1943,10 @@ packages:
     resolution: {integrity: sha512-M1Ob1zPSIvlARiJUkKqvAZ3VAqQY6Jcuth/pBKQ2b1dX/Qx0OnJ8Vux6J2H5PTMQeRzWrrbTu70VxBfv/OPDJA==}
     dev: true
 
+  /didyoumean@1.2.2:
+    resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
+    dev: true
+
   /diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -1940,6 +1956,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-type: 4.0.0
+
+  /dlv@1.1.3:
+    resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
+    dev: true
 
   /doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -2477,6 +2497,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - ts-node
+    dev: true
+
+  /eslint-plugin-tailwindcss@3.13.1(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-2Nlgr9doO6vFAG9w4iGU0sspWXuzypfng10HTF+dFS2NterhweWtgdRvf/f7aaoOUUxVZM8wMIXzazrZ7CxyeA==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: ^3.3.2
+    dependencies:
+      fast-glob: 3.3.2
+      postcss: 8.4.32
+      tailwindcss: 3.4.1
     dev: true
 
   /eslint-plugin-toml@0.8.0(eslint-ts-patch@8.56.0-0):
@@ -3796,6 +3827,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
+    dev: true
+
   /object-inspect@1.13.1:
     resolution: {integrity: sha512-5qoj1RUiKOMsCCNLV1CBiPYE10sziTsnmNxkAI/rZhiD63CF7IqdFGC/XzjWjpSgLf0LxXX3bDFIh0E18f6UhQ==}
     dev: true
@@ -4022,6 +4058,11 @@ packages:
     hasBin: true
     dev: true
 
+  /pify@2.3.0:
+    resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -4038,6 +4079,28 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
     dev: false
+
+  /postcss-import@15.1.0(postcss@8.4.32):
+    resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.32
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.8
+    dev: true
+
+  /postcss-js@4.0.1(postcss@8.4.32):
+    resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
+    engines: {node: ^12 || ^14 || >= 16}
+    peerDependencies:
+      postcss: ^8.4.21
+    dependencies:
+      camelcase-css: 2.0.1
+      postcss: 8.4.32
+    dev: true
 
   /postcss-load-config@3.1.4(postcss@8.4.32):
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
@@ -4073,6 +4136,16 @@ packages:
       yaml: 2.3.4
     dev: true
 
+  /postcss-nested@6.0.1(postcss@8.4.32):
+    resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.2.14
+    dependencies:
+      postcss: 8.4.32
+      postcss-selector-parser: 6.0.13
+    dev: true
+
   /postcss-safe-parser@6.0.0(postcss@8.4.32):
     resolution: {integrity: sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==}
     engines: {node: '>=12.0'}
@@ -4096,6 +4169,10 @@ packages:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
+
+  /postcss-value-parser@4.2.0:
+    resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
+    dev: true
 
   /postcss@8.4.32:
     resolution: {integrity: sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==}
@@ -4166,6 +4243,12 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /read-cache@1.0.0:
+    resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
+    dependencies:
+      pify: 2.3.0
+    dev: true
 
   /read-pkg-up@7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -4250,7 +4333,6 @@ packages:
       is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-    dev: false
 
   /resolve@2.0.0-next.5:
     resolution: {integrity: sha512-U7WjGVG9sH8tvjW5SmGbQuui75FiyjAX72HX15DwBBwF9dNiQZRQAg9nnPhYy+TUnE0+VcrttuvNI8oSxZcocA==}
@@ -4664,6 +4746,37 @@ packages:
     dependencies:
       '@pkgr/core': 0.1.0
       tslib: 2.6.2
+    dev: true
+
+  /tailwindcss@3.4.1:
+    resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      arg: 5.0.2
+      chokidar: 3.5.3
+      didyoumean: 1.2.2
+      dlv: 1.1.3
+      fast-glob: 3.3.2
+      glob-parent: 6.0.2
+      is-glob: 4.0.3
+      jiti: 1.21.0
+      lilconfig: 2.1.0
+      micromatch: 4.0.5
+      normalize-path: 3.0.0
+      object-hash: 3.0.0
+      picocolors: 1.0.0
+      postcss: 8.4.32
+      postcss-import: 15.1.0(postcss@8.4.32)
+      postcss-js: 4.0.1(postcss@8.4.32)
+      postcss-load-config: 4.0.1(postcss@8.4.32)
+      postcss-nested: 6.0.1(postcss@8.4.32)
+      postcss-selector-parser: 6.0.13
+      resolve: 1.22.8
+      sucrase: 3.34.0
+    transitivePeerDependencies:
+      - ts-node
     dev: true
 
   /tar@6.2.0:

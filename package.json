@@ -25,7 +25,6 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": "./bin/index.js",
   "files": [
     "bin",
     "dist",
@@ -50,6 +49,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-svelte": "^2.34.1",
+    "eslint-plugin-tailwindcss": "^3.13.1",
     "eslint-plugin-unicorn": "^50.0.1",
     "svelte-eslint-parser": "^0.33.1"
   },
@@ -70,6 +70,9 @@
       "optional": true
     },
     "eslint-plugin-svelte": {
+      "optional": true
+    },
+    "eslint-plugin-tailwindcss": {
       "optional": true
     },
     "eslint-plugin-unicorn": {
@@ -117,7 +120,6 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "workspace:*",
     "@antfu/eslint-plugin-prettier": "^5.0.1-1",
     "@antfu/ni": "^0.21.12",
     "@stylistic/eslint-plugin-migrate": "^1.5.3",
@@ -135,6 +137,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-svelte": "^2.35.1",
+    "eslint-plugin-tailwindcss": "^3.13.1",
     "eslint-ts-patch": "^8.56.0-0",
     "esno": "^4.0.0",
     "execa": "^8.0.1",

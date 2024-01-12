@@ -207,6 +207,31 @@ export interface OptionsUnoCSS extends OptionsOverrides {
   strict?: boolean
 }
 
+/**
+ * @see https://www.npmjs.com/package/eslint-plugin-tailwindcss#more-settings
+ */
+export interface OptionsTailwindCSS extends OptionsOverrides {
+  /**
+   * Object/functions that use tailwindcss classes.
+   *
+   * @default ["classnames", "clsx", "ctl"]
+   */
+  callees?: string[]
+  /**
+   * Path to the tailwind config file.
+   *
+   * @default "tailwind.config.js"
+   */
+  config?: string
+  cssFiles?: string[]
+  cssFilesRefreshRate?: number
+  removeDuplicates?: boolean
+  skipClassAttribute?: boolean
+  whitelist?: string[]
+  tags?: string[]
+  classRegex?: string
+}
+
 export interface OptionsConfig extends OptionsComponentExtensions {
   /**
    * Enable gitignore support.
@@ -323,6 +348,16 @@ export interface OptionsConfig extends OptionsComponentExtensions {
    * @default false
    */
   unocss?: boolean | OptionsUnoCSS
+
+  /**
+   * Enable tailwindcss rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-tailwindcss`
+   *
+   * @default false
+   */
+  tailwindcss?: boolean | OptionsTailwindCSS
 
   /**
    * Use external formatters to format files.
