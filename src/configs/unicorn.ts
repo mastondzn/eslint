@@ -1,4 +1,4 @@
-import { ensurePackages } from '../utils';
+import { ensurePackages, interopDefault } from '../utils';
 import type { FlatConfigItem, OptionsOverrides } from '../types';
 
 export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfigItem[]> {
@@ -11,7 +11,7 @@ export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfi
   ]);
 
   // @ts-expect-error no types
-  const pluginUnicorn = await import('eslint-plugin-unicorn');
+  const pluginUnicorn = await interopDefault(import('eslint-plugin-unicorn'));
 
   return [
     {
