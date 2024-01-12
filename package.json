@@ -41,6 +41,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@mastondzn/eslint-plugin-tailwindcss": "^3.14.1",
     "@unocss/eslint-plugin": ">=0.50.0",
     "eslint": ">=8.40.0",
     "eslint-plugin-format": ">=0.1.0",
@@ -48,11 +49,13 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-svelte": "^2.34.1",
-    "eslint-plugin-tailwindcss": "^3.13.1",
     "eslint-plugin-unicorn": "^50.0.1",
     "svelte-eslint-parser": "^0.33.1"
   },
   "peerDependenciesMeta": {
+    "@mastondzn/eslint-plugin-tailwindcss": {
+      "optional": true
+    },
     "@unocss/eslint-plugin": {
       "optional": true
     },
@@ -69,9 +72,6 @@
       "optional": true
     },
     "eslint-plugin-svelte": {
-      "optional": true
-    },
-    "eslint-plugin-tailwindcss": {
       "optional": true
     },
     "eslint-plugin-unicorn": {
@@ -121,6 +121,7 @@
   "devDependencies": {
     "@antfu/eslint-plugin-prettier": "^5.0.1-1",
     "@antfu/ni": "^0.21.12",
+    "@mastondzn/eslint-plugin-tailwindcss": "^3.14.1",
     "@stylistic/eslint-plugin-migrate": "^1.5.3",
     "@types/eslint": "^8.56.1",
     "@types/fs-extra": "^11.0.4",
@@ -136,7 +137,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-svelte": "^2.35.1",
-    "eslint-plugin-tailwindcss": "^3.13.1",
     "eslint-ts-patch": "^8.56.0-0",
     "esno": "^4.0.0",
     "execa": "^8.0.1",

@@ -121,6 +121,9 @@ devDependencies:
   '@antfu/ni':
     specifier: ^0.21.12
     version: 0.21.12
+  '@mastondzn/eslint-plugin-tailwindcss':
+    specifier: ^3.14.1
+    version: 3.14.1(tailwindcss@3.4.1)
   '@stylistic/eslint-plugin-migrate':
     specifier: ^1.5.3
     version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
@@ -166,9 +169,6 @@ devDependencies:
   eslint-plugin-svelte:
     specifier: ^2.35.1
     version: 2.35.1(eslint-ts-patch@8.56.0-0)(svelte@4.2.8)
-  eslint-plugin-tailwindcss:
-    specifier: ^3.13.1
-    version: 3.13.1(tailwindcss@3.4.1)
   eslint-ts-patch:
     specifier: ^8.56.0-0
     version: 8.56.0-0
@@ -843,6 +843,17 @@ packages:
       cross-spawn: 7.0.3
       string-argv: 0.3.2
       type-detect: 4.0.8
+    dev: true
+
+  /@mastondzn/eslint-plugin-tailwindcss@3.14.1(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-Jms/tZ3qNuLZavT9ZTk4QnkvO+F+wzp4hAFZD16qUErg94yeJoyw44e6IXFQd9mAOLDaBkxwBN944zOqZ6M6yQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      tailwindcss: ^3.3.2
+    dependencies:
+      fast-glob: 3.3.2
+      postcss: 8.4.32
+      tailwindcss: 3.4.1
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -2450,17 +2461,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - ts-node
-    dev: true
-
-  /eslint-plugin-tailwindcss@3.13.1(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-2Nlgr9doO6vFAG9w4iGU0sspWXuzypfng10HTF+dFS2NterhweWtgdRvf/f7aaoOUUxVZM8wMIXzazrZ7CxyeA==}
-    engines: {node: '>=12.13.0'}
-    peerDependencies:
-      tailwindcss: ^3.3.2
-    dependencies:
-      fast-glob: 3.3.2
-      postcss: 8.4.32
-      tailwindcss: 3.4.1
     dev: true
 
   /eslint-plugin-toml@0.8.0(eslint-ts-patch@8.56.0-0):
