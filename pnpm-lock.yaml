@@ -124,6 +124,9 @@ devDependencies:
   '@mastondzn/eslint-plugin-tailwindcss':
     specifier: ^3.14.1
     version: 3.14.1(tailwindcss@3.4.1)
+  '@next/eslint-plugin-next':
+    specifier: ^0.0.0
+    version: 0.0.0
   '@stylistic/eslint-plugin-migrate':
     specifier: ^1.5.3
     version: 1.5.3(eslint-ts-patch@8.56.0-0)(typescript@5.3.3)
@@ -157,9 +160,6 @@ devDependencies:
   eslint-plugin-format:
     specifier: ^0.1.0
     version: 0.1.0(eslint-ts-patch@8.56.0-0)
-  eslint-plugin-next:
-    specifier: ^0.0.0
-    version: 0.0.0
   eslint-plugin-react:
     specifier: ^7.33.2
     version: 7.33.2(eslint-ts-patch@8.56.0-0)
@@ -857,6 +857,10 @@ packages:
       fast-glob: 3.3.2
       postcss: 8.4.32
       tailwindcss: 3.4.1
+    dev: true
+
+  /@next/eslint-plugin-next@0.0.0:
+    resolution: {integrity: sha512-XP+Up9aqZ3QVHv+atwUlPgy56FGKPrf0QNtIPNZssgkQFQuPUdB7TTfEicPNwb/BF587Alw0Shlx2BIYo5b3JQ==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -2359,10 +2363,6 @@ packages:
       resolve: 1.22.8
       semver: 7.5.4
     dev: false
-
-  /eslint-plugin-next@0.0.0:
-    resolution: {integrity: sha512-IldNDVb6WNduggwRbYzSGZhaskUwVecJ6fhmqwX01+S1aohwAWNzU4me6y47DDzpD/g0fdayNBGxEdt9vKkUtg==}
-    dev: true
 
   /eslint-plugin-no-only-tests@3.1.0:
     resolution: {integrity: sha512-Lf4YW/bL6Un1R6A76pRZyE1dl1vr31G/ev8UzIc/geCgFWyrKil8hVjYqWVKGB/UIGmb6Slzs9T0wNezdSVegw==}

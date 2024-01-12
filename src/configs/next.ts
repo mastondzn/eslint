@@ -9,11 +9,11 @@ export async function next(
   } = options;
 
   await ensurePackages([
-    'eslint-plugin-next',
+    '@next/eslint-plugin-next',
   ]);
 
   // @ts-expect-error no types
-  const pluginNext = await interopDefault(import('eslint-plugin-next'));
+  const pluginNext = await interopDefault(import('@next/eslint-plugin-next'));
 
   return [{
     name: 'mastondzn:next',
