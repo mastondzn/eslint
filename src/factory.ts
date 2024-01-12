@@ -198,7 +198,7 @@ export async function defineConfig(
     configs.push(
       markdown(
         {
-          componentExts: componentExtensions,
+          componentExtensions,
           overrides: getOverrides(options, 'markdown'),
         },
       ),
