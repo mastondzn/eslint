@@ -45,6 +45,7 @@ export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfi
         'unicorn/prefer-dom-node-text-content': 'error',
         // includes over indexOf when checking for existence
         'unicorn/prefer-includes': 'error',
+        'unicorn/prefer-module': 'off',
         // Prefer using the node: protocol
         'unicorn/prefer-node-protocol': 'error',
         // Prefer using number properties like `Number.isNaN` rather than `isNaN`
