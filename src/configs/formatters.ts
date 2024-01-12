@@ -1,8 +1,8 @@
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
-import type { VendoredPrettierOptions } from '../vender/prettier-types'
-import { ensurePackages, interopDefault, parserPlain } from '../utils'
-import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
-import { StylisticConfigDefaults } from './stylistic'
+import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs';
+import type { VendoredPrettierOptions } from '../vender/prettier-types';
+import { ensurePackages, interopDefault, parserPlain } from '../utils';
+import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types';
+import { StylisticConfigDefaults } from './stylistic';
 
 export async function formatters(
   options: OptionsFormatters | true = {},
@@ -10,7 +10,7 @@ export async function formatters(
 ): Promise<FlatConfigItem[]> {
   await ensurePackages([
     'eslint-plugin-format',
-  ])
+  ]);
 
   if (options === true) {
     options = {
@@ -18,7 +18,7 @@ export async function formatters(
       graphql: true,
       html: true,
       markdown: true,
-    }
+    };
   }
 
   const {
@@ -28,7 +28,7 @@ export async function formatters(
   } = {
     ...StylisticConfigDefaults,
     ...stylistic,
-  }
+  };
 
   const prettierOptions: VendoredPrettierOptions = Object.assign(
     {
@@ -40,7 +40,7 @@ export async function formatters(
       useTabs: indent === 'tab',
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
-  )
+  );
 
   const dprintOptions = Object.assign(
     {
@@ -49,9 +49,9 @@ export async function formatters(
       useTabs: indent === 'tab',
     },
     options.dprintOptions || {},
-  )
+  );
 
-  const pluginFormat = await interopDefault(import('eslint-plugin-format'))
+  const pluginFormat = await interopDefault(import('eslint-plugin-format'));
 
   const configs: FlatConfigItem[] = [
     {
@@ -60,7 +60,7 @@ export async function formatters(
         format: pluginFormat,
       },
     },
-  ]
+  ];
 
   if (options.css) {
     configs.push(
@@ -112,7 +112,7 @@ export async function formatters(
           ],
         },
       },
-    )
+    );
   }
 
   if (options.html) {
@@ -131,13 +131,13 @@ export async function formatters(
           },
         ],
       },
-    })
+    });
   }
 
   if (options.markdown) {
     const formater = options.markdown === true
       ? 'prettier'
-      : options.markdown
+      : options.markdown;
 
     configs.push({
       files: [GLOB_MARKDOWN],
@@ -161,7 +161,7 @@ export async function formatters(
               },
         ],
       },
-    })
+    });
   }
 
   if (options.graphql) {
@@ -180,8 +180,8 @@ export async function formatters(
           },
         ],
       },
-    })
+    });
   }
 
-  return configs
+  return configs;
 }

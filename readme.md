@@ -1,3 +1,5 @@
+<!-- eslint-disable-next-line unicorn/filename-case -->
+
 # @antfu/eslint-config
 
 [![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=)](https://npmjs.com/package/@antfu/eslint-config) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
@@ -33,18 +35,20 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
-export default antfu()
+export default antfu();
 ```
 
 With CJS:
 
+<!-- eslint-disable -->
+
 ```js
 // eslint.config.js
-const antfu = require('@antfu/eslint-config').default
+const antfu = require('@antfu/eslint-config').default;
 
-module.exports = antfu()
+module.exports = antfu();
 ```
 
 > [!TIP]
@@ -52,12 +56,14 @@ module.exports = antfu()
 
 Combined with legacy config:
 
+<!-- eslint-disable -->
+
 ```js
 // eslint.config.js
-const antfu = require('@antfu/eslint-config').default
-const { FlatCompat } = require('@eslint/eslintrc')
+const antfu = require('@antfu/eslint-config').default;
+const { FlatCompat } = require('@eslint/eslintrc');
 
-const compat = new FlatCompat()
+const compat = new FlatCompat();
 
 module.exports = antfu(
   {
@@ -73,7 +79,7 @@ module.exports = antfu(
   })
 
   // Other flat configs...
-)
+);
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
@@ -161,16 +167,16 @@ Normally you only need to import the `antfu` preset:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
-export default antfu()
+export default antfu();
 ```
 
 And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   // Enable stylistic formatting rules
@@ -195,14 +201,14 @@ export default antfu({
     './fixtures',
     // ...globs
   ]
-})
+});
 ```
 
 The `antfu` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu(
   {
@@ -218,7 +224,7 @@ export default antfu(
   {
     rules: {},
   },
-)
+);
 ```
 
 Going more advanced, you can also import fine-grained configs and compose them as you wish:
@@ -248,7 +254,7 @@ import {
   unicorn,
   vue,
   yaml,
-} from '@antfu/eslint-config'
+} from '@antfu/eslint-config';
 
 export default combine(
   ignores(),
@@ -265,7 +271,7 @@ export default combine(
   yaml(),
   toml(),
   markdown(),
-)
+);
 ```
 
 </details>
@@ -302,7 +308,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu(
   {
@@ -322,14 +328,14 @@ export default antfu(
       'style/semi': ['error', 'never'],
     },
   }
-)
+);
 ```
 
 We also provided a `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   vue: {
@@ -347,7 +353,7 @@ export default antfu({
       // ...
     },
   },
-})
+});
 ```
 
 ### Optional Configs
@@ -363,7 +369,7 @@ Use external formatters to format files that ESLint cannot handle yet (`.css`, `
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   formatters: {
@@ -384,7 +390,7 @@ export default antfu({
      */
     markdown: 'prettier'
   }
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -399,11 +405,11 @@ To enable React support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   react: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -418,11 +424,11 @@ To enable svelte support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   svelte: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -437,11 +443,11 @@ To enable UnoCSS support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   unocss: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -468,7 +474,7 @@ const objectWantedToSort = {
   a: 2,
   b: 1,
   c: 3,
-}
+};
 /* eslint perfectionist/sort-objects: "off" */
 ```
 
@@ -478,13 +484,13 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   typescript: {
     tsconfigPath: 'tsconfig.json',
   },
-})
+});
 ```
 
 ### Lint Staged

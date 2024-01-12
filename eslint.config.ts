@@ -1,6 +1,6 @@
 // @ts-expect-error missing types
-import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import antfu from './src'
+import styleMigrate from '@stylistic/eslint-plugin-migrate';
+import antfu from './src';
 
 export default antfu(
   {
@@ -11,7 +11,11 @@ export default antfu(
       'fixtures',
       '_fixtures',
     ],
+
     formatters: true,
+    stylistic: {
+      semi: true,
+    },
   },
   {
     files: ['src/**/*.ts'],
@@ -28,4 +32,4 @@ export default antfu(
       'style-migrate/migrate': ['error', { namespaceTo: 'style' }],
     },
   },
-)
+);

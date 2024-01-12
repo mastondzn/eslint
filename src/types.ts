@@ -1,7 +1,7 @@
-import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { ParserOptions } from '@typescript-eslint/parser'
-import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
-import type { Linter } from 'eslint'
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { ParserOptions } from '@typescript-eslint/parser';
+import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
+import type { Linter } from 'eslint';
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -18,19 +18,19 @@ import type {
   VitestRules,
   VueRules,
   YmlRules,
-} from '@antfu/eslint-define-config'
-import type { RuleOptions as JSDocRules } from '@eslint-types/jsdoc/types'
-import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types'
-import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
-import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin'
-import type { VendoredPrettierOptions } from './vender/prettier-types'
+} from '@antfu/eslint-define-config';
+import type { RuleOptions as JSDocumentRules } from '@eslint-types/jsdoc/types';
+import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types';
+import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types';
+import type { Rules as AntfuRules } from 'eslint-plugin-antfu';
+import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin';
+import type { VendoredPrettierOptions } from './vender/prettier-types';
 
-export type WrapRuleConfig<T extends { [key: string]: any }> = {
+export type WrapRuleConfig<T extends Record<string, any>> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
-}
+};
 
-export type Awaitable<T> = T | Promise<T>
+export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = WrapRuleConfig<
   MergeIntersection<
@@ -42,7 +42,7 @@ export type Rules = WrapRuleConfig<
     Prefix<AntfuRules, 'antfu/'> &
     ReactHooksRules &
     ReactRules &
-    JSDocRules &
+    JSDocumentRules &
     ImportRules &
     EslintRules &
     JsoncRules &
@@ -54,9 +54,9 @@ export type Rules = WrapRuleConfig<
       'test/no-only-tests': RuleConfig<[]>
     }
   >
->
+>;
 
-export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules>, 'plugins'> & {
   /**
    * Custom name of each config item
    */
@@ -69,9 +69,9 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'>
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>
-}
+};
 
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 
 export interface OptionsFiles {
   /**
@@ -99,7 +99,7 @@ export interface OptionsVue extends OptionsOverrides {
 
 export type OptionsTypescript =
   (OptionsTypeScriptWithTypes & OptionsOverrides)
-  | (OptionsTypeScriptParserOptions & OptionsOverrides)
+  | (OptionsTypeScriptParserOptions & OptionsOverrides);
 
 export interface OptionsFormatters {
   /**
@@ -145,14 +145,14 @@ export interface OptionsFormatters {
   dprintOptions?: boolean
 }
 
-export interface OptionsComponentExts {
+export interface OptionsComponentExtensions {
   /**
    * Additional extensions for components.
    *
    * @example ['vue']
    * @default []
    */
-  componentExts?: string[]
+  componentExtensions?: string[]
 }
 
 export interface OptionsTypeScriptParserOptions {
@@ -184,8 +184,7 @@ export interface OptionsStylistic {
   stylistic?: boolean | StylisticConfig
 }
 
-export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
-}
+export type StylisticConfig = Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'>;
 
 export interface OptionsOverrides {
   overrides?: FlatConfigItem['rules']
@@ -208,7 +207,7 @@ export interface OptionsUnoCSS extends OptionsOverrides {
   strict?: boolean
 }
 
-export interface OptionsConfig extends OptionsComponentExts {
+export interface OptionsConfig extends OptionsComponentExtensions {
   /**
    * Enable gitignore support.
    *
@@ -338,27 +337,16 @@ export interface OptionsConfig extends OptionsComponentExts {
   formatters?: boolean | OptionsFormatters
 
   /**
+   * Enable unicorn rules.
+   *
+   * @default true
+   */
+  unicorn?: boolean | OptionsOverrides
+
+  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
   isInEditor?: boolean
 
-  /**
-   * Provide overrides for rules for each integration.
-   *
-   * @deprecated use `overrides` option in each integration key instead
-   */
-  overrides?: {
-    stylistic?: FlatConfigItem['rules']
-    javascript?: FlatConfigItem['rules']
-    typescript?: FlatConfigItem['rules']
-    test?: FlatConfigItem['rules']
-    vue?: FlatConfigItem['rules']
-    jsonc?: FlatConfigItem['rules']
-    markdown?: FlatConfigItem['rules']
-    yaml?: FlatConfigItem['rules']
-    toml?: FlatConfigItem['rules']
-    react?: FlatConfigItem['rules']
-    svelte?: FlatConfigItem['rules']
-  }
 }

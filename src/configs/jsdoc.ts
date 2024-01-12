@@ -1,10 +1,10 @@
-import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsStylistic } from '../types'
+import { interopDefault } from '../utils';
+import type { FlatConfigItem, OptionsStylistic } from '../types';
 
 export async function jsdoc(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
   const {
     stylistic = true,
-  } = options
+  } = options;
 
   return [
     {
@@ -37,5 +37,5 @@ export async function jsdoc(options: OptionsStylistic = {}): Promise<FlatConfigI
           : {},
       },
     },
-  ]
+  ];
 }

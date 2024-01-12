@@ -1,11 +1,11 @@
-import type { FlatConfigItem, OptionsStylistic } from '../types'
-import { pluginAntfu, pluginImport } from '../plugins'
-import { GLOB_SRC_EXT } from '../globs'
+import type { FlatConfigItem, OptionsStylistic } from '../types';
+import { pluginAntfu, pluginImport } from '../plugins';
+import { GLOB_SRC_EXT } from '../globs';
 
 export async function imports(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
   const {
     stylistic = true,
-  } = options
+  } = options;
 
   return [
     {
@@ -42,5 +42,5 @@ export async function imports(options: OptionsStylistic = {}): Promise<FlatConfi
         'antfu/no-import-node-modules-by-path': 'off',
       },
     },
-  ]
+  ];
 }

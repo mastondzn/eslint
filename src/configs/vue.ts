@@ -1,7 +1,7 @@
-import { mergeProcessors } from 'eslint-merge-processors'
-import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
-import { GLOB_VUE } from '../globs'
+import { mergeProcessors } from 'eslint-merge-processors';
+import { interopDefault } from '../utils';
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types';
+import { GLOB_VUE } from '../globs';
 
 export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
@@ -10,16 +10,17 @@ export async function vue(
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
+    typescript,
     vueVersion = 3,
-  } = options
+  } = options;
 
   const sfcBlocks = options.sfcBlocks === true
     ? {}
-    : options.sfcBlocks ?? {}
+    : options.sfcBlocks ?? {};
 
   const {
     indent = 2,
-  } = typeof stylistic === 'boolean' ? {} : stylistic
+  } = typeof stylistic === 'boolean' ? {} : stylistic;
 
   const [
     pluginVue,
@@ -30,7 +31,7 @@ export async function vue(
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),
     interopDefault(import('eslint-processor-vue-blocks')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -48,7 +49,7 @@ export async function vue(
             jsx: true,
           },
           extraFileExtensions: ['.vue'],
-          parser: options.typescript
+          parser: typescript
             ? await interopDefault(import('@typescript-eslint/parser')) as any
             : null,
           sourceType: 'module',
@@ -68,18 +69,18 @@ export async function vue(
           }),
         ]),
       rules: {
-        ...pluginVue.configs.base.rules as any,
+        ...pluginVue.configs.base.rules,
 
         ...vueVersion === 2
           ? {
-              ...pluginVue.configs.essential.rules as any,
-              ...pluginVue.configs['strongly-recommended'].rules as any,
-              ...pluginVue.configs.recommended.rules as any,
+              ...pluginVue.configs.essential.rules,
+              ...pluginVue.configs['strongly-recommended'].rules,
+              ...pluginVue.configs.recommended.rules,
             }
           : {
-              ...pluginVue.configs['vue3-essential'].rules as any,
-              ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
-              ...pluginVue.configs['vue3-recommended'].rules as any,
+              ...pluginVue.configs['vue3-essential'].rules,
+              ...pluginVue.configs['vue3-strongly-recommended'].rules,
+              ...pluginVue.configs['vue3-recommended'].rules,
             },
 
         'node/prefer-global/process': 'off',
@@ -164,5 +165,5 @@ export async function vue(
         ...overrides,
       },
     },
-  ]
+  ];
 }

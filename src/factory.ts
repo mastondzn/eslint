@@ -1,7 +1,7 @@
-import process from 'node:process'
-import fs from 'node:fs'
-import { isPackageExists } from 'local-pkg'
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
+import process from 'node:process';
+import fs from 'node:fs';
+import { isPackageExists } from 'local-pkg';
+import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
 import {
   comments,
   ignores,
@@ -24,11 +24,11 @@ import {
   unocss,
   vue,
   yaml,
-} from './configs'
-import { combine, interopDefault } from './utils'
-import { formatters } from './configs/formatters'
+} from './configs';
+import { combine, interopDefault } from './utils';
+import { formatters } from './configs/formatters';
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
+const flatConfigProperties: (keyof FlatConfigItem)[] = [
   'files',
   'ignores',
   'languageOptions',
@@ -37,14 +37,14 @@ const flatConfigProps: (keyof FlatConfigItem)[] = [
   'plugins',
   'rules',
   'settings',
-]
+];
 
 const VuePackages = [
   'vue',
   'nuxt',
   'vitepress',
   '@slidev/cli',
-]
+];
 
 /**
  * Construct an array of ESLint flat config items.
@@ -54,34 +54,36 @@ export async function antfu(
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const {
-    componentExts = [],
+    componentExtensions = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    jsx,
     react: enableReact = false,
     svelte: enableSvelte = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
+    unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
-    vue: enableVue = VuePackages.some(i => isPackageExists(i)),
-  } = options
+    vue: enableVue = VuePackages.some(index => isPackageExists(index)),
+  } = options;
 
   const stylisticOptions = options.stylistic === false
     ? false
-    : typeof options.stylistic === 'object'
-      ? options.stylistic
-      : {}
+    : (typeof options.stylistic === 'object'
+        ? options.stylistic
+        : {});
 
   if (stylisticOptions && !('jsx' in stylisticOptions))
-    stylisticOptions.jsx = options.jsx ?? true
+    stylisticOptions.jsx = jsx ?? true;
 
-  const configs: Awaitable<FlatConfigItem[]>[] = []
+  const configs: Awaitable<FlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
-    if (typeof enableGitignore !== 'boolean') {
-      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
+    if (typeof enableGitignore === 'boolean') {
+      if (fs.existsSync('.gitignore'))
+        configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]));
     }
     else {
-      if (fs.existsSync('.gitignore'))
-        configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]))
+      configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]));
     }
   }
 
@@ -100,35 +102,40 @@ export async function antfu(
     imports({
       stylistic: stylisticOptions,
     }),
-    unicorn(),
 
     // Optional plugins (installed but not enabled by default)
     perfectionist(),
-  )
+  );
 
   if (enableVue)
-    componentExts.push('vue')
+    componentExtensions.push('vue');
+
+  if (enableUnicorn) {
+    configs.push(unicorn({
+      overrides: getOverrides(options, 'unicorn'),
+    }));
+  }
 
   if (enableTypeScript) {
     configs.push(typescript({
       ...resolveSubOptions(options, 'typescript'),
-      componentExts,
+      componentExtensions,
       overrides: getOverrides(options, 'typescript'),
-    }))
+    }));
   }
 
   if (stylisticOptions) {
     configs.push(stylistic({
       ...stylisticOptions,
       overrides: getOverrides(options, 'stylistic'),
-    }))
+    }));
   }
 
   if (options.test ?? true) {
     configs.push(test({
       isInEditor,
       overrides: getOverrides(options, 'test'),
-    }))
+    }));
   }
 
   if (enableVue) {
@@ -137,14 +144,14 @@ export async function antfu(
       overrides: getOverrides(options, 'vue'),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
-    }))
+    }));
   }
 
   if (enableReact) {
     configs.push(react({
       overrides: getOverrides(options, 'react'),
       typescript: !!enableTypeScript,
-    }))
+    }));
   }
 
   if (enableSvelte) {
@@ -152,14 +159,14 @@ export async function antfu(
       overrides: getOverrides(options, 'svelte'),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
-    }))
+    }));
   }
 
   if (enableUnoCSS) {
     configs.push(unocss({
       ...resolveSubOptions(options, 'unocss'),
       overrides: getOverrides(options, 'unocss'),
-    }))
+    }));
   }
 
   if (options.jsonc ?? true) {
@@ -170,62 +177,62 @@ export async function antfu(
       }),
       sortPackageJson(),
       sortTsconfig(),
-    )
+    );
   }
 
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: getOverrides(options, 'yaml'),
       stylistic: stylisticOptions,
-    }))
+    }));
   }
 
   if (options.toml ?? true) {
     configs.push(toml({
       overrides: getOverrides(options, 'toml'),
       stylistic: stylisticOptions,
-    }))
+    }));
   }
 
   if (options.markdown ?? true) {
     configs.push(
       markdown(
         {
-          componentExts,
+          componentExts: componentExtensions,
           overrides: getOverrides(options, 'markdown'),
         },
       ),
-    )
+    );
   }
 
   if (options.formatters) {
     configs.push(formatters(
       options.formatters,
       typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
-    ))
+    ));
   }
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
-  const fusedConfig = flatConfigProps.reduce((acc, key) => {
+  const fusedConfig = flatConfigProperties.reduce<FlatConfigItem>((accumulator, key) => {
     if (key in options)
-      acc[key] = options[key] as any
-    return acc
-  }, {} as FlatConfigItem)
-  if (Object.keys(fusedConfig).length)
-    configs.push([fusedConfig])
+      accumulator[key] = options[key] as any;
+    return accumulator;
+  }, {});
+  if (Object.keys(fusedConfig).length > 0)
+    configs.push([fusedConfig]);
 
   const merged = combine(
     ...configs,
     ...userConfigs,
-  )
+  );
 
-  return merged
+  return merged;
 }
 
 export type ResolvedOptions<T> = T extends boolean
   ? never
-  : NonNullable<T>
+  : NonNullable<T>;
 
 export function resolveSubOptions<K extends keyof OptionsConfig>(
   options: OptionsConfig,
@@ -233,18 +240,18 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
 ): ResolvedOptions<OptionsConfig[K]> {
   return typeof options[key] === 'boolean'
     ? {} as any
-    : options[key] || {}
+    : options[key] || {};
 }
 
 export function getOverrides<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
 ) {
-  const sub = resolveSubOptions(options, key)
+  const sub = resolveSubOptions(options, key);
   return {
     ...(options.overrides as any)?.[key],
     ...'overrides' in sub
       ? sub.overrides
       : {},
-  }
+  };
 }

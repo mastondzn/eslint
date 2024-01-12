@@ -1,26 +1,50 @@
-import process from 'node:process'
-import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
-import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
-import { pluginAntfu } from '../plugins'
-import { interopDefault, renameRules, toArray } from '../utils'
+import process from 'node:process';
+import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs';
+import type { FlatConfigItem, OptionsComponentExtensions, OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types';
+import { pluginAntfu } from '../plugins';
+import { interopDefault, renameRules, toArray } from '../utils';
 
 export async function typescript(
-  options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {},
+  options: OptionsFiles & OptionsComponentExtensions & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    componentExts = [],
+    componentExtensions = [],
     overrides = {},
     parserOptions = {},
-  } = options
+  } = options;
+
+  const [
+    pluginTs,
+    parserTs,
+  ] = await Promise.all([
+    interopDefault(import('@typescript-eslint/eslint-plugin')),
+    interopDefault(import('@typescript-eslint/parser')),
+  ] as const);
 
   const files = options.files ?? [
     GLOB_SRC,
-    ...componentExts.map(ext => `**/*.${ext}`),
-  ]
+    ...componentExtensions.map(extension => `**/*.${extension}`),
+  ];
 
-  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
+
+  const tsconfigPath = options.tsconfigPath
+    ? toArray(options.tsconfigPath)
+    : undefined;
+
+  const isTypeAware = !!tsconfigPath;
 
   const typeAwareRules: FlatConfigItem['rules'] = {
+    ...renameRules(
+      pluginTs.configs['strict-type-checked'].rules!,
+      '@typescript-eslint/',
+      'ts/',
+    ),
+    ...renameRules(
+      pluginTs.configs['stylistic-type-checked'].rules!,
+      '@typescript-eslint/',
+      'ts/',
+    ),
     'dot-notation': 'off',
     'no-implied-eval': 'off',
     'no-throw-literal': 'off',
@@ -30,6 +54,7 @@ export async function typescript(
     'ts/no-for-in-array': 'error',
     'ts/no-implied-eval': 'error',
     'ts/no-misused-promises': 'error',
+    'ts/no-non-null-assertion': 'warn',
     'ts/no-throw-literal': 'error',
     'ts/no-unnecessary-type-assertion': 'error',
     'ts/no-unsafe-argument': 'error',
@@ -40,19 +65,29 @@ export async function typescript(
     'ts/restrict-plus-operands': 'error',
     'ts/restrict-template-expressions': 'error',
     'ts/unbound-method': 'error',
+  };
+
+  function makeParser(typeAware: boolean, files: string[], ignores?: string[]): FlatConfigItem {
+    return {
+      files,
+      ...ignores ? { ignores } : {},
+      languageOptions: {
+        parser: parserTs,
+        parserOptions: {
+          extraFileExtensions: componentExtensions.map(extension => `.${extension}`),
+          sourceType: 'module',
+          ...typeAware
+            ? {
+                project: tsconfigPath,
+                tsconfigRootDir: process.cwd(),
+              }
+            : {},
+          ...parserOptions as object,
+        },
+      },
+      name: `antfu:typescript:${typeAware ? 'type-aware-parser' : 'parser'}`,
+    };
   }
-
-  const tsconfigPath = options?.tsconfigPath
-    ? toArray(options.tsconfigPath)
-    : undefined
-
-  const [
-    pluginTs,
-    parserTs,
-  ] = await Promise.all([
-    interopDefault(import('@typescript-eslint/eslint-plugin')),
-    interopDefault(import('@typescript-eslint/parser')),
-  ] as const)
 
   return [
     {
@@ -60,34 +95,27 @@ export async function typescript(
       name: 'antfu:typescript:setup',
       plugins: {
         antfu: pluginAntfu,
+
         ts: pluginTs as any,
       },
     },
+    ...isTypeAware
+      ? [
+          makeParser(true, filesTypeAware),
+          makeParser(false, files, filesTypeAware),
+        ]
+      : [makeParser(false, files)],
     {
       files,
-      languageOptions: {
-        parser: parserTs,
-        parserOptions: {
-          extraFileExtensions: componentExts.map(ext => `.${ext}`),
-          sourceType: 'module',
-          ...tsconfigPath
-            ? {
-                project: tsconfigPath,
-                tsconfigRootDir: process.cwd(),
-              }
-            : {},
-          ...parserOptions as any,
-        },
-      },
       name: 'antfu:typescript:rules',
       rules: {
         ...renameRules(
-          pluginTs.configs['eslint-recommended'].overrides![0].rules!,
+          pluginTs.configs.strict.rules!,
           '@typescript-eslint/',
           'ts/',
         ),
         ...renameRules(
-          pluginTs.configs.strict.rules!,
+          pluginTs.configs.stylistic.rules!,
           '@typescript-eslint/',
           'ts/',
         ),
@@ -107,7 +135,7 @@ export async function typescript(
         'ts/no-import-type-side-effects': 'error',
         'ts/no-invalid-void-type': 'off',
         'ts/no-loss-of-precision': 'error',
-        'ts/no-non-null-assertion': 'off',
+        'ts/no-non-null-assertion': 'warn',
         'ts/no-redeclare': 'error',
         'ts/no-require-imports': 'error',
         'ts/no-unused-vars': 'off',
@@ -152,5 +180,5 @@ export async function typescript(
         'ts/no-var-requires': 'off',
       },
     },
-  ]
+  ];
 }

@@ -1,6 +1,6 @@
-import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsIsInEditor, OptionsOverrides } from '../types'
-import { GLOB_TESTS } from '../globs'
+import { interopDefault } from '../utils';
+import type { FlatConfigItem, OptionsFiles, OptionsIsInEditor, OptionsOverrides } from '../types';
+import { GLOB_TESTS } from '../globs';
 
 export async function test(
   options: OptionsFiles & OptionsIsInEditor & OptionsOverrides = {},
@@ -9,7 +9,7 @@ export async function test(
     files = GLOB_TESTS,
     isInEditor = false,
     overrides = {},
-  } = options
+  } = options;
 
   const [
     pluginVitest,
@@ -18,7 +18,7 @@ export async function test(
     interopDefault(import('eslint-plugin-vitest')),
     // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-no-only-tests')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -50,5 +50,5 @@ export async function test(
         ...overrides,
       },
     },
-  ]
+  ];
 }

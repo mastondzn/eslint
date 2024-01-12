@@ -1,12 +1,12 @@
-import { isPackageExists } from 'local-pkg'
-import { ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides } from '../types'
-import { GLOB_JSX, GLOB_TSX } from '../globs'
+import { isPackageExists } from 'local-pkg';
+import { ensurePackages, interopDefault } from '../utils';
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides } from '../types';
+import { GLOB_JSX, GLOB_TSX } from '../globs';
 
 // react refresh
 const ReactRefreshAllowConstantExportPackages = [
   'vite',
-]
+];
 
 export async function react(
   options: OptionsHasTypeScript & OptionsOverrides & OptionsFiles = {},
@@ -15,13 +15,13 @@ export async function react(
     files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
     typescript = true,
-  } = options
+  } = options;
 
   await ensurePackages([
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
-  ])
+  ]);
 
   const [
     pluginReact,
@@ -31,11 +31,11 @@ export async function react(
     interopDefault(import('eslint-plugin-react')),
     interopDefault(import('eslint-plugin-react-hooks')),
     interopDefault(import('eslint-plugin-react-refresh')),
-  ] as const)
+  ] as const);
 
   const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
-    i => isPackageExists(i),
-  )
+    index => isPackageExists(index),
+  );
 
   return [
     {
@@ -107,5 +107,5 @@ export async function react(
         ...overrides,
       },
     },
-  ]
+  ];
 }

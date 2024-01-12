@@ -1,5 +1,5 @@
-import type { FlatConfigItem } from '../types'
-import { pluginPerfectionist } from '../plugins'
+import type { FlatConfigItem } from '../types';
+import { pluginPerfectionist } from '../plugins';
 
 /**
  * Optional perfectionist plugin for props and items sorting.
@@ -14,5 +14,5 @@ export async function perfectionist(): Promise<FlatConfigItem[]> {
         perfectionist: pluginPerfectionist,
       },
     },
-  ]
+  ];
 }
