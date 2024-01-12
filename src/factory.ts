@@ -115,10 +115,10 @@ export async function defineConfig(
     componentExtensions.push('vue');
 
   if (enableUnicorn) {
-    configs.push(unicorn(
-      { overrides: getOverrides(options, 'unicorn') },
-      stylisticOptions ?? {},
-    ));
+    configs.push(unicorn({
+      overrides: getOverrides(options, 'unicorn'),
+      stylistic: stylisticOptions,
+    }));
   }
 
   if (enableTypeScript) {

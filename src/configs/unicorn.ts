@@ -1,16 +1,21 @@
 import { ensurePackages, interopDefault } from '../utils';
 import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types';
-import { StylisticConfigDefaults } from './stylistic';
+import { StylisticConfigDefaults } from '.';
 
 export async function unicorn(
-  options: OptionsOverrides = {},
-  stylistic: OptionsStylistic,
+  options: OptionsOverrides & OptionsStylistic = {},
 ): Promise<FlatConfigItem[]> {
   const {
     overrides = {},
+    stylistic,
   } = options;
 
-  const { indent = 4 } = { ...StylisticConfigDefaults, ...stylistic };
+  const { indent = 4 } = typeof stylistic === 'boolean'
+    ? StylisticConfigDefaults
+    : {
+        ...StylisticConfigDefaults,
+        ...stylistic,
+      };
 
   await ensurePackages([
     'eslint-plugin-unicorn',
