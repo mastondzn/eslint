@@ -27,8 +27,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "bin",
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "tsup --format esm,cjs --clean --dts",
