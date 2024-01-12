@@ -258,6 +258,13 @@ export interface OptionsConfig extends OptionsComponentExtensions {
   typescript?: boolean | OptionsTypescript
 
   /**
+   * Enable unicorn rules.
+   *
+   * @default true
+   */
+  unicorn?: boolean | OptionsOverrides
+
+  /**
    * Enable JSX related rules.
    *
    * Currently only stylistic rules are included.
@@ -325,9 +332,16 @@ export interface OptionsConfig extends OptionsComponentExtensions {
    * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-react-refresh`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   react?: boolean | OptionsOverrides
+
+  /**
+   * Enables next.js rules.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  next?: boolean | OptionsOverrides
 
   /**
    * Enable svelte rules.
@@ -355,7 +369,7 @@ export interface OptionsConfig extends OptionsComponentExtensions {
    * Requires installing:
    * - `eslint-plugin-tailwindcss`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   tailwindcss?: boolean | OptionsTailwindCSS
 
@@ -372,16 +386,8 @@ export interface OptionsConfig extends OptionsComponentExtensions {
   formatters?: boolean | OptionsFormatters
 
   /**
-   * Enable unicorn rules.
-   *
-   * @default true
-   */
-  unicorn?: boolean | OptionsOverrides
-
-  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
   isInEditor?: boolean
-
 }

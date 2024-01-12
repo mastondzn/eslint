@@ -1,10 +1,16 @@
 import { ensurePackages, interopDefault } from '../utils';
-import type { FlatConfigItem, OptionsOverrides } from '../types';
+import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types';
+import { StylisticConfigDefaults } from './stylistic';
 
-export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function unicorn(
+  options: OptionsOverrides = {},
+  stylistic: OptionsStylistic,
+): Promise<FlatConfigItem[]> {
   const {
     overrides = {},
   } = options;
+
+  const { indent = 4 } = { ...StylisticConfigDefaults, ...stylistic };
 
   await ensurePackages([
     'eslint-plugin-unicorn',
@@ -56,7 +62,9 @@ export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfi
         'unicorn/prefer-top-level-await': 'off',
         // Enforce throwing type error when throwing error while checking typeof
         'unicorn/prefer-type-error': 'error',
-        'unicorn/template-indent': ['warn', { indent: 4 }],
+        'unicorn/template-indent': ['warn', {
+          indent: indent === 'tab' ? '\t' : indent,
+        }],
         // Use new when throwing error
         'unicorn/throw-new-error': 'error',
 

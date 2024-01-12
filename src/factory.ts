@@ -10,6 +10,7 @@ import {
   jsdoc,
   jsonc,
   markdown,
+  next,
   node,
   perfectionist,
   react,
@@ -59,9 +60,10 @@ export async function defineConfig(
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     jsx,
-    react: enableReact = false,
+    next: enableNext = isPackageExists('next'),
+    react: enableReact = isPackageExists('react'),
     svelte: enableSvelte = false,
-    tailwindcss: enableTailwindCSS = false,
+    tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
@@ -113,9 +115,10 @@ export async function defineConfig(
     componentExtensions.push('vue');
 
   if (enableUnicorn) {
-    configs.push(unicorn({
-      overrides: getOverrides(options, 'unicorn'),
-    }));
+    configs.push(unicorn(
+      { overrides: getOverrides(options, 'unicorn') },
+      stylisticOptions ?? {},
+    ));
   }
 
   if (enableTypeScript) {
@@ -146,6 +149,12 @@ export async function defineConfig(
       overrides: getOverrides(options, 'vue'),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
+    }));
+  }
+
+  if (enableNext) {
+    configs.push(next({
+      overrides: getOverrides(options, 'next'),
     }));
   }
 
