@@ -4,4 +4,4 @@ export * from './globs';
 export * from './types';
 export * from './utils';
 
-export { antfu as default } from './factory';
+export { defineConfig as default, defineConfig } from './factory';

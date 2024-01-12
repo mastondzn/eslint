@@ -49,7 +49,7 @@ const VuePackages = [
 /**
  * Construct an array of ESLint flat config items.
  */
-export async function antfu(
+export async function defineConfig(
   options: OptionsConfig & FlatConfigItem = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
