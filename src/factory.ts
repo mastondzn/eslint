@@ -1,7 +1,7 @@
 import process from 'node:process';
 import fs from 'node:fs';
 import { isPackageExists } from 'local-pkg';
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types';
+import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsOverrides, UserConfigItem } from './types';
 import {
   comments,
   ignores,
@@ -246,7 +246,7 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
 export function getOverrides<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
-) {
+): OptionsOverrides['overrides'] {
   const sub = resolveSubOptions(options, key);
   return {
     ...'overrides' in sub
