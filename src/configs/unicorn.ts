@@ -67,7 +67,12 @@ export async function unicorn(
         'unicorn/prefer-top-level-await': 'off',
         // Enforce throwing type error when throwing error while checking typeof
         'unicorn/prefer-type-error': 'error',
-        'unicorn/prevent-abbreviations': 'warn',
+        'unicorn/prevent-abbreviations': ['warn', {
+          allowList: {
+            db: true,
+            props: true,
+          },
+        }],
         'unicorn/template-indent': ['warn', {
           indent: indent === 'tab' ? '\t' : indent,
         }],
