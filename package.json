@@ -33,8 +33,7 @@
     "prepack": "nr build",
     "release": "bumpp && pnpm publish",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "@unocss/eslint-plugin": ">=0.50.0",
