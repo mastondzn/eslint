@@ -50,6 +50,10 @@ export async function typescript(
     'no-throw-literal': 'off',
     'ts/await-thenable': 'error',
     'ts/dot-notation': ['error', { allowKeywords: true }],
+    'ts/no-confusing-void-expression': ['error', {
+      ignoreArrowShorthand: true,
+      ignoreVoidOperator: true,
+    }],
     'ts/no-floating-promises': 'error',
     'ts/no-for-in-array': 'error',
     'ts/no-implied-eval': 'error',
