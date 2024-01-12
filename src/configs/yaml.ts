@@ -12,7 +12,7 @@ export async function yaml(
   } = options;
 
   const {
-    indent = 2,
+    indent = 4,
     quotes = 'single',
   } = typeof stylistic === 'boolean' ? {} : stylistic;
 

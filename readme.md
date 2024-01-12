@@ -1,6 +1,7 @@
-<!-- eslint-disable-next-line unicorn/filename-case -->
+# @mastondzn/eslint
 
-# @antfu/eslint-config
+> [!IMPORTANT]
+> The below readme is not updated for the customizations made by me, but most of its content is still relevant.
 
 [![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=)](https://npmjs.com/package/@antfu/eslint-config) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
 

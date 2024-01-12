@@ -19,7 +19,7 @@ export async function vue(
     : options.sfcBlocks ?? {};
 
   const {
-    indent = 2,
+    indent = 4,
   } = typeof stylistic === 'boolean' ? {} : stylistic;
 
   const [

@@ -15,6 +15,9 @@ export default antfu(
     formatters: true,
     stylistic: {
       semi: true,
+      // we use indent 2 as the original here to not break everything
+      indent: 2,
+      quotes: 'single',
     },
   },
   {

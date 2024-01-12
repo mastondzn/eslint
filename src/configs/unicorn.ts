@@ -55,6 +55,7 @@ export async function unicorn(options: OptionsOverrides = {}): Promise<FlatConfi
         'unicorn/prefer-top-level-await': 'off',
         // Enforce throwing type error when throwing error while checking typeof
         'unicorn/prefer-type-error': 'error',
+        'unicorn/template-indent': ['warn', { indent: 4 }],
         // Use new when throwing error
         'unicorn/throw-new-error': 'error',
 

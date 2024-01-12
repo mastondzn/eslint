@@ -3,10 +3,10 @@ import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types
 import { pluginAntfu } from '../plugins';
 
 export const StylisticConfigDefaults: StylisticConfig = {
-  indent: 2,
+  indent: 4,
   jsx: true,
   quotes: 'single',
-  semi: false,
+  semi: true,
 };
 
 export async function stylistic(

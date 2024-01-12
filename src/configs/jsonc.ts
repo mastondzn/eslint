@@ -12,7 +12,7 @@ export async function jsonc(
   } = options;
 
   const {
-    indent = 2,
+    indent = 4,
   } = typeof stylistic === 'boolean' ? {} : stylistic;
 
   const [
