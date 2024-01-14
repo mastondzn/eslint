@@ -51,6 +51,17 @@ export async function stylistic(
         'style/brace-style': ['error', '1tbs', {
           allowSingleLine: true,
         }],
+        'style/member-delimiter-style': ['error', {
+          multiline: {
+            delimiter: 'semi',
+            requireLast: true,
+          },
+          multilineDetection: 'brackets',
+          singleline: {
+            delimiter: 'semi',
+            requireLast: true,
+          },
+        }],
 
         ...overrides,
       },
