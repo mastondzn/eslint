@@ -1,6 +1,6 @@
-import { interopDefault } from '../utils';
-import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types';
 import { pluginAntfu } from '../plugins';
+import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types';
+import { interopDefault } from '../utils';
 
 export const StylisticConfigDefaults: StylisticConfig = {
   indent: 4,
@@ -45,7 +45,6 @@ export async function stylistic(
         ...config.rules,
 
         'antfu/consistent-list-newline': 'error',
-        'antfu/if-newline': 'error',
         'antfu/top-level-function': 'error',
 
         'curly': ['error', 'multi-line', 'consistent'],
