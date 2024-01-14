@@ -1,7 +1,7 @@
-import process from 'node:process';
 import fs from 'node:fs';
+
 import { isPackageExists } from 'local-pkg';
-import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsOverrides, UserConfigItem } from './types';
+
 import {
   comments,
   ignores,
@@ -27,8 +27,9 @@ import {
   vue,
   yaml,
 } from './configs';
-import { combine, interopDefault } from './utils';
 import { formatters } from './configs/formatters';
+import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsOverrides, UserConfigItem } from './types';
+import { combine, interopDefault } from './utils';
 
 const flatConfigProperties: (keyof FlatConfigItem)[] = [
   'files',
@@ -76,17 +77,18 @@ export async function defineConfig(
         ? options.stylistic
         : {});
 
-  if (stylisticOptions && !('jsx' in stylisticOptions))
+  if (stylisticOptions && !('jsx' in stylisticOptions)) {
     stylisticOptions.jsx = jsx ?? true;
+  }
 
   const configs: Awaitable<FlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
     if (typeof enableGitignore === 'boolean') {
-      if (fs.existsSync('.gitignore'))
+      if (fs.existsSync('.gitignore')) {
         configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]));
-    }
-    else {
+      }
+    } else {
       configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]));
     }
   }
@@ -111,8 +113,9 @@ export async function defineConfig(
     perfectionist(),
   );
 
-  if (enableVue)
+  if (enableVue) {
     componentExtensions.push('vue');
+  }
 
   if (enableUnicorn) {
     configs.push(unicorn({
@@ -233,12 +236,14 @@ export async function defineConfig(
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProperties.reduce<FlatConfigItem>((accumulator, key) => {
-    if (key in options)
+    if (key in options) {
       accumulator[key] = options[key] as any;
+    }
     return accumulator;
   }, {});
-  if (Object.keys(fusedConfig).length > 0)
+  if (Object.keys(fusedConfig).length > 0) {
     configs.push([fusedConfig]);
+  }
 
   const merged = combine(
     ...configs,

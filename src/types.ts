@@ -1,7 +1,3 @@
-import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
-import type { ParserOptions } from '@typescript-eslint/parser';
-import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
-import type { Linter } from 'eslint';
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -22,8 +18,13 @@ import type {
 import type { RuleOptions as JSDocumentRules } from '@eslint-types/jsdoc/types';
 import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types';
 import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types';
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu';
 import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin';
+import type { ParserOptions } from '@typescript-eslint/parser';
+import type { Linter } from 'eslint';
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { Rules as AntfuRules } from 'eslint-plugin-antfu';
+import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
+
 import type { VendoredPrettierOptions } from './vender/prettier-types';
 
 export type WrapRuleConfig<T extends Record<string, any>> = {

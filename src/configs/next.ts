@@ -1,5 +1,5 @@
-import { ensurePackages, interopDefault, renameRules } from '../utils';
 import type { FlatConfigItem, OptionsOverrides } from '../types';
+import { ensurePackages, interopDefault, renameRules } from '../utils';
 
 export async function next(
   options: OptionsOverrides = {},

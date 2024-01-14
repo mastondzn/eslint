@@ -1,5 +1,5 @@
-import process from 'node:process';
 import { isPackageExists } from 'local-pkg';
+
 import type { Awaitable, UserConfigItem } from './types';
 
 export const parserPlain = {
@@ -35,8 +35,9 @@ export function renameRules(rules: Record<string, any>, from: string, to: string
   return Object.fromEntries(
     Object.entries(rules)
       .map(([key, value]) => {
-        if (key.startsWith(from))
+        if (key.startsWith(from)) {
           return [to + key.slice(from.length), value];
+        }
         return [key, value];
       }),
   );
@@ -52,12 +53,12 @@ export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { de
 }
 
 export async function ensurePackages(packages: string[]) {
-  if (process.env.CI || !process.stdout.isTTY)
-    return;
+  if (process.env.CI || !process.stdout.isTTY) return;
 
   const nonExistingPackages = packages.filter(index => !isPackageExists(index));
-  if (nonExistingPackages.length === 0)
+  if (nonExistingPackages.length === 0) {
     return;
+  }
 
   const { default: prompts } = await import('prompts');
   const { result } = await prompts([
@@ -67,6 +68,7 @@ export async function ensurePackages(packages: string[]) {
       type: 'confirm',
     },
   ]);
-  if (result)
+  if (result) {
     await import('@antfu/install-pkg').then(index => index.installPackage(nonExistingPackages, { dev: true }));
+  }
 }

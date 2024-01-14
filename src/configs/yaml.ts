@@ -1,5 +1,5 @@
-import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
 import { GLOB_YAML } from '../globs';
+import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
 import { interopDefault } from '../utils';
 
 export async function yaml(

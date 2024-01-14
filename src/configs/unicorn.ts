@@ -1,6 +1,6 @@
-import { ensurePackages, interopDefault } from '../utils';
-import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types';
 import { StylisticConfigDefaults } from '.';
+import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function unicorn(
   options: OptionsOverrides & OptionsStylistic = {},

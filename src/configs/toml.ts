@@ -1,5 +1,5 @@
-import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
 import { GLOB_TOML } from '../globs';
+import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types';
 import { interopDefault } from '../utils';
 
 export async function toml(
