@@ -48,6 +48,9 @@ export async function stylistic(
         'antfu/top-level-function': 'error',
 
         'curly': ['error', 'multi-line', 'consistent'],
+        'style/brace-style': ['error', '1tbs', {
+          allowSingleLine: true,
+        }],
 
         ...overrides,
       },
