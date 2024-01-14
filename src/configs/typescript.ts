@@ -47,6 +47,7 @@ export async function typescript(
     'dot-notation': 'off',
     'no-implied-eval': 'off',
     'no-throw-literal': 'off',
+    'no-undef': 'off',
     'ts/await-thenable': 'error',
     'ts/dot-notation': ['error', { allowKeywords: true }],
     'ts/no-confusing-void-expression': ['error', {
