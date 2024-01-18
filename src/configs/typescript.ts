@@ -99,7 +99,6 @@ export async function typescript(
       name: 'antfu:typescript:setup',
       plugins: {
         antfu: pluginAntfu,
-
         ts: pluginTs as any,
       },
     },

@@ -105,9 +105,7 @@ export async function defineConfig(
     jsdoc({
       stylistic: stylisticOptions,
     }),
-    imports({
-      stylistic: stylisticOptions,
-    }),
+    imports(),
 
     // Optional plugins (installed but not enabled by default)
     perfectionist(),

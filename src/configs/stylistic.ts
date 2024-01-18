@@ -2,7 +2,7 @@ import { pluginAntfu } from '../plugins';
 import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types';
 import { interopDefault } from '../utils';
 
-export const StylisticConfigDefaults: StylisticConfig = {
+export const StylisticConfigDefaults: Required<StylisticConfig> = {
   indent: 4,
   jsx: true,
   quotes: 'single',
@@ -45,7 +45,6 @@ export async function stylistic(
         ...config.rules,
 
         'antfu/consistent-list-newline': 'error',
-        'antfu/top-level-function': 'error',
 
         'curly': ['error', 'multi-line', 'consistent'],
         'style/brace-style': ['error', '1tbs', {

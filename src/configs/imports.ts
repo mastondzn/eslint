@@ -1,12 +1,8 @@
 import { GLOB_SRC_EXT } from '../globs';
 import { pluginAntfu, pluginImport } from '../plugins';
-import type { FlatConfigItem, OptionsStylistic } from '../types';
+import type { FlatConfigItem } from '../types';
 
-export async function imports(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
-  const {
-    stylistic = true,
-  } = options;
-
+export async function imports(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'antfu:imports',
@@ -20,6 +16,7 @@ export async function imports(options: OptionsStylistic = {}): Promise<FlatConfi
         'antfu/no-import-node-modules-by-path': 'error',
 
         'import/first': 'error',
+        'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
         'import/no-duplicates': 'error',
         'import/no-mutable-exports': 'error',
         'import/no-named-default': 'error',
@@ -44,12 +41,11 @@ export async function imports(options: OptionsStylistic = {}): Promise<FlatConfi
             },
           ],
         }],
-
-        ...stylistic
-          ? {
-              'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
-            }
-          : {},
+      },
+      settings: {
+        'import/resolver': {
+          typescript: true,
+        },
       },
     },
     {

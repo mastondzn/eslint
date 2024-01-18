@@ -43,6 +43,7 @@ export async function javascript(
       },
       rules: {
         'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
+        'antfu/top-level-function': 'error',
 
         'array-callback-return': 'error',
         'block-scoped-var': 'error',
