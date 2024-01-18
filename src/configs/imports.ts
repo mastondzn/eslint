@@ -24,6 +24,7 @@ export async function imports(options: OptionsStylistic = {}): Promise<FlatConfi
         'import/no-mutable-exports': 'error',
         'import/no-named-default': 'error',
         'import/no-self-import': 'error',
+        'import/no-useless-path-segments': 'error',
         'import/no-webpack-loader-syntax': 'error',
         'import/order': ['error', {
           'alphabetize': {
