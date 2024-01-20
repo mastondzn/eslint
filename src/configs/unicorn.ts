@@ -79,6 +79,13 @@ export async function unicorn(
         // Use new when throwing error
         'unicorn/throw-new-error': 'error',
 
+        ...stylistic
+          ? {}
+          : {
+              // this breaks with prettier
+              'unicorn/no-nested-ternary': 'off',
+            },
+
         ...overrides,
       },
     },
