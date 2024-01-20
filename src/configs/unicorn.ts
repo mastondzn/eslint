@@ -1,6 +1,6 @@
 import { StylisticConfigDefaults } from '.';
 import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types';
-import { ensurePackages, interopDefault } from '../utils';
+import { interopDefault } from '../utils';
 
 export async function unicorn(
   options: OptionsOverrides & OptionsStylistic = {},
@@ -16,11 +16,6 @@ export async function unicorn(
         ...StylisticConfigDefaults,
         ...stylistic,
       };
-
-  await ensurePackages([
-    'eslint-plugin-unicorn',
-  ]);
-
   // @ts-expect-error no types
   const pluginUnicorn = await interopDefault(import('eslint-plugin-unicorn'));
 
