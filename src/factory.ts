@@ -31,7 +31,8 @@ import { formatters } from './configs/formatters';
 import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsOverrides, UserConfigItem } from './types';
 import { combine, interopDefault } from './utils';
 
-const flatConfigProperties: (keyof FlatConfigItem)[] = [
+const flatConfigProps: (keyof FlatConfigItem)[] = [
+  'name',
   'files',
   'ignores',
   'languageOptions',
@@ -59,7 +60,7 @@ export async function defineConfig(
   const {
     componentExtensions = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     jsx,
     next: enableNext = isPackageExists('next'),
     react: enableReact = isPackageExists('react'),

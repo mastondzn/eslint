@@ -25,6 +25,11 @@ export async function typescript(
     ...componentExtensions.map(extension => `**/*.${extension}`),
   ];
 
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
+  const tsconfigPath = options?.tsconfigPath
+    ? toArray(options.tsconfigPath)
+    : undefined
+  const isTypeAware = !!tsconfigPath
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
 
   const tsconfigPath = options.tsconfigPath
@@ -131,6 +136,7 @@ export async function typescript(
         'ts/ban-types': ['error', { types: { Function: false } }],
         'ts/consistent-type-definitions': ['error', 'interface'],
         'ts/consistent-type-imports': ['error', { disallowTypeAnnotations: false, prefer: 'type-imports' }],
+        'ts/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
         'ts/no-dupe-class-members': 'error',
         'ts/no-dynamic-delete': 'off',
         'ts/no-explicit-any': 'off',
