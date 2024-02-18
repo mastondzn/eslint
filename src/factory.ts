@@ -31,7 +31,7 @@ import { formatters } from './configs/formatters';
 import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsOverrides, UserConfigItem } from './types';
 import { combine, interopDefault } from './utils';
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
+const flatConfigProperties: (keyof FlatConfigItem)[] = [
   'name',
   'files',
   'ignores',

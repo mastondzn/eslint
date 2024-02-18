@@ -323,7 +323,7 @@ export interface OptionsConfig extends OptionsComponentExtensions {
    *
    * @default true
    */
-  stylistic?: boolean | (StylisticConfig & OptionsOverrides)
+  stylistic?: boolean | (StylisticConfig & OptionsOverrides);
 
   /**
    * Enable react rules.

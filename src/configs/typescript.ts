@@ -25,17 +25,10 @@ export async function typescript(
     ...componentExtensions.map(extension => `**/*.${extension}`),
   ];
 
-  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const tsconfigPath = options?.tsconfigPath
     ? toArray(options.tsconfigPath)
-    : undefined
-  const isTypeAware = !!tsconfigPath
-  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
-
-  const tsconfigPath = options.tsconfigPath
-    ? toArray(options.tsconfigPath)
     : undefined;
-
   const isTypeAware = !!tsconfigPath;
 
   const typeAwareRules: FlatConfigItem['rules'] = {

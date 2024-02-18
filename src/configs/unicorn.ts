@@ -45,8 +45,7 @@ export async function unicorn(
         'unicorn/no-null': 'off',
         'unicorn/no-object-as-default-parameter': 'off',
         'unicorn/no-process-exit': 'off',
-        // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
-        'unicorn/number-literal-case': 'error',
+
         // textContent instead of innerText
         'unicorn/prefer-dom-node-text-content': 'error',
         // includes over indexOf when checking for existence
@@ -79,6 +78,7 @@ export async function unicorn(
           : {
               // this breaks with prettier
               'unicorn/no-nested-ternary': 'off',
+              'unicorn/number-literal-case': 'off',
             },
 
         ...overrides,
