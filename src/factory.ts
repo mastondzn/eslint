@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { isPackageExists } from 'local-pkg';
 
 import {
+  astro,
   comments,
   ignores,
   imports,
@@ -58,6 +59,7 @@ export async function defineConfig(
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const {
+    astro: enableAstro = false,
     componentExtensions = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
@@ -186,6 +188,13 @@ export async function defineConfig(
     configs.push(tailwindcss({
       ...resolveSubOptions(options, 'tailwindcss'),
       overrides: getOverrides(options, 'tailwindcss'),
+    }));
+  }
+
+  if (enableAstro) {
+    configs.push(astro({
+      overrides: getOverrides(options, 'astro'),
+      stylistic: stylisticOptions,
     }));
   }
 
