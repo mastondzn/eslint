@@ -10,11 +10,11 @@ export async function tailwindcss(
   } = options;
 
   await ensurePackages([
-    '@mastondzn/eslint-plugin-tailwindcss',
+    'eslint-plugin-tailwindcss',
   ]);
 
   // @ts-expect-error no types
-  const pluginTailwind = await interopDefault(import('@mastondzn/eslint-plugin-tailwindcss'));
+  const pluginTailwind = await interopDefault(import('eslint-plugin-tailwindcss'));
 
   return [{
     name: 'mastondzn:tailwindcss',
