@@ -6,7 +6,6 @@ import type {
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
-
 import process from 'node:process';
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginAntfu } from '../plugins';
@@ -37,8 +36,11 @@ export async function typescript(
     `${GLOB_MARKDOWN}/**`,
     GLOB_ASTRO_TS,
   ];
-  const tsconfigPath = options?.tsconfigPath ?? undefined;
-  const isTypeAware = !!tsconfigPath;
+
+  const tsconfigPath =
+    'tsconfigPath' in options ? options.tsconfigPath : './tsconfig.json';
+
+  const isTypeAware = Boolean(tsconfigPath);
 
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),
@@ -47,12 +49,15 @@ export async function typescript(
 
   const rules: TypedFlatConfigItem['rules'] = {
     ...renameRules(
+      // eslint-disable-next-line ts/no-non-null-assertion
       pluginTs.configs['eslint-recommended'].overrides![0].rules!,
       { '@typescript-eslint': 'ts' },
     ),
+    // eslint-disable-next-line ts/no-non-null-assertion
     ...renameRules(pluginTs.configs.strict.rules!, {
       '@typescript-eslint': 'ts',
     }),
+    // eslint-disable-next-line ts/no-non-null-assertion
     ...renameRules(pluginTs.configs.stylistic.rules!, {
       '@typescript-eslint': 'ts',
     }),
@@ -107,12 +112,15 @@ export async function typescript(
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {
     ...renameRules(
+      // eslint-disable-next-line ts/no-non-null-assertion
       pluginTs.configs['eslint-recommended'].overrides![0].rules!,
       { '@typescript-eslint': 'ts' },
     ),
+    // eslint-disable-next-line ts/no-non-null-assertion
     ...renameRules(pluginTs.configs['strict-type-checked'].rules!, {
       '@typescript-eslint': 'ts',
     }),
+    // eslint-disable-next-line ts/no-non-null-assertion
     ...renameRules(pluginTs.configs['stylistic-type-checked'].rules!, {
       '@typescript-eslint': 'ts',
     }),
@@ -165,7 +173,7 @@ export async function typescript(
                 tsconfigRootDir: process.cwd(),
               }
             : {}),
-          ...(parserOptions as any),
+          ...parserOptions,
         },
       },
       name: `antfu/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
@@ -178,7 +186,7 @@ export async function typescript(
       name: 'antfu/typescript/setup',
       plugins: {
         antfu: pluginAntfu,
-        ts: pluginTs as any,
+        ts: pluginTs,
       },
     },
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
