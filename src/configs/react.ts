@@ -1,3 +1,5 @@
+import { isPackageExists } from 'local-pkg';
+
 import type {
   OptionsFiles,
   OptionsOverrides,
@@ -5,8 +7,6 @@ import type {
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
-
-import { isPackageExists } from 'local-pkg';
 import {
   GLOB_ASTRO_TS,
   GLOB_MARKDOWN,
@@ -14,7 +14,6 @@ import {
   GLOB_TS,
   GLOB_TSX,
 } from '../globs';
-
 import { ensurePackages, interopDefault } from '../utils';
 
 // react refresh

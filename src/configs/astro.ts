@@ -3,7 +3,6 @@ import type {
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
-
 import { GLOB_ASTRO } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 

@@ -6,7 +6,6 @@ import type {
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-
 import { ensurePackages, interopDefault, toArray } from '../utils';
 
 export async function solid(
@@ -23,7 +22,7 @@ export async function solid(
 
   await ensurePackages(['eslint-plugin-solid']);
 
-  const tsconfigPath = options?.tsconfigPath
+  const tsconfigPath = options.tsconfigPath
     ? toArray(options.tsconfigPath)
     : undefined;
   const isTypeAware = !!tsconfigPath;

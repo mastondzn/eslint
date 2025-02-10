@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import process from 'node:process';
+
 import type {
   OptionsComponentExts,
   OptionsFiles,
@@ -6,8 +9,6 @@ import type {
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
-import { existsSync } from 'node:fs';
-import process from 'node:process';
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginAntfu } from '../plugins';
 import { interopDefault, renameRules } from '../utils';

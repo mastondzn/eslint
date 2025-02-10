@@ -1,4 +1,8 @@
 import type { Linter } from 'eslint';
+
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { isPackageExists } from 'local-pkg';
+
 import type { RuleOptions } from './typegen';
 import type {
   Awaitable,
@@ -6,9 +10,6 @@ import type {
   OptionsConfig,
   TypedFlatConfigItem,
 } from './types';
-
-import { FlatConfigComposer } from 'eslint-flat-config-utils';
-import { isPackageExists } from 'local-pkg';
 import {
   astro,
   command,
@@ -338,7 +339,9 @@ export function antfu(
       ],
       {
         builtinRules: async () =>
+          // eslint-disable-next-line ts/no-unsafe-return
           import(['eslint', 'use-at-your-own-risk'].join('/')).then(
+            // eslint-disable-next-line ts/no-unsafe-return
             (r) => r.builtinRules,
           ),
       },
@@ -354,6 +357,7 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
+  // eslint-disable-next-line ts/no-unsafe-return
   return typeof options[key] === 'boolean' ? ({} as any) : options[key] || {};
 }
 

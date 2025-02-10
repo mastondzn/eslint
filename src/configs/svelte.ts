@@ -4,7 +4,6 @@ import type {
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
-
 import { GLOB_SVELTE } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 

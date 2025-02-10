@@ -1,11 +1,10 @@
+import globals from 'globals';
+
 import type {
   OptionsIsInEditor,
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
-
-import globals from 'globals';
-
 import { pluginAntfu, pluginUnusedImports } from '../plugins';
 
 export async function javascript(

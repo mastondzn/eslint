@@ -4,7 +4,6 @@ import type {
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
-
 import { GLOB_TESTS } from '../globs';
 import { interopDefault } from '../utils';
 

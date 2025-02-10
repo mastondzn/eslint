@@ -1,5 +1,4 @@
 import type { TypedFlatConfigItem } from '../types';
-
 import { pluginPerfectionist } from '../plugins';
 
 /**
@@ -15,38 +14,29 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
         perfectionist: pluginPerfectionist,
       },
       rules: {
-        'perfectionist/sort-exports': [
-          'error',
-          { order: 'asc', type: 'natural' },
-        ],
+        'perfectionist/sort-exports': ['error', {}],
         'perfectionist/sort-imports': [
           'error',
           {
             groups: [
               'type',
-              ['parent-type', 'sibling-type', 'index-type', 'internal-type'],
-
               'builtin',
               'external',
-              'internal',
-              ['parent', 'sibling', 'index'],
-              'side-effect',
+              ['internal-type', 'parent-type', 'sibling-type', 'index-type'],
+              { newlinesBetween: 'never' },
+              ['internal', 'parent', 'sibling', 'index'],
               'object',
+              'side-effect',
               'unknown',
             ],
-            newlinesBetween: 'ignore',
-            order: 'asc',
-            type: 'natural',
+            newlinesBetween: 'always',
           },
         ],
         'perfectionist/sort-named-exports': [
           'error',
-          { order: 'asc', type: 'natural' },
+          { groupKind: 'values-first' },
         ],
-        'perfectionist/sort-named-imports': [
-          'error',
-          { order: 'asc', type: 'natural' },
-        ],
+        'perfectionist/sort-named-imports': ['error', {}],
       },
     },
   ];

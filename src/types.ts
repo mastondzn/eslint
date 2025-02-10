@@ -2,6 +2,7 @@ import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
+
 import type { RuleOptions } from './typegen';
 
 export type Awaitable<T> = T | Promise<T>;
@@ -344,4 +345,4 @@ export interface OptionsConfig extends OptionsComponentExts {
   autoRenamePlugins?: boolean;
 }
 
-export { type ConfigNames } from './typegen';
+export type { ConfigNames } from './typegen';

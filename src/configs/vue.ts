@@ -1,3 +1,5 @@
+import { mergeProcessors } from 'eslint-merge-processors';
+
 import type {
   OptionsFiles,
   OptionsHasTypeScript,
@@ -5,8 +7,6 @@ import type {
   OptionsVue,
   TypedFlatConfigItem,
 } from '../types';
-
-import { mergeProcessors } from 'eslint-merge-processors';
 import { GLOB_VUE } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 
