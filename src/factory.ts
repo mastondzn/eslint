@@ -29,6 +29,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   svelte,
+  tailwindcss,
   test,
   toml,
   typescript,
@@ -88,13 +89,14 @@ export function antfu(
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
-    unicorn: enableUnicorn = true,
-    regexp: enableRegexp = true,
     next: enableNext = isPackageExists('next'),
     react: enableReact = isPackageExists('react'),
-    svelte: enableSvelte = isPackageExists('svelte'),
+    regexp: enableRegexp = true,
     solid: enableSolid = isPackageExists('solid-js'),
+    svelte: enableSvelte = isPackageExists('svelte'),
+    tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
     typescript: enableTypeScript = isPackageExists('typescript'),
+    unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = isPackageExists('unocss'),
     vue: enableVue = ['vue', 'nuxt'].some((i) => isPackageExists(i)),
   } = options;
@@ -244,6 +246,15 @@ export function antfu(
       unocss({
         ...resolveSubOptions(options, 'unocss'),
         overrides: getOverrides(options, 'unocss'),
+      }),
+    );
+  }
+
+  if (enableTailwindCSS) {
+    configs.push(
+      tailwindcss({
+        ...resolveSubOptions(options, 'tailwindcss'),
+        overrides: getOverrides(options, 'tailwindcss'),
       }),
     );
   }

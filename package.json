@@ -45,6 +45,7 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-solid": "^0.14.3",
     "eslint-plugin-svelte": ">=2.35.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-vue": "^9.32.0",
     "eslint-processor-vue-blocks": "^2.0.0",
     "svelte-eslint-parser": ">=0.37.0",
@@ -79,6 +80,9 @@
       "optional": true
     },
     "eslint-plugin-svelte": {
+      "optional": true
+    },
+    "eslint-plugin-tailwindcss": {
       "optional": true
     },
     "eslint-plugin-vue": {
@@ -147,6 +151,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-solid": "^0.14.5",
     "eslint-plugin-svelte": "^2.46.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-vue": "^9.32.0",
     "eslint-processor-vue-blocks": "^2.0.0",
     "eslint-typegen": "^1.0.0",

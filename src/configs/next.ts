@@ -10,6 +10,14 @@ export async function next(
 
   const pluginNext = await interopDefault(import('@next/eslint-plugin-next'));
 
+  const recommended = renameRules(
+    {
+      ...pluginNext.configs.recommended.rules,
+      ...pluginNext.configs['core-web-vitals'].rules,
+    },
+    { '@next/next': 'next' },
+  );
+
   return [
     {
       name: 'maston:next',
@@ -17,13 +25,7 @@ export async function next(
         next: pluginNext,
       },
       rules: {
-        ...renameRules(
-          {
-            ...pluginNext.configs.recommended.rules,
-            ...pluginNext.configs['core-web-vitals'].rules,
-          },
-          { '@next/next/': 'next/' },
-        ),
+        ...recommended,
         ...overrides,
       },
     },

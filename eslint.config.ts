@@ -9,6 +9,7 @@ export default antfu(
     astro: true,
     typescript: true,
     next: true,
+    tailwindcss: true,
     type: 'lib',
   },
   {

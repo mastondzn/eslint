@@ -61,15 +61,6 @@ export interface OptionsComponentExts {
   componentExts?: string[];
 }
 
-export interface OptionsUnicorn {
-  /**
-   * Include all rules recommended by `eslint-plugin-unicorn`, instead of only ones picked by Anthony.
-   *
-   * @default false
-   */
-  allRecommended?: boolean;
-}
-
 export interface OptionsTypeScriptParserOptions {
   /**
    * Additional parser options for TypeScript.
@@ -130,6 +121,15 @@ export interface OptionsIsInEditor {
   isInEditor?: boolean;
 }
 
+export interface OptionsUnicorn extends OptionsOverrides {
+  /**
+   * Include all rules recommended by `eslint-plugin-unicorn`, instead of only ones picked by Anthony.
+   *
+   * @default false
+   */
+  allRecommended?: boolean;
+}
+
 export interface OptionsUnoCSS extends OptionsOverrides {
   /**
    * Enable attributify support.
@@ -141,6 +141,31 @@ export interface OptionsUnoCSS extends OptionsOverrides {
    * @default false
    */
   strict?: boolean;
+}
+
+/**
+ * @see https://www.npmjs.com/package/eslint-plugin-tailwindcss#more-settings
+ */
+export interface OptionsTailwindCSS extends OptionsOverrides {
+  /**
+   * Object/functions that use tailwindcss classes.
+   *
+   * @default ["classnames", "clsx", "ctl"]
+   */
+  callees?: string[];
+  /**
+   * Path to the tailwind config file.
+   *
+   * @default "tailwind.config.js"
+   */
+  config?: string;
+  cssFiles?: string[];
+  cssFilesRefreshRate?: number;
+  removeDuplicates?: boolean;
+  skipClassAttribute?: boolean;
+  whitelist?: string[];
+  tags?: string[];
+  classRegex?: string;
 }
 
 export interface OptionsConfig
@@ -307,6 +332,16 @@ export interface OptionsConfig
    * @default auto-detect based on the dependencies
    */
   unocss?: boolean | OptionsUnoCSS;
+
+  /**
+   * Enable tailwindcss rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-tailwindcss`
+   *
+   * @default auto-detect based on the dependencies
+   */
+  tailwindcss?: boolean | OptionsTailwindCSS;
 
   /**
    * Control to disable some rules in editors.

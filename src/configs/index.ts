@@ -17,6 +17,7 @@ export * from './regexp';
 export * from './solid';
 export * from './sort';
 export * from './svelte';
+export * from './tailwindcss';
 export * from './test';
 export * from './toml';
 export * from './typescript';

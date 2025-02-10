@@ -5,6 +5,8 @@ import { pluginUnicorn } from '../plugins';
 export async function unicorn(
   options: OptionsUnicorn = {},
 ): Promise<TypedFlatConfigItem[]> {
+  const { overrides = {} } = options;
+
   return [
     {
       name: 'antfu/unicorn/rules',
@@ -31,6 +33,7 @@ export async function unicorn(
               'unicorn/prefer-type-error': 'error',
               'unicorn/throw-new-error': 'error',
             }),
+        ...overrides,
       },
     },
   ];

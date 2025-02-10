@@ -21,6 +21,7 @@ import {
   solid,
   sortPackageJson,
   svelte,
+  tailwindcss,
   test,
   toml,
   typescript,
@@ -59,6 +60,7 @@ const configs = await combine(
   typescript(),
   unicorn(),
   unocss(),
+  tailwindcss(),
   vue(),
   yaml(),
 );
