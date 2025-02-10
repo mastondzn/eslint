@@ -52,6 +52,7 @@ export async function javascript(
         ],
 
         'antfu/no-top-level-await': 'error',
+        'antfu/top-level-function': 'error',
 
         'array-callback-return': 'error',
         'block-scoped-var': 'error',
