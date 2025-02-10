@@ -320,22 +320,4 @@ export interface OptionsConfig
    * @default true
    */
   autoRenamePlugins?: boolean;
-
-  /**
-   * Provide overrides for rules for each integration.
-   *
-   * @deprecated use `overrides` option in each integration key instead
-   */
-  overrides?: {
-    javascript?: TypedFlatConfigItem['rules'];
-    typescript?: TypedFlatConfigItem['rules'];
-    test?: TypedFlatConfigItem['rules'];
-    vue?: TypedFlatConfigItem['rules'];
-    jsonc?: TypedFlatConfigItem['rules'];
-    markdown?: TypedFlatConfigItem['rules'];
-    yaml?: TypedFlatConfigItem['rules'];
-    toml?: TypedFlatConfigItem['rules'];
-    react?: TypedFlatConfigItem['rules'];
-    svelte?: TypedFlatConfigItem['rules'];
-  };
 }

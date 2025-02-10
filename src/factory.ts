@@ -21,6 +21,7 @@ import {
   jsonc,
   jsx,
   markdown,
+  next,
   node,
   perfectionist,
   react,
@@ -36,7 +37,6 @@ import {
   vue,
   yaml,
 } from './configs';
-import { next } from './configs/next';
 import { regexp } from './configs/regexp';
 import { interopDefault, isInEditorEnv } from './utils';
 
@@ -351,7 +351,6 @@ export function getOverrides<K extends keyof OptionsConfig>(
 ): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key);
   return {
-    ...(options.overrides as any)?.[key],
     ...('overrides' in sub ? sub.overrides : {}),
   };
 }

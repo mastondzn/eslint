@@ -8,6 +8,7 @@ export default antfu(
     svelte: true,
     astro: true,
     typescript: true,
+    next: true,
     type: 'lib',
   },
   {
