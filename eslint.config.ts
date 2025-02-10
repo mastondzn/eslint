@@ -10,7 +10,6 @@ export default antfu(
     typescript: true,
     next: true,
     tailwindcss: true,
-    type: 'lib',
   },
   {
     files: ['src/**/*.ts'],

@@ -176,7 +176,6 @@ export function antfu(
         ...typescriptOptions,
         componentExts,
         overrides: getOverrides(options, 'typescript'),
-        type: options.type,
       }),
     );
   }

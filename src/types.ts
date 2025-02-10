@@ -101,15 +101,6 @@ export interface OptionsOverrides {
   overrides?: TypedFlatConfigItem['rules'];
 }
 
-export interface OptionsProjectType {
-  /**
-   * Type of the project. `lib` will enable more strict rules for libraries.
-   *
-   * @default 'app'
-   */
-  type?: 'app' | 'lib';
-}
-
 export interface OptionsRegExp {
   /**
    * Override rulelevels
@@ -168,9 +159,7 @@ export interface OptionsTailwindCSS extends OptionsOverrides {
   classRegex?: string;
 }
 
-export interface OptionsConfig
-  extends OptionsComponentExts,
-    OptionsProjectType {
+export interface OptionsConfig extends OptionsComponentExts {
   /**
    * Enable gitignore support.
    *

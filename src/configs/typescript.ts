@@ -2,7 +2,6 @@ import type {
   OptionsComponentExts,
   OptionsFiles,
   OptionsOverrides,
-  OptionsProjectType,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
@@ -18,15 +17,13 @@ export async function typescript(
     OptionsComponentExts &
     OptionsOverrides &
     OptionsTypeScriptWithTypes &
-    OptionsTypeScriptParserOptions &
-    OptionsProjectType = {},
+    OptionsTypeScriptParserOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     componentExts = [],
     overrides = {},
     overridesTypeAware = {},
     parserOptions = {},
-    type = 'app',
   } = options;
 
   const files = options.files ?? [
@@ -177,19 +174,6 @@ export async function typescript(
         'ts/no-wrapper-object-types': 'error',
         'ts/triple-slash-reference': 'off',
         'ts/unified-signatures': 'off',
-
-        ...(type === 'lib'
-          ? {
-              'ts/explicit-function-return-type': [
-                'error',
-                {
-                  allowExpressions: true,
-                  allowHigherOrderFunctions: true,
-                  allowIIFEs: true,
-                },
-              ],
-            }
-          : {}),
         ...overrides,
       },
     },
