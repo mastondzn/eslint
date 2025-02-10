@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types';
 
-import { pluginComments } from '../plugins'
+import { pluginComments } from '../plugins';
 
 export async function comments(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -16,5 +16,5 @@ export async function comments(): Promise<TypedFlatConfigItem[]> {
         'eslint-comments/no-unused-enable': 'error',
       },
     },
-  ]
+  ];
 }

@@ -1,25 +1,22 @@
-import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
+import type {
+  OptionsFiles,
+  OptionsOverrides,
+  TypedFlatConfigItem,
+} from '../types';
 
-import { GLOB_ASTRO } from '../globs'
-import { interopDefault } from '../utils'
+import { GLOB_ASTRO } from '../globs';
+import { interopDefault } from '../utils';
 
 export async function astro(
-  options: OptionsOverrides  & OptionsFiles = {},
+  options: OptionsOverrides & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const {
-    files = [GLOB_ASTRO],
-    overrides = {},
-  } = options
+  const { files = [GLOB_ASTRO], overrides = {} } = options;
 
-  const [
-    pluginAstro,
-    parserAstro,
-    parserTs,
-  ] = await Promise.all([
+  const [pluginAstro, parserAstro, parserTs] = await Promise.all([
     interopDefault(import('eslint-plugin-astro')),
     interopDefault(import('astro-eslint-parser')),
     interopDefault(import('@typescript-eslint/parser')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -61,5 +58,5 @@ export async function astro(
         ...overrides,
       },
     },
-  ]
+  ];
 }

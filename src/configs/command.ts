@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types';
 
-import createCommand from 'eslint-plugin-command/config'
+import createCommand from 'eslint-plugin-command/config';
 
 export async function command(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -8,5 +8,5 @@ export async function command(): Promise<TypedFlatConfigItem[]> {
       ...createCommand(),
       name: 'antfu/command/rules',
     },
-  ]
+  ];
 }

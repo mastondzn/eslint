@@ -1,27 +1,24 @@
-import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types'
+import type {
+  OptionsFiles,
+  OptionsHasTypeScript,
+  OptionsOverrides,
+  TypedFlatConfigItem,
+} from '../types';
 
-import { GLOB_SVELTE } from '../globs'
-import { ensurePackages, interopDefault } from '../utils'
+import { GLOB_SVELTE } from '../globs';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function svelte(
   options: OptionsHasTypeScript & OptionsOverrides & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const {
-    files = [GLOB_SVELTE],
-    overrides = {},
-  } = options
+  const { files = [GLOB_SVELTE], overrides = {} } = options;
 
-  await ensurePackages([
-    'eslint-plugin-svelte',
-  ])
+  await ensurePackages(['eslint-plugin-svelte']);
 
-  const [
-    pluginSvelte,
-    parserSvelte,
-  ] = await Promise.all([
+  const [pluginSvelte, parserSvelte] = await Promise.all([
     interopDefault(import('eslint-plugin-svelte')),
     interopDefault(import('svelte-eslint-parser')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -37,7 +34,9 @@ export async function svelte(
         parserOptions: {
           extraFileExtensions: ['.svelte'],
           parser: options.typescript
-            ? await interopDefault(import('@typescript-eslint/parser')) as any
+            ? ((await interopDefault(
+                import('@typescript-eslint/parser'),
+              )) as any)
             : null,
         },
       },
@@ -46,13 +45,16 @@ export async function svelte(
       rules: {
         'import/no-mutable-exports': 'off',
         'no-undef': 'off', // incompatible with most recent (attribute-form) generic types RFC
-        'no-unused-vars': ['error', {
-          args: 'none',
-          caughtErrors: 'none',
-          ignoreRestSiblings: true,
-          vars: 'all',
-          varsIgnorePattern: '^(\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)',
-        }],
+        'no-unused-vars': [
+          'error',
+          {
+            args: 'none',
+            caughtErrors: 'none',
+            ignoreRestSiblings: true,
+            vars: 'all',
+            varsIgnorePattern: '^(\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)',
+          },
+        ],
 
         'svelte/comment-directive': 'error',
         'svelte/no-at-debug-tags': 'warn',
@@ -87,5 +89,5 @@ export async function svelte(
         ...overrides,
       },
     },
-  ]
+  ];
 }

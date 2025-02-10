@@ -1,24 +1,17 @@
-import type { OptionsUnoCSS, TypedFlatConfigItem } from '../types'
+import type { OptionsUnoCSS, TypedFlatConfigItem } from '../types';
 
-import { ensurePackages, interopDefault } from '../utils'
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function unocss(
   options: OptionsUnoCSS = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const {
-    attributify = true,
-    strict = false,
-  } = options
+  const { attributify = true, strict = false } = options;
 
-  await ensurePackages([
-    '@unocss/eslint-plugin',
-  ])
+  await ensurePackages(['@unocss/eslint-plugin']);
 
-  const [
-    pluginUnoCSS,
-  ] = await Promise.all([
+  const [pluginUnoCSS] = await Promise.all([
     interopDefault(import('@unocss/eslint-plugin')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -28,17 +21,17 @@ export async function unocss(
       },
       rules: {
         'unocss/order': 'warn',
-        ...attributify
+        ...(attributify
           ? {
               'unocss/order-attributify': 'warn',
             }
-          : {},
-        ...strict
+          : {}),
+        ...(strict
           ? {
               'unocss/blocklist': 'error',
             }
-          : {},
+          : {}),
       },
     },
-  ]
+  ];
 }

@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types';
 
-import { pluginNode } from '../plugins'
+import { pluginNode } from '../plugins';
 
 export async function node(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -20,5 +20,5 @@ export async function node(): Promise<TypedFlatConfigItem[]> {
         'node/process-exit-as-throw': 'error',
       },
     },
-  ]
+  ];
 }

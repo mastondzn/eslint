@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types';
 
-import { interopDefault } from '../utils'
+import { interopDefault } from '../utils';
 
 export async function jsdoc(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -27,5 +27,5 @@ export async function jsdoc(): Promise<TypedFlatConfigItem[]> {
         'jsdoc/require-yields-check': 'warn',
       },
     },
-  ]
+  ];
 }

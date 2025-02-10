@@ -1,78 +1,88 @@
-import type { OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
+import type {
+  OptionsFiles,
+  OptionsOverrides,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptWithTypes,
+  TypedFlatConfigItem,
+} from '../types';
 
-import { isPackageExists } from 'local-pkg'
-import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
+import { isPackageExists } from 'local-pkg';
+import {
+  GLOB_ASTRO_TS,
+  GLOB_MARKDOWN,
+  GLOB_SRC,
+  GLOB_TS,
+  GLOB_TSX,
+} from '../globs';
 
-import { ensurePackages, interopDefault } from '../utils'
+import { ensurePackages, interopDefault } from '../utils';
 
 // react refresh
-const ReactRefreshAllowConstantExportPackages = [
-  'vite',
-]
+const ReactRefreshAllowConstantExportPackages = ['vite'];
 const RemixPackages = [
   '@remix-run/node',
   '@remix-run/react',
   '@remix-run/serve',
   '@remix-run/dev',
-]
+];
 const ReactRouterPackages = [
   '@react-router/node',
   '@react-router/react',
   '@react-router/serve',
   '@react-router/dev',
-]
-const NextJsPackages = [
-  'next',
-]
+];
+const NextJsPackages = ['next'];
 
 export async function react(
-  options: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles = {},
+  options: OptionsTypeScriptParserOptions &
+    OptionsTypeScriptWithTypes &
+    OptionsOverrides &
+    OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_SRC],
     filesTypeAware = [GLOB_TS, GLOB_TSX],
-    ignoresTypeAware = [
-      `${GLOB_MARKDOWN}/**`,
-      GLOB_ASTRO_TS,
-    ],
+    ignoresTypeAware = [`${GLOB_MARKDOWN}/**`, GLOB_ASTRO_TS],
     overrides = {},
     tsconfigPath,
-  } = options
+  } = options;
 
   await ensurePackages([
     '@eslint-react/eslint-plugin',
     'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
-  ])
+  ]);
 
-  const isTypeAware = !!tsconfigPath
+  const isTypeAware = !!tsconfigPath;
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {
     'react/no-leaked-conditional-rendering': 'warn',
-  }
+  };
 
-  const [
-    pluginReact,
-    pluginReactHooks,
-    pluginReactRefresh,
-  ] = await Promise.all([
-    interopDefault(import('@eslint-react/eslint-plugin')),
-    interopDefault(import('eslint-plugin-react-hooks')),
-    interopDefault(import('eslint-plugin-react-refresh')),
-  ] as const)
+  const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
+    [
+      interopDefault(import('@eslint-react/eslint-plugin')),
+      interopDefault(import('eslint-plugin-react-hooks')),
+      interopDefault(import('eslint-plugin-react-refresh')),
+    ] as const,
+  );
 
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(i => isPackageExists(i))
-  const isUsingRemix = RemixPackages.some(i => isPackageExists(i))
-  const isUsingReactRouter = ReactRouterPackages.some(i => isPackageExists(i))
-  const isUsingNext = NextJsPackages.some(i => isPackageExists(i))
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    (i) => isPackageExists(i),
+  );
+  const isUsingRemix = RemixPackages.some((i) => isPackageExists(i));
+  const isUsingReactRouter = ReactRouterPackages.some((i) =>
+    isPackageExists(i),
+  );
+  const isUsingNext = NextJsPackages.some((i) => isPackageExists(i));
 
-  const plugins = pluginReact.configs.all.plugins
+  const plugins = pluginReact.configs.all.plugins;
 
   return [
     {
       name: 'antfu/react/setup',
       plugins: {
-        'react': plugins['@eslint-react'],
+        react: plugins['@eslint-react'],
         'react-dom': plugins['@eslint-react/dom'],
         'react-hooks': pluginReactHooks,
         'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
@@ -133,13 +143,7 @@ export async function react(
                   ]
                 : []),
               ...(isUsingRemix || isUsingReactRouter
-                ? [
-                    'meta',
-                    'links',
-                    'headers',
-                    'loader',
-                    'action',
-                  ]
+                ? ['meta', 'links', 'headers', 'loader', 'action']
                 : []),
             ],
           },
@@ -198,15 +202,17 @@ export async function react(
         ...overrides,
       },
     },
-    ...isTypeAware
-      ? [{
-          files: filesTypeAware,
-          ignores: ignoresTypeAware,
-          name: 'antfu/react/type-aware-rules',
-          rules: {
-            ...typeAwareRules,
+    ...(isTypeAware
+      ? [
+          {
+            files: filesTypeAware,
+            ignores: ignoresTypeAware,
+            name: 'antfu/react/type-aware-rules',
+            rules: {
+              ...typeAwareRules,
+            },
           },
-        }]
-      : [],
-  ]
+        ]
+      : []),
+  ];
 }

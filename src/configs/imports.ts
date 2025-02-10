@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types';
 
-import { pluginAntfu, pluginImport } from '../plugins'
+import { pluginAntfu, pluginImport } from '../plugins';
 
 export async function imports(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -24,5 +24,5 @@ export async function imports(): Promise<TypedFlatConfigItem[]> {
         'import/no-webpack-loader-syntax': 'error',
       },
     },
-  ]
+  ];
 }

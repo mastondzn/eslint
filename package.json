@@ -26,6 +26,8 @@
     "build:inspector": "pnpm build && npx @eslint/config-inspector build",
     "watch": "tsup --watch",
     "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typegen": "tsx scripts/typegen.ts",
     "prepack": "nr build",
     "release": "bumpp && pnpm publish",
