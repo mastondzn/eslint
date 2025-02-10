@@ -36,6 +36,7 @@ import {
   vue,
   yaml,
 } from './configs';
+import { next } from './configs/next';
 import { regexp } from './configs/regexp';
 import { interopDefault, isInEditorEnv } from './utils';
 
@@ -87,6 +88,7 @@ export function antfu(
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
+    next: enableNext = isPackageExists('next'),
     react: enableReact = false,
     regexp: enableRegexp = true,
     solid: enableSolid = false,
@@ -208,6 +210,14 @@ export function antfu(
         ...typescriptOptions,
         overrides: getOverrides(options, 'react'),
         tsconfigPath,
+      }),
+    );
+  }
+
+  if (enableNext) {
+    configs.push(
+      next({
+        overrides: getOverrides(options, 'next'),
       }),
     );
   }

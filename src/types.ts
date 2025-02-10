@@ -157,17 +157,6 @@ export interface OptionsConfig
   gitignore?: boolean | FlatGitignoreOptions;
 
   /**
-   * Disable some opinionated rules to Anthony's preference.
-   *
-   * Including:
-   * - `antfu/top-level-function`
-   * - `antfu/if-newline`
-   *
-   * @default false
-   */
-  lessOpinionated?: boolean;
-
-  /**
    * Core rules. Can't be disabled.
    */
   javascript?: OptionsOverrides;
@@ -208,6 +197,11 @@ export interface OptionsConfig
    * Enable Vue support.
    *
    * @default auto-detect based on the dependencies
+   *
+   * Requires installing:
+   * - `eslint-plugin-vue`
+   * - `eslint-processor-vue-blocks`
+   * - `vue-eslint-parser`
    */
   vue?: boolean | OptionsVue;
 
@@ -273,6 +267,17 @@ export interface OptionsConfig
    * @default false
    */
   react?: boolean | OptionsOverrides;
+
+  /**
+   * Enable Next.js rules.
+   *
+   * Requires installing:
+   * - `@next/eslint-plugin-next`
+   *
+   * @default auto-detect based on the dependencies
+   */
+  next?: boolean | OptionsOverrides;
+
   /**
    * Enable solid rules.
    *
