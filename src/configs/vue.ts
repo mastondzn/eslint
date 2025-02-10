@@ -8,7 +8,7 @@ import type {
 
 import { mergeProcessors } from 'eslint-merge-processors';
 import { GLOB_VUE } from '../globs';
-import { interopDefault } from '../utils';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function vue(
   options: OptionsVue &
@@ -19,6 +19,12 @@ export async function vue(
   const { files = [GLOB_VUE], overrides = {}, vueVersion = 3 } = options;
 
   const sfcBlocks = options.sfcBlocks === true ? {} : (options.sfcBlocks ?? {});
+
+  await ensurePackages([
+    'eslint-plugin-vue',
+    'vue-eslint-parser',
+    'eslint-processor-vue-blocks',
+  ]);
 
   const [pluginVue, parserVue, processorVueBlocks] = await Promise.all([
     interopDefault(import('eslint-plugin-vue')),
