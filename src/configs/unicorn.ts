@@ -5,7 +5,7 @@ import { pluginUnicorn } from '../plugins';
 export async function unicorn(
   options: OptionsUnicorn = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const { overrides = {} } = options;
+  const { allRecommended = true, overrides = {} } = options;
 
   return [
     {
@@ -14,25 +14,31 @@ export async function unicorn(
         unicorn: pluginUnicorn,
       },
       rules: {
-        ...(options.allRecommended
+        ...(allRecommended
           ? pluginUnicorn.configs['flat/recommended'].rules
-          : {
-              'unicorn/consistent-empty-array-spread': 'error',
-              'unicorn/error-message': 'error',
-              'unicorn/escape-case': 'error',
-              'unicorn/new-for-builtins': 'error',
-              'unicorn/no-instanceof-array': 'error',
-              'unicorn/no-new-array': 'error',
-              'unicorn/no-new-buffer': 'error',
-              'unicorn/number-literal-case': 'error',
-              'unicorn/prefer-dom-node-text-content': 'error',
-              'unicorn/prefer-includes': 'error',
-              'unicorn/prefer-node-protocol': 'error',
-              'unicorn/prefer-number-properties': 'error',
-              'unicorn/prefer-string-starts-ends-with': 'error',
-              'unicorn/prefer-type-error': 'error',
-              'unicorn/throw-new-error': 'error',
-            }),
+          : {}),
+
+        'unicorn/no-array-reduce': 'off',
+        'unicorn/no-await-expression-member': 'off',
+        'unicorn/no-nested-ternary': 'off',
+        'unicorn/no-null': 'off',
+        'unicorn/no-object-as-default-parameter': 'off',
+        'unicorn/no-process-exit': 'off',
+        // this one conflicts with prettier
+        'unicorn/number-literal-case': 'off',
+        'unicorn/prefer-module': 'off',
+        'unicorn/prefer-top-level-await': 'off',
+        'unicorn/prevent-abbreviations': [
+          'warn',
+          {
+            allowList: {
+              db: true,
+              props: true,
+            },
+          },
+        ],
+        'unicorn/template-indent': 'off',
+
         ...overrides,
       },
     },
