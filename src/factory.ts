@@ -114,12 +114,12 @@ export function antfu(
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
-    if (typeof enableGitignore !== 'boolean') {
+    if (typeof enableGitignore === 'boolean') {
       configs.push(
         interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
           r({
             name: 'antfu/gitignore',
-            ...enableGitignore,
+            strict: false,
           }),
         ]),
       );
@@ -128,7 +128,7 @@ export function antfu(
         interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
           r({
             name: 'antfu/gitignore',
-            strict: false,
+            ...enableGitignore,
           }),
         ]),
       );
@@ -315,7 +315,7 @@ export function antfu(
     if (key in options) acc[key] = options[key] as any;
     return acc;
   }, {} as TypedFlatConfigItem);
-  if (Object.keys(fusedConfig).length) configs.push([fusedConfig]);
+  if (Object.keys(fusedConfig).length > 0) configs.push([fusedConfig]);
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
 

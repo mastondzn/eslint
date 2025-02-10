@@ -37,7 +37,7 @@ export async function typescript(
     `${GLOB_MARKDOWN}/**`,
     GLOB_ASTRO_TS,
   ];
-  const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : undefined;
+  const tsconfigPath = options?.tsconfigPath ?? undefined;
   const isTypeAware = !!tsconfigPath;
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {

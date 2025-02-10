@@ -28,15 +28,7 @@ export async function unicorn(
         'unicorn/number-literal-case': 'off',
         'unicorn/prefer-module': 'off',
         'unicorn/prefer-top-level-await': 'off',
-        'unicorn/prevent-abbreviations': [
-          'warn',
-          {
-            allowList: {
-              db: true,
-              props: true,
-            },
-          },
-        ],
+        'unicorn/prevent-abbreviations': 'off',
         'unicorn/template-indent': 'off',
 
         ...overrides,

@@ -54,6 +54,7 @@ export async function test(
         'test/prefer-lowercase-title': 'error',
 
         // Disables
+        // eslint-disable-next-line unicorn/no-useless-spread
         ...{
           'antfu/no-top-level-await': 'off',
           'no-unused-expressions': 'off',

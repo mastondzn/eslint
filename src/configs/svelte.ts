@@ -52,7 +52,7 @@ export async function svelte(
             caughtErrors: 'none',
             ignoreRestSiblings: true,
             vars: 'all',
-            varsIgnorePattern: '^(\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)',
+            varsIgnorePattern: String.raw`^(\$\$Props$|\$\$Events$|\$\$Slots$)`,
           },
         ],
 
@@ -83,7 +83,7 @@ export async function svelte(
             args: 'after-used',
             argsIgnorePattern: '^_',
             vars: 'all',
-            varsIgnorePattern: '^(_|\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)',
+            varsIgnorePattern: String.raw`^(_|\$\$Props$|\$\$Events$|\$\$Slots$)`,
           },
         ],
         ...overrides,
