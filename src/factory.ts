@@ -83,22 +83,20 @@ export function antfu(
   >[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
-    astro: enableAstro = false,
+    astro: enableAstro = isPackageExists('astro'),
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
-    next: enableNext = isPackageExists('next'),
-    react: enableReact = false,
-    regexp: enableRegexp = true,
-    solid: enableSolid = false,
-    svelte: enableSvelte = false,
-    typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
-    unocss: enableUnoCSS = false,
-    vue: enableVue = ['vue', 'nuxt', 'vitepress'].some((i) =>
-      isPackageExists(i),
-    ),
+    regexp: enableRegexp = true,
+    next: enableNext = isPackageExists('next'),
+    react: enableReact = isPackageExists('react'),
+    svelte: enableSvelte = isPackageExists('svelte'),
+    solid: enableSolid = isPackageExists('solid-js'),
+    typescript: enableTypeScript = isPackageExists('typescript'),
+    unocss: enableUnoCSS = isPackageExists('unocss'),
+    vue: enableVue = ['vue', 'nuxt'].some((i) => isPackageExists(i)),
   } = options;
 
   let isInEditor = options.isInEditor;

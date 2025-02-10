@@ -235,7 +235,7 @@ export interface OptionsConfig
    * Requires installing for formatting .astro:
    * - `prettier-plugin-astro`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   astro?: boolean | OptionsOverrides;
 
@@ -264,7 +264,7 @@ export interface OptionsConfig
    * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-react-refresh`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   react?: boolean | OptionsOverrides;
 
@@ -284,7 +284,7 @@ export interface OptionsConfig
    * Requires installing:
    * - `eslint-plugin-solid`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   solid?: boolean | OptionsOverrides;
 
@@ -294,7 +294,7 @@ export interface OptionsConfig
    * Requires installing:
    * - `eslint-plugin-svelte`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   svelte?: boolean;
 
@@ -304,7 +304,7 @@ export interface OptionsConfig
    * Requires installing:
    * - `@unocss/eslint-plugin`
    *
-   * @default false
+   * @default auto-detect based on the dependencies
    */
   unocss?: boolean | OptionsUnoCSS;
 
