@@ -1,4 +1,4 @@
-import type { TypedFlatConfigItem } from '../types';
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
 import { pluginPerfectionist } from '../plugins';
 
 /**
@@ -6,7 +6,11 @@ import { pluginPerfectionist } from '../plugins';
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
-export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
+export async function perfectionist(
+  options: OptionsOverrides,
+): Promise<TypedFlatConfigItem[]> {
+  const { overrides = {} } = options;
+
   return [
     {
       name: 'antfu/perfectionist/setup',
@@ -14,7 +18,7 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
         perfectionist: pluginPerfectionist,
       },
       rules: {
-        'perfectionist/sort-exports': ['error', {}],
+        'perfectionist/sort-exports': ['error', { groupKind: 'types-first' }],
         'perfectionist/sort-imports': [
           'error',
           {
@@ -34,9 +38,13 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
         ],
         'perfectionist/sort-named-exports': [
           'error',
-          { groupKind: 'values-first' },
+          { groupKind: 'types-first' },
         ],
-        'perfectionist/sort-named-imports': ['error', {}],
+        'perfectionist/sort-named-imports': [
+          'error',
+          { groupKind: 'types-first' },
+        ],
+        ...overrides,
       },
     },
   ];

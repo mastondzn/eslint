@@ -1,4 +1,3 @@
-import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 import { isPackageExists } from 'local-pkg';
@@ -6,7 +5,7 @@ import { isPackageExists } from 'local-pkg';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
-const isCwdInScope = isPackageExists('@antfu/eslint-config');
+const isCwdInScope = isPackageExists('@mastondzn/eslint');
 
 export const parserPlain = {
   meta: {
@@ -45,7 +44,7 @@ export async function combine(
  *
  * @example
  * ```ts
- * import { renameRules } from '@antfu/eslint-config'
+ * import { renameRules } from '@mastondzn/eslint'
  *
  * export default [{
  *   rules: renameRules(
@@ -77,7 +76,7 @@ export function renameRules<T>(
  *
  * @example
  * ```ts
- * import { renamePluginInConfigs } from '@antfu/eslint-config'
+ * import { renamePluginInConfigs } from '@mastondzn/eslint'
  * import someConfigs from './some-configs'
  *
  * export default renamePluginInConfigs(someConfigs, {

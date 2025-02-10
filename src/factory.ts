@@ -1,5 +1,7 @@
 import type { Linter } from 'eslint';
 
+import { existsSync } from 'node:fs';
+
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
@@ -76,7 +78,7 @@ export const defaultPluginRenaming = {
  *  The merged ESLint configurations.
  */
 // eslint-disable-next-line ts/promise-function-async
-export function antfu(
+export function maston(
   options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
   ...userConfigs: Awaitable<
     | TypedFlatConfigItem
@@ -92,6 +94,7 @@ export function antfu(
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
     next: enableNext = isPackageExists('next'),
+    perfectionist: enablePerfectionist = true,
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
     solid: enableSolid = isPackageExists('solid-js'),
@@ -109,7 +112,7 @@ export function antfu(
     if (isInEditor)
       // eslint-disable-next-line no-console
       console.log(
-        '[@antfu/eslint-config] Detected running in editor, some rules are disabled.',
+        '[@mastondzn/eslint] Detected running in editor, some rules are disabled.',
       );
   }
 
@@ -138,10 +141,14 @@ export function antfu(
   }
 
   const typescriptOptions = resolveSubOptions(options, 'typescript');
+
+  const tsconfigExists = existsSync(`${process.cwd()}/tsconfig.json`);
   const tsconfigPath =
     'tsconfigPath' in typescriptOptions
       ? typescriptOptions.tsconfigPath
-      : undefined;
+      : tsconfigExists
+        ? './tsconfig.json'
+        : undefined;
 
   // Base configs
   configs.push(
@@ -155,9 +162,6 @@ export function antfu(
     jsdoc(),
     imports(),
     command(),
-
-    // Optional plugins (installed but not enabled by default)
-    perfectionist(),
   );
 
   if (enableUnicorn) {
@@ -170,6 +174,14 @@ export function antfu(
 
   if (enableJsx) {
     configs.push(jsx());
+  }
+
+  if (enablePerfectionist) {
+    configs.push(
+      perfectionist({
+        overrides: getOverrides(options, 'perfectionist'),
+      }),
+    );
   }
 
   if (enableTypeScript) {
@@ -307,7 +319,7 @@ export function antfu(
 
   if ('files' in options) {
     throw new Error(
-      '[@antfu/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.',
+      '[@mastondzn/eslint] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.',
     );
   }
 

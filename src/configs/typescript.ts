@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs';
-import process from 'node:process';
-
 import type {
   OptionsComponentExts,
   OptionsFiles,
@@ -39,16 +36,8 @@ export async function typescript(
     GLOB_ASTRO_TS,
   ];
 
-  const tsconfigExists = existsSync(`${process.cwd()}/tsconfig.json`);
-
-  const tsconfigPath =
-    'tsconfigPath' in options
-      ? options.tsconfigPath
-      : tsconfigExists
-        ? './tsconfig.json'
-        : undefined;
-
-  const isTypeAware = Boolean(tsconfigPath);
+  const tsconfigPath = options.tsconfigPath;
+  const isTypeAware = !!tsconfigPath;
 
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),

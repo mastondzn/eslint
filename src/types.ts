@@ -193,6 +193,13 @@ export interface OptionsConfig extends OptionsComponentExts {
   jsx?: boolean;
 
   /**
+   * Customize rules for plugin-perfectionist (mostly import/export sorting).
+   *
+   * @default true
+   */
+  perfectionist?: boolean | OptionsOverrides;
+
+  /**
    * Options for eslint-plugin-unicorn.
    *
    * @default true

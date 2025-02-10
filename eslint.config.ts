@@ -1,6 +1,6 @@
-import { antfu } from './src';
+import { maston } from './src';
 
-export default antfu(
+export default maston(
   {
     vue: true,
     react: true,
@@ -10,6 +10,7 @@ export default antfu(
     next: true,
     tailwindcss: true,
     typescript: {
+      tsconfigPath: './tsconfig.json',
       overridesTypeAware: {
         'ts/no-explicit-any': 'warn',
         'ts/no-unsafe-argument': 'warn',
