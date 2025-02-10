@@ -12,7 +12,7 @@
 - **Style principle**: Minimal for reading, stable for diff, consistent
   - Sorted imports, dangling commas
   - Single quotes, no semi
-  - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+  - Using [ESLint ](https://github.com/eslint-/eslint-)
 - Respects `.gitignore` by default
 - Requires ESLint v9.5.0+
 
@@ -126,7 +126,7 @@ Add the following settings to your `.vscode/settings.json`:
     "source.organizeImports": "never"
   },
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
+  // Silent the  rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off", "fixable": true },
     { "rule": "format/*", "severity": "off", "fixable": true },
@@ -220,7 +220,7 @@ lspconfig.eslint.setup(
       "postcss"
     },
     settings = {
-      -- Silent the stylistic rules in you IDE, but still auto fix them
+      -- Silent the  rules in you IDE, but still auto fix them
       rulesCustomizations = customizations,
     },
   }
@@ -274,11 +274,11 @@ export default antfu({
 // Type of the project. 'lib' for libraries, the default is 'app'
   type: 'lib',
 
-  // Enable stylistic formatting rules
-  // stylistic: true,
+  // Enable  formatting rules
+  // : true,
 
-  // Or customize the stylistic rules
-  stylistic: {
+  // Or customize the  rules
+  : {
     indent: 2, // 4, or 'tab'
     quotes: 'single', // or 'double'
   },
@@ -343,7 +343,7 @@ import {
   node,
   sortPackageJson,
   sortTsconfig,
-  stylistic,
+  ,
   toml,
   typescript,
   unicorn,
@@ -360,7 +360,7 @@ export default combine(
   imports(),
   unicorn(),
   typescript(/* Options */),
-  stylistic(),
+  (),
   vue(),
   jsonc(),
   yaml(),
@@ -385,7 +385,7 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
 | `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
 | `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
+| `style/*`  | `@/*`         | [@/eslint-plugin](https://github.com/eslint-/eslint-)           |
 | `test/*`   | `vitest/*`             | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                |
 | `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 

@@ -22,7 +22,6 @@ import {
   solid,
   sortPackageJson,
   sortTsconfig,
-  stylistic,
   svelte,
   test,
   toml,
@@ -32,7 +31,6 @@ import {
   vue,
   yaml,
 } from './configs'
-import { formatters } from './configs/formatters'
 import { regexp } from './configs/regexp'
 import { interopDefault, isInEditorEnv } from './utils'
 
@@ -59,7 +57,6 @@ export const defaultPluginRenaming = {
   '@eslint-react/hooks-extra': 'react-hooks-extra',
   '@eslint-react/naming-convention': 'react-naming-convention',
 
-  '@stylistic': 'style',
   '@typescript-eslint': 'ts',
   'import-x': 'import',
   'n': 'node',
@@ -105,15 +102,6 @@ export function antfu(
       console.log('[@antfu/eslint-config] Detected running in editor, some rules are disabled.')
   }
 
-  const stylisticOptions = options.stylistic === false
-    ? false
-    : typeof options.stylistic === 'object'
-      ? options.stylistic
-      : {}
-
-  if (stylisticOptions && !('jsx' in stylisticOptions))
-    stylisticOptions.jsx = enableJsx
-
   const configs: Awaitable<TypedFlatConfigItem[]>[] = []
 
   if (enableGitignore) {
@@ -143,12 +131,8 @@ export function antfu(
     }),
     comments(),
     node(),
-    jsdoc({
-      stylistic: stylisticOptions,
-    }),
-    imports({
-      stylistic: stylisticOptions,
-    }),
+    jsdoc(),
+    imports(),
     command(),
 
     // Optional plugins (installed but not enabled by default)
@@ -176,14 +160,6 @@ export function antfu(
     }))
   }
 
-  if (stylisticOptions) {
-    configs.push(stylistic({
-      ...stylisticOptions,
-      lessOpinionated: options.lessOpinionated,
-      overrides: getOverrides(options, 'stylistic'),
-    }))
-  }
-
   if (enableRegexp) {
     configs.push(regexp(typeof enableRegexp === 'boolean' ? {} : enableRegexp))
   }
@@ -199,7 +175,6 @@ export function antfu(
     configs.push(vue({
       ...resolveSubOptions(options, 'vue'),
       overrides: getOverrides(options, 'vue'),
-      stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }))
   }
@@ -223,7 +198,6 @@ export function antfu(
   if (enableSvelte) {
     configs.push(svelte({
       overrides: getOverrides(options, 'svelte'),
-      stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }))
   }
@@ -238,7 +212,6 @@ export function antfu(
   if (enableAstro) {
     configs.push(astro({
       overrides: getOverrides(options, 'astro'),
-      stylistic: stylisticOptions,
     }))
   }
 
@@ -246,7 +219,6 @@ export function antfu(
     configs.push(
       jsonc({
         overrides: getOverrides(options, 'jsonc'),
-        stylistic: stylisticOptions,
       }),
       sortPackageJson(),
       sortTsconfig(),
@@ -256,14 +228,12 @@ export function antfu(
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: getOverrides(options, 'yaml'),
-      stylistic: stylisticOptions,
     }))
   }
 
   if (options.toml ?? true) {
     configs.push(toml({
       overrides: getOverrides(options, 'toml'),
-      stylistic: stylisticOptions,
     }))
   }
 
@@ -276,13 +246,6 @@ export function antfu(
         },
       ),
     )
-  }
-
-  if (options.formatters) {
-    configs.push(formatters(
-      options.formatters,
-      typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
-    ))
   }
 
   configs.push(

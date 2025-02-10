@@ -1,9 +1,8 @@
-import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
-import type { ConfigNames, RuleOptions } from './typegen'
+import type { ConfigNames, RuleOptions } from './typegen.d'
 import type { VendoredPrettierOptions } from './vender/prettier-types'
 
 export type Awaitable<T> = T | Promise<T>
@@ -49,80 +48,6 @@ export interface OptionsVue extends OptionsOverrides {
 export type OptionsTypescript =
   (OptionsTypeScriptWithTypes & OptionsOverrides)
   | (OptionsTypeScriptParserOptions & OptionsOverrides)
-
-export interface OptionsFormatters {
-  /**
-   * Enable formatting support for CSS, Less, Sass, and SCSS.
-   *
-   * Currently only support Prettier.
-   */
-  css?: 'prettier' | boolean
-
-  /**
-   * Enable formatting support for HTML.
-   *
-   * Currently only support Prettier.
-   */
-  html?: 'prettier' | boolean
-
-  /**
-   * Enable formatting support for XML.
-   *
-   * Currently only support Prettier.
-   */
-  xml?: 'prettier' | boolean
-
-  /**
-   * Enable formatting support for SVG.
-   *
-   * Currently only support Prettier.
-   */
-  svg?: 'prettier' | boolean
-
-  /**
-   * Enable formatting support for Markdown.
-   *
-   * Support both Prettier and dprint.
-   *
-   * When set to `true`, it will use Prettier.
-   */
-  markdown?: 'prettier' | 'dprint' | boolean
-
-  /**
-   * Enable formatting support for GraphQL.
-   */
-  graphql?: 'prettier' | boolean
-
-  /**
-   * Custom options for Prettier.
-   *
-   * By default it's controlled by our own config.
-   */
-  prettierOptions?: VendoredPrettierOptions
-
-  /**
-   * Custom options for dprint.
-   *
-   * By default it's controlled by our own config.
-   */
-  dprintOptions?: boolean
-
-  /**
-   * Install the prettier plugin for handle Slidev markdown
-   *
-   * Only works when `markdown` is enabled with `prettier`.
-   */
-  slidev?: boolean | {
-    files?: string[]
-  }
-
-  /**
-   * Enable formatting support for Astro.
-   *
-   * Currently only support Prettier.
-   */
-  astro?: 'prettier' | boolean
-}
 
 export interface OptionsComponentExts {
   /**
@@ -179,13 +104,6 @@ export interface OptionsHasTypeScript {
   typescript?: boolean
 }
 
-export interface OptionsStylistic {
-  stylistic?: boolean | StylisticConfig
-}
-
-export interface StylisticConfig
-  extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
-}
 
 export interface OptionsOverrides {
   overrides?: TypedFlatConfigItem['rules']
@@ -334,14 +252,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   markdown?: boolean | OptionsOverrides
 
   /**
-   * Enable stylistic rules.
-   *
-   * @see https://eslint.style/
-   * @default true
-   */
-  stylistic?: boolean | (StylisticConfig & OptionsOverrides)
-
-  /**
    * Enable regexp rules.
    *
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/
@@ -391,18 +301,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   unocss?: boolean | OptionsUnoCSS
 
   /**
-   * Use external formatters to format files.
-   *
-   * Requires installing:
-   * - `eslint-plugin-format`
-   *
-   * When set to `true`, it will enable all formatters.
-   *
-   * @default false
-   */
-  formatters?: boolean | OptionsFormatters
-
-  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
@@ -421,7 +319,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * @deprecated use `overrides` option in each integration key instead
    */
   overrides?: {
-    stylistic?: TypedFlatConfigItem['rules']
     javascript?: TypedFlatConfigItem['rules']
     typescript?: TypedFlatConfigItem['rules']
     test?: TypedFlatConfigItem['rules']

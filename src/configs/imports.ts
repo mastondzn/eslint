@@ -1,12 +1,8 @@
-import type { OptionsStylistic, TypedFlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 
 import { pluginAntfu, pluginImport } from '../plugins'
 
-export async function imports(options: OptionsStylistic = {}): Promise<TypedFlatConfigItem[]> {
-  const {
-    stylistic = true,
-  } = options
-
+export async function imports(): Promise<TypedFlatConfigItem[]> {
   return [
     {
       name: 'antfu/imports/rules',
@@ -26,12 +22,6 @@ export async function imports(options: OptionsStylistic = {}): Promise<TypedFlat
         'import/no-named-default': 'error',
         'import/no-self-import': 'error',
         'import/no-webpack-loader-syntax': 'error',
-
-        ...stylistic
-          ? {
-              'import/newline-after-import': ['error', { count: 1 }],
-            }
-          : {},
       },
     },
   ]
