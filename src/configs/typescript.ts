@@ -6,6 +6,7 @@ import type {
   OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
+import { existsSync } from 'node:fs';
 import process from 'node:process';
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginAntfu } from '../plugins';
@@ -37,8 +38,14 @@ export async function typescript(
     GLOB_ASTRO_TS,
   ];
 
+  const tsconfigExists = existsSync(`${process.cwd()}/tsconfig.json`);
+
   const tsconfigPath =
-    'tsconfigPath' in options ? options.tsconfigPath : './tsconfig.json';
+    'tsconfigPath' in options
+      ? options.tsconfigPath
+      : tsconfigExists
+        ? './tsconfig.json'
+        : undefined;
 
   const isTypeAware = Boolean(tsconfigPath);
 
@@ -143,10 +150,6 @@ export async function typescript(
     'ts/restrict-plus-operands': 'error',
     'ts/restrict-template-expressions': 'error',
     'ts/return-await': ['error', 'in-try-catch'],
-    'ts/strict-boolean-expressions': [
-      'error',
-      { allowNullableBoolean: true, allowNullableObject: true },
-    ],
     'ts/switch-exhaustiveness-check': 'error',
     'ts/unbound-method': 'error',
   };

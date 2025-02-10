@@ -14,7 +14,7 @@ export async function tailwindcss(
 
   return [
     {
-      name: 'mastondzn:tailwindcss',
+      name: 'maston/tailwindcss',
       plugins: {
         tailwindcss: pluginTailwind,
       },

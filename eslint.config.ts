@@ -7,9 +7,17 @@ export default antfu(
     solid: true,
     svelte: true,
     astro: true,
-    typescript: true,
     next: true,
     tailwindcss: true,
+    typescript: {
+      overridesTypeAware: {
+        'ts/no-explicit-any': 'warn',
+        'ts/no-unsafe-argument': 'warn',
+        'ts/no-unsafe-assignment': 'warn',
+        'ts/no-unsafe-member-access': 'warn',
+        'ts/require-await': 'warn',
+      },
+    },
   },
   {
     files: ['src/**/*.ts'],

@@ -56,10 +56,10 @@ export async function combine(
  * }]
  * ```
  */
-export function renameRules(
-  rules: Record<string, any>,
+export function renameRules<T>(
+  rules: Record<string, T>,
   map: Record<string, string>,
-): Record<string, any> {
+): Record<string, T> {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
       for (const [from, to] of Object.entries(map)) {
@@ -112,6 +112,7 @@ export async function interopDefault<T>(
   m: Awaitable<T>,
 ): Promise<T extends { default: infer U } ? U : T> {
   const resolved = await m;
+  // eslint-disable-next-line ts/no-unsafe-return
   return (resolved as any).default || resolved;
 }
 
@@ -122,12 +123,7 @@ export function isPackageInScope(name: string): boolean {
 export async function ensurePackages(
   packages: (string | undefined)[],
 ): Promise<void> {
-  if (
-    process.env.CI ||
-    process.stdout.isTTY === false ||
-    isCwdInScope === false
-  )
-    return;
+  if (process.env.CI || !process.stdout.isTTY || !isCwdInScope) return;
 
   const nonExistingPackages = packages.filter(
     (i) => i && !isPackageInScope(i),
@@ -139,7 +135,7 @@ export async function ensurePackages(
     message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
   });
   if (result)
-    await import('@antfu/install-pkg').then((i) =>
+    await import('@antfu/install-pkg').then(async (i) =>
       i.installPackage(nonExistingPackages, { dev: true }),
     );
 }
@@ -148,20 +144,18 @@ export function isInEditorEnv(): boolean {
   if (process.env.CI) return false;
   if (isInGitHooksOrLintStaged()) return false;
   return !!(
-    false ||
-    process.env.VSCODE_PID ||
-    process.env.VSCODE_CWD ||
-    process.env.JETBRAINS_IDE ||
-    process.env.VIM ||
+    process.env.VSCODE_PID ??
+    process.env.VSCODE_CWD ??
+    process.env.JETBRAINS_IDE ??
+    process.env.VIM ??
     process.env.NVIM
   );
 }
 
 export function isInGitHooksOrLintStaged(): boolean {
   return !!(
-    false ||
-    process.env.GIT_PARAMS ||
-    process.env.VSCODE_GIT_COMMAND ||
+    process.env.GIT_PARAMS ??
+    process.env.VSCODE_GIT_COMMAND ??
     process.env.npm_lifecycle_script?.startsWith('lint-staged')
   );
 }

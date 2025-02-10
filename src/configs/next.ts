@@ -16,11 +16,11 @@ export async function next(
       ...pluginNext.configs['core-web-vitals'].rules,
     },
     { '@next/next': 'next' },
-  );
+  ) as TypedFlatConfigItem['rules'];
 
   return [
     {
-      name: 'maston:next',
+      name: 'maston/next',
       plugins: {
         next: pluginNext,
       },

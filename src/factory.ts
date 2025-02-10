@@ -74,12 +74,13 @@ export const defaultPluginRenaming = {
  * @returns {Promise<TypedFlatConfigItem[]>}
  *  The merged ESLint configurations.
  */
+// eslint-disable-next-line ts/promise-function-async
 export function antfu(
   options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
   ...userConfigs: Awaitable<
     | TypedFlatConfigItem
     | TypedFlatConfigItem[]
-    | FlatConfigComposer<any, any>
+    | FlatConfigComposer
     | Linter.Config[]
   >[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
@@ -311,10 +312,13 @@ export function antfu(
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
-  const fusedConfig = flatConfigProps.reduce((acc, key) => {
-    if (key in options) acc[key] = options[key] as any;
-    return acc;
-  }, {} as TypedFlatConfigItem);
+  const fusedConfig = flatConfigProps.reduce<TypedFlatConfigItem>(
+    (acc, key) => {
+      if (key in options) acc[key] = options[key] as any;
+      return acc;
+    },
+    {},
+  );
   if (Object.keys(fusedConfig).length > 0) configs.push([fusedConfig]);
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
@@ -333,7 +337,7 @@ export function antfu(
         'prefer-const',
       ],
       {
-        builtinRules: () =>
+        builtinRules: async () =>
           import(['eslint', 'use-at-your-own-risk'].join('/')).then(
             (r) => r.builtinRules,
           ),
@@ -353,9 +357,9 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
   return typeof options[key] === 'boolean' ? ({} as any) : options[key] || {};
 }
 
-export function getOverrides<K extends keyof OptionsConfig>(
+export function getOverrides(
   options: OptionsConfig,
-  key: K,
+  key: keyof OptionsConfig,
 ): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key);
   return {

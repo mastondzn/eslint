@@ -35,6 +35,7 @@ const configs = await combine(
   {
     plugins: {
       '': {
+        // eslint-disable-next-line ts/no-deprecated
         rules: Object.fromEntries(builtinRules.entries()),
       },
     },
@@ -76,4 +77,4 @@ dts += `
 export type ConfigNames = ${configNames.map((i) => `'${i}'`).join(' | ')}
 `;
 
-await fs.writeFile('src/typegen.d.ts', dts);
+await fs.writeFile('src/typegen.ts', dts);
