@@ -6,9 +6,9 @@ import type {
   TypedFlatConfigItem,
 } from '../types';
 
-export async function regexp(
+export function regexp(
   options: OptionsRegExp & OptionsOverrides = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const config = configs['flat/recommended'] as TypedFlatConfigItem;
 
   const rules = {

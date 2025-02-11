@@ -6,11 +6,9 @@ import { pluginPerfectionist } from '../plugins';
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
-export async function perfectionist(
-  options: OptionsOverrides,
-): Promise<TypedFlatConfigItem[]> {
-  const { overrides = {} } = options;
-
+export function perfectionist(
+  options: OptionsOverrides = {},
+): TypedFlatConfigItem[] {
   return [
     {
       name: 'antfu/perfectionist/setup',
@@ -23,12 +21,18 @@ export async function perfectionist(
           'error',
           {
             groups: [
-              'type',
-              'builtin',
-              'external',
+              ['builtin-type'],
+              { newlinesBetween: 'never' },
+              ['builtin'],
+
+              ['external-type'],
+              { newlinesBetween: 'never' },
+              ['external'],
+
               ['internal-type', 'parent-type', 'sibling-type', 'index-type'],
               { newlinesBetween: 'never' },
               ['internal', 'parent', 'sibling', 'index'],
+
               'object',
               'side-effect',
               'unknown',
@@ -44,7 +48,7 @@ export async function perfectionist(
           'error',
           { groupKind: 'types-first' },
         ],
-        ...overrides,
+        ...options.overrides,
       },
     },
   ];

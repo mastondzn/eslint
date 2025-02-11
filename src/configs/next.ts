@@ -10,13 +10,13 @@ export async function next(
 
   const pluginNext = await interopDefault(import('@next/eslint-plugin-next'));
 
-  const recommended = renameRules(
+  const recommended: TypedFlatConfigItem['rules'] = renameRules(
     {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,
     },
     { '@next/next': 'next' },
-  ) as TypedFlatConfigItem['rules'];
+  );
 
   return [
     {

@@ -7,9 +7,9 @@ import type {
 } from '../types';
 import { pluginAntfu, pluginUnusedImports } from '../plugins';
 
-export async function javascript(
+export function javascript(
   options: OptionsIsInEditor & OptionsOverrides = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const { isInEditor = false, overrides = {} } = options;
 
   return [

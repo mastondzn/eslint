@@ -1,7 +1,5 @@
 import type { Linter } from 'eslint';
-
-import { existsSync } from 'node:fs';
-
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
@@ -119,36 +117,25 @@ export function maston(
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   if (enableGitignore) {
-    if (typeof enableGitignore === 'boolean') {
-      configs.push(
-        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-          r({
-            name: 'antfu/gitignore',
-            strict: false,
-          }),
-        ]),
-      );
-    } else {
-      configs.push(
-        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-          r({
-            name: 'antfu/gitignore',
-            ...enableGitignore,
-          }),
-        ]),
-      );
-    }
+    const options: FlatGitignoreOptions = {
+      name: 'antfu/gitignore',
+      ...(typeof enableGitignore === 'boolean'
+        ? { strict: false }
+        : enableGitignore),
+    };
+
+    configs.push(
+      interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
+        r(options),
+      ]),
+    );
   }
 
   const typescriptOptions = resolveSubOptions(options, 'typescript');
-
-  const tsconfigExists = existsSync(`${process.cwd()}/tsconfig.json`);
   const tsconfigPath =
     'tsconfigPath' in typescriptOptions
       ? typescriptOptions.tsconfigPath
-      : tsconfigExists
-        ? './tsconfig.json'
-        : undefined;
+      : undefined;
 
   // Base configs
   configs.push(
@@ -378,7 +365,5 @@ export function getOverrides(
   key: keyof OptionsConfig,
 ): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key);
-  return {
-    ...('overrides' in sub ? sub.overrides : {}),
-  };
+  return 'overrides' in sub ? (sub.overrides ?? {}) : {};
 }

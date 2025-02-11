@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
@@ -77,4 +77,4 @@ dts += `
 export type ConfigNames = ${configNames.map((i) => `'${i}'`).join(' | ')}
 `;
 
-await fs.writeFile('src/typegen.d.ts', dts);
+await writeFile('src/typegen.d.ts', dts);

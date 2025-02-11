@@ -1,7 +1,7 @@
 import type { TypedFlatConfigItem } from '../types';
 import { pluginAntfu, pluginImport } from '../plugins';
 
-export async function imports(): Promise<TypedFlatConfigItem[]> {
+export function imports(): TypedFlatConfigItem[] {
   return [
     {
       name: 'antfu/imports/rules',
