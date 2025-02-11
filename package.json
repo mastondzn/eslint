@@ -1,7 +1,7 @@
 {
   "name": "@mastondzn/eslint",
   "type": "module",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "packageManager": "pnpm@10.2.1",
   "description": "Maston's customizable ESLint config",
   "author": "Anthony Fu <anthonyfu117@hotmail.com> (https://github.com/antfu/)",
