@@ -12,7 +12,7 @@ export async function svelte(
 ): Promise<TypedFlatConfigItem[]> {
   const { files = [GLOB_SVELTE], overrides = {} } = options;
 
-  await ensurePackages(['eslint-plugin-svelte']);
+  await ensurePackages(['eslint-plugin-svelte', 'svelte-eslint-parser']);
 
   const [pluginSvelte, parserSvelte] = await Promise.all([
     interopDefault(import('eslint-plugin-svelte')),
