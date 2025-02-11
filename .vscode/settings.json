@@ -11,11 +11,6 @@
 
   "eslint.runtime": "node",
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
-  "eslint.rules.customizations": [
-    { "rule": "*-indent", "severity": "off", "fixable": true }
-  ],
-
   // Enable eslint for all supported languages
   "eslint.validate": [
     "javascript",
