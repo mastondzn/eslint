@@ -12,7 +12,7 @@ export function jsx(): TypedFlatConfigItem[] {
           },
         },
       },
-      name: 'antfu/jsx/setup',
+      name: 'maston/jsx/setup',
     },
   ];
 }

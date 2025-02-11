@@ -5,7 +5,7 @@ export function disables(): TypedFlatConfigItem[] {
   return [
     {
       files: [`**/scripts/${GLOB_SRC}`],
-      name: 'antfu/disables/scripts',
+      name: 'maston/disables/scripts',
       rules: {
         'antfu/no-top-level-await': 'off',
         'no-console': 'off',
@@ -14,7 +14,7 @@ export function disables(): TypedFlatConfigItem[] {
     },
     {
       files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
-      name: 'antfu/disables/cli',
+      name: 'maston/disables/cli',
       rules: {
         'antfu/no-top-level-await': 'off',
         'no-console': 'off',
@@ -22,7 +22,7 @@ export function disables(): TypedFlatConfigItem[] {
     },
     {
       files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
-      name: 'antfu/disables/bin',
+      name: 'maston/disables/bin',
       rules: {
         'antfu/no-import-dist': 'off',
         'antfu/no-import-node-modules-by-path': 'off',
@@ -30,7 +30,7 @@ export function disables(): TypedFlatConfigItem[] {
     },
     {
       files: ['**/*.d.?([cm])ts'],
-      name: 'antfu/disables/dts',
+      name: 'maston/disables/dts',
       rules: {
         'eslint-comments/no-unlimited-disable': 'off',
         'import/no-duplicates': 'off',
@@ -40,14 +40,14 @@ export function disables(): TypedFlatConfigItem[] {
     },
     {
       files: ['**/*.js', '**/*.cjs'],
-      name: 'antfu/disables/cjs',
+      name: 'maston/disables/cjs',
       rules: {
         'ts/no-require-imports': 'off',
       },
     },
     {
       files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
-      name: 'antfu/disables/config-files',
+      name: 'maston/disables/config-files',
       rules: {
         'antfu/no-top-level-await': 'off',
         'no-console': 'off',

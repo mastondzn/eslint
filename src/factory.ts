@@ -118,7 +118,7 @@ export function maston(
 
   if (enableGitignore) {
     const options: FlatGitignoreOptions = {
-      name: 'antfu/gitignore',
+      name: 'maston/gitignore',
       ...(typeof enableGitignore === 'boolean'
         ? { strict: false }
         : enableGitignore),

@@ -12,7 +12,6 @@
     "Maston (https://github.com/mastondzn)"
   ],
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
   "homepage": "https://github.com/mastondzn/eslint",
   "keywords": [
     "eslint-config"
@@ -141,7 +140,6 @@
     "@antfu/ni": "^23.3.1",
     "@eslint-react/eslint-plugin": "^1.26.2",
     "@eslint/config-inspector": "^1.0.0",
-    "@mastondzn/eslint": "workspace:*",
     "@next/eslint-plugin-next": "^15.1.6",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.1",

@@ -6,7 +6,7 @@ export function command(): TypedFlatConfigItem[] {
   return [
     {
       ...createCommand(),
-      name: 'antfu/command/rules',
+      name: 'maston/command/rules',
     },
   ];
 }

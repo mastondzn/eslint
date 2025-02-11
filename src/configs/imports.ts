@@ -4,7 +4,7 @@ import { pluginAntfu, pluginImport } from '../plugins';
 export function imports(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'antfu/imports/rules',
+      name: 'maston/imports/rules',
       plugins: {
         antfu: pluginAntfu,
         import: pluginImport,

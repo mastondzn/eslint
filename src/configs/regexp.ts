@@ -24,7 +24,7 @@ export function regexp(
   return [
     {
       ...config,
-      name: 'antfu/regexp/rules',
+      name: 'maston/regexp/rules',
       rules: {
         ...rules,
         ...options.overrides,

@@ -21,7 +21,7 @@ export async function astro(
 
   return [
     {
-      name: 'antfu/astro/setup',
+      name: 'maston/astro/setup',
       plugins: {
         astro: pluginAstro,
       },
@@ -37,7 +37,7 @@ export async function astro(
         },
         sourceType: 'module',
       },
-      name: 'antfu/astro/rules',
+      name: 'maston/astro/rules',
       processor: 'astro/client-side-ts',
       rules: {
         // Astro uses top level await for e.g. data fetching

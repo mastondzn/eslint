@@ -36,10 +36,10 @@ export function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
-      name: 'antfu/javascript/setup',
+      name: 'maston/javascript/setup',
     },
     {
-      name: 'antfu/javascript/rules',
+      name: 'maston/javascript/rules',
       plugins: {
         antfu: pluginAntfu,
         'unused-imports': pluginUnusedImports,

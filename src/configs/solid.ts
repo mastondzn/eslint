@@ -34,7 +34,7 @@ export async function solid(
 
   return [
     {
-      name: 'antfu/solid/setup',
+      name: 'maston/solid/setup',
       plugins: {
         solid: pluginSolid,
       },
@@ -51,7 +51,7 @@ export async function solid(
         },
         sourceType: 'module',
       },
-      name: 'antfu/solid/rules',
+      name: 'maston/solid/rules',
       rules: {
         // reactivity
         'solid/components-return-once': 'warn',

@@ -4,7 +4,7 @@ import { interopDefault } from '../utils';
 export async function jsdoc(): Promise<TypedFlatConfigItem[]> {
   return [
     {
-      name: 'antfu/jsdoc/rules',
+      name: 'maston/jsdoc/rules',
       plugins: {
         jsdoc: await interopDefault(import('eslint-plugin-jsdoc')),
       },

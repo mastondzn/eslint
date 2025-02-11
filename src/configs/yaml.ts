@@ -18,7 +18,7 @@ export async function yaml(
 
   return [
     {
-      name: 'antfu/yaml/setup',
+      name: 'maston/yaml/setup',
       plugins: {
         yaml: pluginYaml,
       },
@@ -28,7 +28,7 @@ export async function yaml(
       languageOptions: {
         parser: parserYaml,
       },
-      name: 'antfu/yaml/rules',
+      name: 'maston/yaml/rules',
       rules: {
         'style/spaced-comment': 'off',
 

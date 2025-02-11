@@ -6,7 +6,7 @@ export function unicorn(options: OptionsUnicorn = {}): TypedFlatConfigItem[] {
 
   return [
     {
-      name: 'antfu/unicorn/rules',
+      name: 'maston/unicorn/rules',
       plugins: {
         unicorn: pluginUnicorn,
       },
@@ -24,6 +24,7 @@ export function unicorn(options: OptionsUnicorn = {}): TypedFlatConfigItem[] {
         // this one conflicts with prettier
         'unicorn/number-literal-case': 'off',
         'unicorn/prefer-module': 'off',
+        'unicorn/prefer-spread': 'off',
         'unicorn/prefer-top-level-await': 'off',
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/template-indent': 'off',

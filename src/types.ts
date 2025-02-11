@@ -113,8 +113,7 @@ export interface OptionsIsInEditor {
 
 export interface OptionsUnicorn extends OptionsOverrides {
   /**
-   * Include all rules recommended by `eslint-plugin-unicorn`, instead of only ones picked by Anthony.
-   *
+   * Include all rules recommended by `eslint-plugin-unicorn`.
    * @default true
    */
   allRecommended?: boolean;

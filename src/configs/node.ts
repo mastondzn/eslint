@@ -4,7 +4,7 @@ import { pluginNode } from '../plugins';
 export function node(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'antfu/node/rules',
+      name: 'maston/node/rules',
       plugins: {
         node: pluginNode,
       },

@@ -11,7 +11,7 @@ export function perfectionist(
 ): TypedFlatConfigItem[] {
   return [
     {
-      name: 'antfu/perfectionist/setup',
+      name: 'maston/perfectionist/setup',
       plugins: {
         perfectionist: pluginPerfectionist,
       },

@@ -32,14 +32,14 @@ export async function test(
 
   return [
     {
-      name: 'antfu/test/setup',
+      name: 'maston/test/setup',
       plugins: {
         test: _pluginTest,
       },
     },
     {
       files,
-      name: 'antfu/test/rules',
+      name: 'maston/test/rules',
       rules: {
         'test/consistent-test-it': [
           'error',

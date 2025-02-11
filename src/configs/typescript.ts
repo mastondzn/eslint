@@ -173,14 +173,14 @@ export async function typescript(
           ...parserOptions,
         },
       },
-      name: `antfu/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
+      name: `maston/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
     };
   }
 
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
-      name: 'antfu/typescript/setup',
+      name: 'maston/typescript/setup',
       plugins: {
         antfu: pluginAntfu,
         ts: pluginTs,
@@ -195,7 +195,7 @@ export async function typescript(
       : [makeParser(false, files)]),
     {
       files,
-      name: 'antfu/typescript/rules',
+      name: 'maston/typescript/rules',
       rules: {
         ...rules,
         ...overrides,
@@ -206,7 +206,7 @@ export async function typescript(
           {
             files: filesTypeAware,
             ignores: ignoresTypeAware,
-            name: 'antfu/typescript/rules-type-aware',
+            name: 'maston/typescript/rules-type-aware',
             rules: {
               ...typeAwareRules,
               ...overridesTypeAware,

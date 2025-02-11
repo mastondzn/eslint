@@ -5,7 +5,7 @@ export function ignores(userIgnores: string[] = []): TypedFlatConfigItem[] {
   return [
     {
       ignores: [...GLOB_EXCLUDE, ...userIgnores],
-      name: 'antfu/ignores',
+      name: 'maston/ignores',
     },
   ];
 }
