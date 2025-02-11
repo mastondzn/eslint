@@ -1,11 +1,26 @@
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { isPackageExists } from 'local-pkg';
 
 import type { Awaitable, TypedFlatConfigItem } from './types';
 
+const packageJson = JSON.parse(
+  (() => {
+    try {
+      return readFileSync(`${process.cwd()}/package.json`, {
+        encoding: 'utf8',
+      });
+    } catch {
+      return '{}';
+    }
+  })(),
+) as { name?: string };
+
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
-const isCwdInScope = isPackageExists('@mastondzn/eslint');
+const isCwdInScope =
+  isPackageExists('@mastondzn/eslint') ||
+  packageJson.name === '@mastondzn/eslint';
 
 export const parserPlain = {
   meta: {
