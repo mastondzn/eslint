@@ -131,12 +131,6 @@ export function maston(
     );
   }
 
-  const typescriptOptions = resolveSubOptions(options, 'typescript');
-  const tsconfigPath =
-    'tsconfigPath' in typescriptOptions
-      ? typescriptOptions.tsconfigPath
-      : undefined;
-
   // Base configs
   configs.push(
     ignores(options.ignores),
@@ -174,7 +168,7 @@ export function maston(
   if (enableTypeScript) {
     configs.push(
       typescript({
-        ...typescriptOptions,
+        ...resolveSubOptions(options, 'typescript'),
         componentExts,
         overrides: getOverrides(options, 'typescript'),
       }),
@@ -207,9 +201,7 @@ export function maston(
   if (enableReact) {
     configs.push(
       react({
-        ...typescriptOptions,
         overrides: getOverrides(options, 'react'),
-        tsconfigPath,
       }),
     );
   }
@@ -226,7 +218,6 @@ export function maston(
     configs.push(
       solid({
         overrides: getOverrides(options, 'solid'),
-        tsconfigPath,
         typescript: !!enableTypeScript,
       }),
     );

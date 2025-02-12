@@ -3,17 +3,9 @@ import { isPackageExists } from 'local-pkg';
 import type {
   OptionsFiles,
   OptionsOverrides,
-  OptionsTypeScriptParserOptions,
-  OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
-import {
-  GLOB_ASTRO_TS,
-  GLOB_MARKDOWN,
-  GLOB_SRC,
-  GLOB_TS,
-  GLOB_TSX,
-} from '../globs';
+import { GLOB_SRC } from '../globs';
 import { ensurePackages, interopDefault } from '../utils';
 
 // react refresh
@@ -33,30 +25,15 @@ const ReactRouterPackages = [
 const NextJsPackages = ['next'];
 
 export async function react(
-  options: OptionsTypeScriptParserOptions &
-    OptionsTypeScriptWithTypes &
-    OptionsOverrides &
-    OptionsFiles = {},
+  options: OptionsOverrides & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const {
-    files = [GLOB_SRC],
-    filesTypeAware = [GLOB_TS, GLOB_TSX],
-    ignoresTypeAware = [`${GLOB_MARKDOWN}/**`, GLOB_ASTRO_TS],
-    overrides = {},
-    tsconfigPath,
-  } = options;
+  const { files = [GLOB_SRC], overrides = {} } = options;
 
   await ensurePackages([
     '@eslint-react/eslint-plugin',
     'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
   ]);
-
-  const isTypeAware = !!tsconfigPath;
-
-  const typeAwareRules: TypedFlatConfigItem['rules'] = {
-    'react/no-leaked-conditional-rendering': 'warn',
-  };
 
   const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
     [
@@ -201,17 +178,5 @@ export async function react(
         ...overrides,
       },
     },
-    ...(isTypeAware
-      ? [
-          {
-            files: filesTypeAware,
-            ignores: ignoresTypeAware,
-            name: 'maston/react/type-aware-rules',
-            rules: {
-              ...typeAwareRules,
-            },
-          },
-        ]
-      : []),
   ];
 }

@@ -46,10 +46,6 @@ export interface OptionsVue extends OptionsOverrides {
   vueVersion?: 2 | 3;
 }
 
-export type OptionsTypescript =
-  | (OptionsTypeScriptWithTypes & OptionsOverrides)
-  | (OptionsTypeScriptParserOptions & OptionsOverrides);
-
 export interface OptionsComponentExts {
   /**
    * Additional extensions for components.
@@ -60,11 +56,26 @@ export interface OptionsComponentExts {
   componentExts?: string[];
 }
 
-export interface OptionsTypeScriptParserOptions {
+export interface OptionsTypeScript extends OptionsOverrides {
   /**
    * Additional parser options for TypeScript.
    */
-  parserOptions?: Partial<ParserOptions>;
+  parserOptions?: Partial<
+    Omit<ParserOptions, 'projectService' | 'tsconfigRootDir'>
+  >;
+
+  /**
+   * When this is provided, type aware rules will be enabled.
+   * @default undefined (not type aware)
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
+  projectService?: ParserOptions['projectService'];
+
+  /**
+   *  Tells the parser the absolute path of your project's root directory.
+   *  Usually using `import.meta.dirname` is good.
+   */
+  tsconfigRootDir?: string | undefined;
 
   /**
    * Glob patterns for files that should be type aware.
@@ -77,14 +88,6 @@ export interface OptionsTypeScriptParserOptions {
    * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
    */
   ignoresTypeAware?: string[];
-}
-
-export interface OptionsTypeScriptWithTypes {
-  /**
-   * When this options is provided, type aware rules will be enabled.
-   * @see https://typescript-eslint.io/linting/typed-linting/
-   */
-  tsconfigPath?: string;
 
   /**
    * Override type aware rules.
@@ -180,7 +183,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  typescript?: boolean | OptionsTypescript;
+  typescript?: boolean | OptionsTypeScript;
 
   /**
    * Enable JSX related rules.

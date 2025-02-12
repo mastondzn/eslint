@@ -35,7 +35,11 @@ import { maston } from '@mastondzn/eslint';
 export default maston({
   // include this typescript setting to enable powerful type aware rules!
   // (at the cost of some performance)
-  typescript: { tsconfigPath: './tsconfig.json' },
+  typescript: {
+    projectService: true,
+    // optionally specify the root tsconfig dir, this helps if you run eslint from another dir
+    tsconfigRootDir: import.meta.dirname,
+  },
 });
 ```
 
@@ -488,7 +492,8 @@ import { maston } from '@antfu/eslint-config';
 
 export default maston({
   typescript: {
-    tsconfigPath: 'tsconfig.json',
+    projectService: true,
+    tsconfigRootDir: import.meta.dirname,
   },
 });
 ```

@@ -2,17 +2,13 @@ import type {
   OptionsFiles,
   OptionsHasTypeScript,
   OptionsOverrides,
-  OptionsTypeScriptWithTypes,
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-import { ensurePackages, interopDefault, toArray } from '../utils';
+import { ensurePackages, interopDefault } from '../utils';
 
 export async function solid(
-  options: OptionsHasTypeScript &
-    OptionsOverrides &
-    OptionsFiles &
-    OptionsTypeScriptWithTypes = {},
+  options: OptionsHasTypeScript & OptionsOverrides & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_JSX, GLOB_TSX],
@@ -21,11 +17,6 @@ export async function solid(
   } = options;
 
   await ensurePackages(['eslint-plugin-solid']);
-
-  const tsconfigPath = options.tsconfigPath
-    ? toArray(options.tsconfigPath)
-    : undefined;
-  const isTypeAware = !!tsconfigPath;
 
   const [pluginSolid, parserTs] = await Promise.all([
     interopDefault(import('eslint-plugin-solid')),
@@ -47,7 +38,6 @@ export async function solid(
           ecmaFeatures: {
             jsx: true,
           },
-          ...(isTypeAware ? { project: tsconfigPath } : {}),
         },
         sourceType: 'module',
       },

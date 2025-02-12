@@ -1,28 +1,31 @@
+import type { ParserOptions } from '@typescript-eslint/parser';
+
 import type {
   OptionsComponentExts,
   OptionsFiles,
-  OptionsOverrides,
-  OptionsTypeScriptParserOptions,
-  OptionsTypeScriptWithTypes,
+  OptionsTypeScript,
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
-import { pluginAntfu } from '../plugins';
 import { interopDefault, renameRules } from '../utils';
 
 export async function typescript(
-  options: OptionsFiles &
-    OptionsComponentExts &
-    OptionsOverrides &
-    OptionsTypeScriptWithTypes &
-    OptionsTypeScriptParserOptions = {},
+  options: OptionsFiles & OptionsComponentExts & OptionsTypeScript = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
     componentExts = [],
     overrides = {},
     overridesTypeAware = {},
     parserOptions = {},
+    projectService,
+    tsconfigRootDir,
   } = options;
+
+  const {
+    projectService: _projectService,
+    tsconfigRootDir: _tsconfigRootDir,
+    ...actualParserOptions
+  } = parserOptions as ParserOptions;
 
   const files = options.files ?? [
     GLOB_TS,
@@ -36,8 +39,7 @@ export async function typescript(
     GLOB_ASTRO_TS,
   ];
 
-  const tsconfigPath = options.tsconfigPath;
-  const isTypeAware = !!tsconfigPath;
+  const isTypeAware = projectService;
 
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),
@@ -46,15 +48,14 @@ export async function typescript(
 
   const rules: TypedFlatConfigItem['rules'] = {
     ...renameRules(
-      // eslint-disable-next-line ts/no-non-null-assertion
       pluginTs.configs['eslint-recommended'].overrides![0].rules!,
       { '@typescript-eslint': 'ts' },
     ),
-    // eslint-disable-next-line ts/no-non-null-assertion
+
     ...renameRules(pluginTs.configs.strict.rules!, {
       '@typescript-eslint': 'ts',
     }),
-    // eslint-disable-next-line ts/no-non-null-assertion
+
     ...renameRules(pluginTs.configs.stylistic.rules!, {
       '@typescript-eslint': 'ts',
     }),
@@ -109,15 +110,14 @@ export async function typescript(
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {
     ...renameRules(
-      // eslint-disable-next-line ts/no-non-null-assertion
       pluginTs.configs['eslint-recommended'].overrides![0].rules!,
       { '@typescript-eslint': 'ts' },
     ),
-    // eslint-disable-next-line ts/no-non-null-assertion
+
     ...renameRules(pluginTs.configs['strict-type-checked'].rules!, {
       '@typescript-eslint': 'ts',
     }),
-    // eslint-disable-next-line ts/no-non-null-assertion
+
     ...renameRules(pluginTs.configs['stylistic-type-checked'].rules!, {
       '@typescript-eslint': 'ts',
     }),
@@ -140,6 +140,7 @@ export async function typescript(
     'ts/no-unsafe-call': 'error',
     'ts/no-unsafe-member-access': 'error',
     'ts/no-unsafe-return': 'error',
+    'ts/no-unused-vars': 'off',
     'ts/promise-function-async': 'error',
     'ts/restrict-plus-operands': 'error',
     'ts/restrict-template-expressions': 'error',
@@ -159,19 +160,21 @@ export async function typescript(
       languageOptions: {
         parser: parserTs,
         parserOptions: {
-          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
+          extraFileExtensions: componentExts.map((ext) =>
+            ext.startsWith('.') ? ext : `.${ext}`,
+          ),
           sourceType: 'module',
           ...(typeAware
             ? {
                 projectService: {
                   allowDefaultProject: ['./*.js'],
-                  defaultProject: tsconfigPath,
+                  ...(typeof projectService === 'object' ? projectService : {}),
                 },
-                tsconfigRootDir: process.cwd(),
               }
             : {}),
-          ...parserOptions,
-        },
+          tsconfigRootDir: tsconfigRootDir ?? process.cwd(),
+          ...actualParserOptions,
+        } satisfies ParserOptions,
       },
       name: `maston/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
     };
@@ -182,17 +185,16 @@ export async function typescript(
       // Install the plugins without globs, so they can be configured separately.
       name: 'maston/typescript/setup',
       plugins: {
-        antfu: pluginAntfu,
         ts: pluginTs,
       },
     },
+
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
+    makeParser(false, files),
     ...(isTypeAware
-      ? [
-          makeParser(false, files),
-          makeParser(true, filesTypeAware, ignoresTypeAware),
-        ]
-      : [makeParser(false, files)]),
+      ? [makeParser(true, filesTypeAware, ignoresTypeAware)]
+      : []),
+
     {
       files,
       name: 'maston/typescript/rules',
