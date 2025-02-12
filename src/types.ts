@@ -318,7 +318,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  svelte?: boolean;
+  svelte?: boolean | OptionsOverrides;
 
   /**
    * Enable unocss rules.
