@@ -11,9 +11,7 @@ export function unicorn(options: OptionsUnicorn = {}): TypedFlatConfigItem[] {
         unicorn: pluginUnicorn,
       },
       rules: {
-        ...(allRecommended
-          ? pluginUnicorn.configs['flat/recommended'].rules
-          : {}),
+        ...(allRecommended ? pluginUnicorn.configs.recommended.rules : {}),
 
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-await-expression-member': 'off',
