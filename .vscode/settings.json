@@ -27,5 +27,7 @@
     "github-actions-workflow",
     "toml",
     "xml"
-  ]
+  ],
+
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

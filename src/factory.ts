@@ -348,7 +348,9 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
   key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
   // eslint-disable-next-line ts/no-unsafe-return
-  return typeof options[key] === 'boolean' ? ({} as any) : options[key] || {};
+  return typeof options[key] === 'boolean'
+    ? ({} as any)
+    : options[key] || ({} as any);
 }
 
 export function getOverrides(
