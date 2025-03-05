@@ -1,6 +1,4 @@
-# @mastondzn/eslint
-
-[![npm](https://img.shields.io/npm/v/@mastondzn/eslint?color=444&label=)](https://npmjs.com/package/@mastondzn/eslint)
+# @mastondzn/eslint [![npm](https://img.shields.io/npm/v/@mastondzn/eslint?color=444&label=)](https://npmjs.com/package/@mastondzn/eslint)
 
 Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without formatting, with more configs (tailwindcss, next), and stricter rules aswell.
 
@@ -234,7 +232,7 @@ The `maston` factory function also accepts any number of arbitrary custom config
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston(
   {
