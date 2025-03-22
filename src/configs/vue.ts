@@ -16,21 +16,28 @@ export async function vue(
     OptionsOverrides &
     OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const { files = [GLOB_VUE], overrides = {}, vueVersion = 3 } = options;
+  const {
+    a11y = false,
+    files = [GLOB_VUE],
+    overrides = {},
+    vueVersion = 3,
+  } = options;
 
   const sfcBlocks = options.sfcBlocks === true ? {} : (options.sfcBlocks ?? {});
 
-  await ensurePackages([
-    'eslint-plugin-vue',
-    'vue-eslint-parser',
-    'eslint-processor-vue-blocks',
-  ]);
+  if (a11y) {
+    await ensurePackages(['eslint-plugin-vuejs-accessibility']);
+  }
 
-  const [pluginVue, parserVue, processorVueBlocks] = await Promise.all([
-    interopDefault(import('eslint-plugin-vue')),
-    interopDefault(import('vue-eslint-parser')),
-    interopDefault(import('eslint-processor-vue-blocks')),
-  ] as const);
+  const [pluginVue, parserVue, processorVueBlocks, pluginVueA11y] =
+    await Promise.all([
+      interopDefault(import('eslint-plugin-vue')),
+      interopDefault(import('vue-eslint-parser')),
+      interopDefault(import('eslint-processor-vue-blocks')),
+      ...(a11y
+        ? [interopDefault(import('eslint-plugin-vuejs-accessibility'))]
+        : []),
+    ] as const);
 
   return [
     {
@@ -57,6 +64,7 @@ export async function vue(
       name: 'maston/vue/setup',
       plugins: {
         vue: pluginVue,
+        ...(a11y ? { 'vue-a11y': pluginVueA11y } : {}),
       },
     },
     {
@@ -174,6 +182,7 @@ export async function vue(
         'vue/require-prop-types': 'off',
         'vue/space-infix-ops': 'error',
         'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
+
         ...overrides,
       },
     },
