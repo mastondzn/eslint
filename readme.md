@@ -201,7 +201,7 @@ And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default antfu({
   // TypeScript, Vue and others are autodetected, you can also explicitly enable them:
@@ -347,7 +347,7 @@ Since v2.9.0, this preset will automatically rename the plugins also for your cu
 If you really want to use the original prefix, you can revert the plugin renaming by:
 
 ```ts
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston().renamePlugins({
   ts: '@typescript-eslint',
@@ -365,7 +365,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston(
   {
@@ -392,7 +392,7 @@ We also provided the `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config';
+import antfu from '@mastondzn/eslint';
 
 export default antfu({
   vue: {
@@ -419,7 +419,7 @@ The factory function `maston()` returns a [`FlatConfigComposer` object from `esl
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston()
   // some configs before the main config
@@ -486,7 +486,7 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston({
   typescript: {
@@ -510,7 +510,7 @@ This is to prevent unused imports from getting removed by the editor during refa
 
 ```js
 // eslint.config.js
-import { maston } from '@antfu/eslint-config';
+import { maston } from '@mastondzn/eslint';
 
 export default maston({
   isInEditor: false,
