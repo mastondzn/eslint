@@ -1,3 +1,4 @@
+import type { Linter } from 'eslint';
 import { mergeProcessors } from 'eslint-merge-processors';
 
 import type {
@@ -39,6 +40,14 @@ export async function vue(
         : []),
     ] as const);
 
+  function getRulesFromFlatConfig(
+    config: Extract<keyof typeof pluginVue.configs, `flat/${string}`>,
+  ) {
+    return pluginVue.configs[config]
+      .map((c) => c.rules)
+      .reduce((acc, c) => ({ ...acc, ...c }), {});
+  }
+
   return [
     {
       // This allows Vue plugin to work with auto imports
@@ -77,9 +86,7 @@ export async function vue(
           },
           extraFileExtensions: ['.vue'],
           parser: options.typescript
-            ? ((await interopDefault(
-                import('@typescript-eslint/parser'),
-              )) as any)
+            ? await interopDefault(import('@typescript-eslint/parser'))
             : null,
           sourceType: 'module',
         },
@@ -87,9 +94,9 @@ export async function vue(
       name: 'maston/vue/rules',
       processor:
         sfcBlocks === false
-          ? pluginVue.processors['.vue']
+          ? (pluginVue.processors['.vue'] as Linter.Processor)
           : mergeProcessors([
-              pluginVue.processors['.vue'],
+              pluginVue.processors['.vue'] as Linter.Processor,
               processorVueBlocks({
                 ...sfcBlocks,
                 blocks: {
@@ -103,20 +110,14 @@ export async function vue(
 
         ...(vueVersion === 2
           ? {
-              ...pluginVue.configs['vue2-essential'].rules,
-              ...pluginVue.configs['vue2-strongly-recommended'].rules,
-              ...pluginVue.configs['vue2-recommended'].rules,
+              ...getRulesFromFlatConfig('flat/vue2-essential'),
+              ...getRulesFromFlatConfig('flat/vue2-strongly-recommended'),
+              ...getRulesFromFlatConfig('flat/vue2-recommended'),
             }
           : {
-              ...pluginVue.configs['flat/essential']
-                .map((c) => c.rules)
-                .reduce((acc, c) => ({ ...acc, ...c }), {}),
-              ...pluginVue.configs['flat/strongly-recommended']
-                .map((c) => c.rules)
-                .reduce((acc, c) => ({ ...acc, ...c }), {}),
-              ...pluginVue.configs['flat/recommended']
-                .map((c) => c.rules)
-                .reduce((acc, c) => ({ ...acc, ...c }), {}),
+              ...getRulesFromFlatConfig('flat/essential'),
+              ...getRulesFromFlatConfig('flat/strongly-recommended'),
+              ...getRulesFromFlatConfig('flat/recommended'),
             }),
 
         'antfu/no-top-level-await': 'off',
