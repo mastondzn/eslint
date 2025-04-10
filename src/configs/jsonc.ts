@@ -21,7 +21,7 @@ export async function jsonc(
     {
       name: 'maston/jsonc/setup',
       plugins: {
-        jsonc: pluginJsonc as any,
+        jsonc: pluginJsonc,
       },
     },
     {

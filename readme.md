@@ -203,7 +203,7 @@ And that's it! Or you can configure each integration individually, for example:
 // eslint.config.js
 import { maston } from '@mastondzn/eslint';
 
-export default antfu({
+export default maston({
   // TypeScript, Vue and others are autodetected, you can also explicitly enable them:
   typescript: true,
   vue: true,
@@ -391,9 +391,9 @@ We also provided the `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import antfu from '@mastondzn/eslint';
+import { maston } from '@mastondzn/eslint';
 
-export default antfu({
+export default maston({
   vue: {
     overrides: {
       'vue/operator-linebreak': ['error', 'before'],
