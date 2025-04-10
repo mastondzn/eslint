@@ -317,7 +317,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
 | `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
 | `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*`  | `@/*`                  | [@/eslint-plugin](https://github.com/eslint-/eslint-)                                      |
 | `test/*`   | `vitest/*`             | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                |
 | `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 | `next/*`   | `@next/next/*`         | [@next/eslint-plugin-next](https://nextjs.org/docs/app/api-reference/config/eslint)        |
@@ -382,7 +381,7 @@ export default maston(
   {
     // Without `files`, they are general rules for all files
     rules: {
-      'style/semi': ['error', 'never'],
+      'ts/no-non-null-assertion': 'off',
     },
   },
 );
