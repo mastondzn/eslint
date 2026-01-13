@@ -35,7 +35,6 @@ import {
   toml,
   typescript,
   unicorn,
-  unocss,
   yaml,
 } from './configs';
 import { regexp } from './configs/regexp';
@@ -99,7 +98,6 @@ export function maston(
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
-    unocss: enableUnoCSS = isPackageExists('unocss'),
   } = options;
 
   let isInEditor = options.isInEditor;
@@ -212,15 +210,6 @@ export function maston(
       svelte({
         overrides: getOverrides(options, 'svelte'),
         typescript: !!enableTypeScript,
-      }),
-    );
-  }
-
-  if (enableUnoCSS) {
-    configs.push(
-      unocss({
-        ...resolveSubOptions(options, 'unocss'),
-        overrides: getOverrides(options, 'unocss'),
       }),
     );
   }

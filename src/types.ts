@@ -104,19 +104,6 @@ export interface OptionsUnicorn extends OptionsOverrides {
   allRecommended?: boolean;
 }
 
-export interface OptionsUnoCSS extends OptionsOverrides {
-  /**
-   * Enable attributify support.
-   * @default true
-   */
-  attributify?: boolean;
-  /**
-   * Enable strict mode by throwing errors about blocklisted classes.
-   * @default false
-   */
-  strict?: boolean;
-}
-
 /**
  * @see https://www.npmjs.com/package/eslint-plugin-tailwindcss#more-settings
  */
@@ -289,16 +276,6 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   svelte?: boolean | OptionsOverrides;
-
-  /**
-   * Enable unocss rules.
-   *
-   * Requires installing:
-   * - `@unocss/eslint-plugin`
-   *
-   * @default auto-detect based on the dependencies
-   */
-  unocss?: boolean | OptionsUnoCSS;
 
   /**
    * Enable tailwindcss rules.

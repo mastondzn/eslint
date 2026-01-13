@@ -26,7 +26,6 @@ import {
   toml,
   typescript,
   unicorn,
-  unocss,
   yaml,
 } from '../src';
 
@@ -59,7 +58,6 @@ const configs = await combine(
   regexp(),
   typescript(),
   unicorn(),
-  unocss(),
   tailwindcss(),
   yaml(),
 );
