@@ -3,7 +3,7 @@
 Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without formatting, with more configs (tailwindcss, next), and stricter rules aswell.
 
 - Designed to work with TypeScript, JSX, JSON, YAML, Toml, Markdown, etc. Out-of-box.
-- Auto-detects and includes plugins and rules for: Typescript, React, Svelte, TailwindCSS, UnoCSS, Astro, Solid, Next.js, Vue
+- Auto-detects and includes plugins and rules for: Typescript, React, Svelte, TailwindCSS, UnoCSS, Astro, Solid, Next.js
 - Pretty strict by default, uses typescript-eslint's strict and stylistic recommended rules in both type aware and non type aware files.
 - Opinionated, but [very customizable](#customization)
 - [ESLint v9 Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily with included utils!
@@ -95,7 +95,6 @@ Add the following settings to your `.vscode/settings.json`:
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "vue",
     "html",
     "markdown",
     "json",
@@ -138,7 +137,6 @@ lspconfig.eslint.setup(
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-      "vue",
       "html",
       "markdown",
       "json",
@@ -204,9 +202,9 @@ And that's it! Or you can configure each integration individually, for example:
 import { maston } from '@mastondzn/eslint';
 
 export default maston({
-  // TypeScript, Vue and others are autodetected, you can also explicitly enable them:
+  // TypeScript and others are autodetected, you can also explicitly enable them:
   typescript: true,
-  vue: true,
+  react: true,
 
   // Disable jsonc and yaml support
   jsonc: false,
@@ -278,7 +276,6 @@ import {
   toml,
   typescript,
   unicorn,
-  vue,
   yaml,
 } from '@mastondzn/eslint';
 
@@ -293,7 +290,6 @@ export default combine(
   typescript(/* Options */),
   next(),
   tailwindcss(),
-  vue(),
   jsonc(),
   yaml(),
   toml(),
@@ -360,7 +356,7 @@ export default maston().renamePlugins({
 
 ### Rules Overrides
 
-Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
+Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files. If you want to override the rules, you need to specify the file extension:
 
 ```js
 // eslint.config.js
@@ -368,15 +364,7 @@ import { maston } from '@mastondzn/eslint';
 
 export default maston(
   {
-    vue: true,
     typescript: true,
-  },
-  {
-    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-    files: ['**/*.vue'],
-    rules: {
-      'vue/operator-linebreak': ['error', 'before'],
-    },
   },
   {
     // Without `files`, they are general rules for all files
@@ -394,11 +382,6 @@ We also provided the `overrides` options in each integration to make it easier:
 import { maston } from '@mastondzn/eslint';
 
 export default maston({
-  vue: {
-    overrides: {
-      'vue/operator-linebreak': ['error', 'before'],
-    },
-  },
   typescript: {
     overrides: {
       'ts/consistent-type-definitions': ['error', 'interface'],
