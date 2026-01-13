@@ -27,7 +27,6 @@ import {
   typescript,
   unicorn,
   unocss,
-  vue,
   yaml,
 } from '../src';
 
@@ -62,7 +61,6 @@ const configs = await combine(
   unicorn(),
   unocss(),
   tailwindcss(),
-  vue(),
   yaml(),
 );
 
