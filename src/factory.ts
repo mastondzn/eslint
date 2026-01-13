@@ -36,7 +36,6 @@ import {
   typescript,
   unicorn,
   unocss,
-  vue,
   yaml,
 } from './configs';
 import { regexp } from './configs/regexp';
@@ -101,7 +100,6 @@ export function maston(
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = isPackageExists('unocss'),
-    vue: enableVue = ['vue', 'nuxt'].some((i) => isPackageExists(i)),
   } = options;
 
   let isInEditor = options.isInEditor;
@@ -149,10 +147,6 @@ export function maston(
     configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
   }
 
-  if (enableVue) {
-    componentExts.push('vue');
-  }
-
   if (enableJsx) {
     configs.push(jsx());
   }
@@ -184,16 +178,6 @@ export function maston(
       test({
         isInEditor,
         overrides: getOverrides(options, 'test'),
-      }),
-    );
-  }
-
-  if (enableVue) {
-    configs.push(
-      vue({
-        ...resolveSubOptions(options, 'vue'),
-        overrides: getOverrides(options, 'vue'),
-        typescript: !!enableTypeScript,
       }),
     );
   }

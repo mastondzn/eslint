@@ -1,7 +1,6 @@
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
-import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks';
 
 import type { RuleOptions } from './typegen';
 
@@ -27,31 +26,6 @@ export interface OptionsFiles {
    * Override the `files` option to provide custom globs.
    */
   files?: string[];
-}
-
-export interface OptionsVue extends OptionsOverrides {
-  /**
-   * Create virtual files for Vue SFC blocks to enable linting.
-   *
-   * @see https://github.com/antfu/eslint-processor-vue-blocks
-   * @default true
-   */
-  sfcBlocks?: boolean | VueBlocksOptions;
-
-  /**
-   * Vue version. Apply different rules set from `eslint-plugin-vue`.
-   *
-   * @default 3
-   */
-  vueVersion?: 2 | 3;
-
-  /**
-   * Vue accessibility plugin. Help check a11y issue in `.vue` files upon enabled
-   *
-   * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/
-   * @default false
-   */
-  a11y?: boolean;
 }
 
 export interface OptionsComponentExts {
@@ -222,18 +196,6 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default true
    */
   test?: boolean | OptionsOverrides;
-
-  /**
-   * Enable Vue support.
-   *
-   * @default auto-detect based on the dependencies
-   *
-   * Requires installing:
-   * - `eslint-plugin-vue`
-   * - `eslint-processor-vue-blocks`
-   * - `vue-eslint-parser`
-   */
-  vue?: boolean | OptionsVue;
 
   /**
    * Enable JSONC support.

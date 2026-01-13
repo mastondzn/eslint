@@ -39,7 +39,6 @@ export async function toml(
         'toml/precision-of-fractional-seconds': 'error',
         'toml/precision-of-integer': 'error',
         'toml/tables-order': 'error',
-        'toml/vue-custom-block/no-parsing-error': 'error',
         ...overrides,
       },
     },

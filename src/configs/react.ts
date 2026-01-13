@@ -177,7 +177,17 @@ export async function react(
                   ]
                 : []),
               ...(isUsingRemix || isUsingReactRouter
-                ? ['meta', 'links', 'headers', 'loader', 'action']
+                ? [
+                    'meta',
+                    'links',
+                    'headers',
+                    'loader',
+                    'action',
+                    'clientLoader',
+                    'clientAction',
+                    'handle',
+                    'shouldRevalidate',
+                  ]
                 : []),
             ],
           },

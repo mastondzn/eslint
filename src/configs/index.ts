@@ -23,5 +23,4 @@ export * from './toml';
 export * from './typescript';
 export * from './unicorn';
 export * from './unocss';
-export * from './vue';
 export * from './yaml';

@@ -38,7 +38,6 @@ export async function yaml(
         'yaml/no-empty-sequence-entry': 'error',
         'yaml/no-irregular-whitespace': 'error',
         'yaml/plain-scalar': 'error',
-        'yaml/vue-custom-block/no-parsing-error': 'error',
 
         ...overrides,
       },
