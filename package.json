@@ -40,10 +40,7 @@
   },
   "peerDependencies": {
     "@eslint-react/eslint-plugin": "catalog:peer",
-    "@next/eslint-plugin-next": "catalog:peer",
-    "astro-eslint-parser": "catalog:peer",
     "eslint": "catalog:peer",
-    "eslint-plugin-astro": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-solid": "catalog:peer",
@@ -52,15 +49,6 @@
   },
   "peerDependenciesMeta": {
     "@eslint-react/eslint-plugin": {
-      "optional": true
-    },
-    "@next/eslint-plugin-next": {
-      "optional": true
-    },
-    "astro-eslint-parser": {
-      "optional": true
-    },
-    "eslint-plugin-astro": {
       "optional": true
     },
     "eslint-plugin-format": {
@@ -115,12 +103,9 @@
     "@antfu/ni": "^30.0.0",
     "@eslint-react/eslint-plugin": "catalog:peer",
     "@eslint/config-inspector": "^1.0.2",
-    "@next/eslint-plugin-next": "catalog:peer",
     "@types/node": "^24.12.0",
-    "astro-eslint-parser": "catalog:peer",
     "bumpp": "^11.0.1",
     "eslint": "catalog:peer",
-    "eslint-plugin-astro": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-solid": "catalog:peer",

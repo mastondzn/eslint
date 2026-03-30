@@ -1,9 +1,9 @@
 # @mastondzn/eslint [![npm](https://img.shields.io/npm/v/@mastondzn/eslint?color=444&label=)](https://npmjs.com/package/@mastondzn/eslint)
 
-Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without formatting, with more configs (tailwindcss, next), and stricter rules aswell.
+Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without formatting, with more configs (tailwindcss), and stricter rules aswell.
 
 - Designed to work with TypeScript, JSX, JSON, YAML, Toml, Markdown, etc. Out-of-box.
-- Auto-detects and includes plugins and rules for: Typescript, React, TailwindCSS, Astro, Solid, Next.js
+- Auto-detects and includes plugins and rules for: Typescript, React, TailwindCSS, Solid
 - Pretty strict by default, uses typescript-eslint's strict and stylistic recommended rules in both type aware and non type aware files.
 - Opinionated, but [very customizable](#customization)
 - [ESLint v9 Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily with included utils!
@@ -105,7 +105,6 @@ Add the following settings to your `.vscode/settings.json`:
     "xml",
     "gql",
     "graphql",
-    "astro",
     "css",
     "less",
     "scss",
@@ -145,7 +144,6 @@ lspconfig.eslint.setup(
       "xml",
       "gql",
       "graphql",
-      "astro",
       "css",
       "less",
       "scss",
@@ -265,7 +263,6 @@ import {
   jsdoc,
   jsonc,
   markdown,
-  next,
   node,
   sortPackageJson,
   sortTsconfig,
@@ -286,7 +283,6 @@ export default combine(
   imports(),
   unicorn(),
   typescript(/* Options */),
-  next(),
   tailwindcss(),
   jsonc(),
   yaml(),
@@ -312,7 +308,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
 | `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
 | `test/*`   | `vitest/*`             | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                |
-| `next/*`   | `@next/next/*`         | [@next/eslint-plugin-next](https://nextjs.org/docs/app/api-reference/config/eslint)        |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 

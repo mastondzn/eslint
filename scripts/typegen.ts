@@ -4,7 +4,6 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
 import {
-  astro,
   combine,
   comments,
   imports,
@@ -13,7 +12,6 @@ import {
   jsonc,
   jsx,
   markdown,
-  next,
   node,
   perfectionist,
   react,
@@ -37,7 +35,6 @@ const configs = await combine(
       },
     },
   },
-  astro(),
   comments(),
   imports(),
   javascript(),
@@ -45,7 +42,6 @@ const configs = await combine(
   jsdoc(),
   jsonc(),
   markdown(),
-  next(),
   node(),
   perfectionist(),
   react(),

@@ -11,7 +11,6 @@ import type {
   TypedFlatConfigItem,
 } from './types';
 import {
-  astro,
   command,
   comments,
   disables,
@@ -22,7 +21,6 @@ import {
   jsonc,
   jsx,
   markdown,
-  next,
   node,
   perfectionist,
   react,
@@ -83,12 +81,10 @@ export function maston(
   >[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
-    astro: enableAstro = isPackageExists('astro'),
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
-    next: enableNext = isPackageExists('next'),
     perfectionist: enablePerfectionist = true,
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
@@ -186,14 +182,6 @@ export function maston(
     );
   }
 
-  if (enableNext) {
-    configs.push(
-      next({
-        overrides: getOverrides(options, 'next'),
-      }),
-    );
-  }
-
   if (enableSolid) {
     configs.push(
       solid({
@@ -216,14 +204,6 @@ export function maston(
     configs.push(
       turbo({
         overrides: getOverrides(options, 'turbo'),
-      }),
-    );
-  }
-
-  if (enableAstro) {
-    configs.push(
-      astro({
-        overrides: getOverrides(options, 'astro'),
       }),
     );
   }

@@ -67,7 +67,7 @@ export interface OptionsTypeScript extends OptionsOverrides {
 
   /**
    * Glob patterns for files that should not be type aware.
-   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+   * @default ['**\/*.md\/**']
    */
   ignoresTypeAware?: string[];
 
@@ -206,19 +206,6 @@ export interface OptionsConfig extends OptionsComponentExts {
   toml?: boolean | OptionsOverrides;
 
   /**
-   * Enable ASTRO support.
-   *
-   * Requires installing:
-   * - `eslint-plugin-astro`
-   *
-   * Requires installing for formatting .astro:
-   * - `prettier-plugin-astro`
-   *
-   * @default auto-detect based on the dependencies
-   */
-  astro?: boolean | OptionsOverrides;
-
-  /**
    * Enable linting for **code snippets** in Markdown.
    *
    * For formatting Markdown content, enable also `formatters.markdown`.
@@ -246,16 +233,6 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   react?: boolean | OptionsOverrides;
-
-  /**
-   * Enable Next.js rules.
-   *
-   * Requires installing:
-   * - `@next/eslint-plugin-next`
-   *
-   * @default auto-detect based on the dependencies
-   */
-  next?: boolean | OptionsOverrides;
 
   /**
    * Enable solid rules.

@@ -6,7 +6,7 @@ import type {
   OptionsTypeScript,
   TypedFlatConfigItem,
 } from '../types';
-import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
+import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { interopDefault, renameRules } from '../utils';
 
 export async function typescript(
@@ -34,10 +34,7 @@ export async function typescript(
   ];
 
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
-  const ignoresTypeAware = options.ignoresTypeAware ?? [
-    `${GLOB_MARKDOWN}/**`,
-    GLOB_ASTRO_TS,
-  ];
+  const ignoresTypeAware = options.ignoresTypeAware ?? [`${GLOB_MARKDOWN}/**`];
 
   const isTypeAware = projectService;
 

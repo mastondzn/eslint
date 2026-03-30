@@ -1,4 +1,3 @@
-export * from './astro';
 export * from './command';
 export * from './comments';
 export * from './disables';
@@ -9,7 +8,6 @@ export * from './jsdoc';
 export * from './jsonc';
 export * from './jsx';
 export * from './markdown';
-export * from './next';
 export * from './node';
 export * from './perfectionist';
 export * from './react';
