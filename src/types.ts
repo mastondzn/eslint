@@ -288,6 +288,16 @@ export interface OptionsConfig extends OptionsComponentExts {
   tailwindcss?: boolean | OptionsTailwindCSS;
 
   /**
+   * Enable Turborepo rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-turbo`
+   *
+   * @default auto-detect based on the dependencies
+   */
+  turbo?: boolean | OptionsOverrides;
+
+  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */

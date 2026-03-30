@@ -1,40 +1,23 @@
 import type {
   OptionsFiles,
-  OptionsIsInEditor,
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_TESTS } from '../globs';
 import { interopDefault } from '../utils';
 
-// Hold the reference so we don't redeclare the plugin on each call
-let _pluginTest: any;
-
 export async function test(
-  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides = {},
+  options: OptionsFiles & OptionsOverrides = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const { files = GLOB_TESTS, isInEditor = false, overrides = {} } = options;
+  const { files = GLOB_TESTS, overrides = {} } = options;
 
-  const [pluginVitest, pluginNoOnlyTests] = await Promise.all([
-    interopDefault(import('@vitest/eslint-plugin')),
-    // @ts-expect-error missing types
-    interopDefault(import('eslint-plugin-no-only-tests')),
-  ] as const);
-
-  _pluginTest = _pluginTest ?? {
-    ...pluginVitest,
-    rules: {
-      ...pluginVitest.rules,
-      // extend `test/no-only-tests` rule
-      ...pluginNoOnlyTests.rules,
-    },
-  };
+  const pluginVitest = await interopDefault(import('@vitest/eslint-plugin'));
 
   return [
     {
       name: 'maston/test/setup',
       plugins: {
-        test: _pluginTest,
+        test: pluginVitest,
       },
     },
     {
@@ -47,8 +30,6 @@ export async function test(
         ],
         'test/no-identical-title': 'error',
         'test/no-import-node-test': 'error',
-        'test/no-only-tests': isInEditor ? 'warn' : 'error',
-
         'test/prefer-hooks-in-order': 'error',
         'test/prefer-lowercase-title': 'error',
 

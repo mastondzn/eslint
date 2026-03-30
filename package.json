@@ -2,7 +2,7 @@
   "name": "@mastondzn/eslint",
   "type": "module",
   "version": "1.4.0",
-  "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48",
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
   "description": "Maston's customizable ESLint config",
   "author": "Anthony Fu <anthonyfu117@hotmail.com> (https://github.com/antfu/)",
   "contributors": [
@@ -49,6 +49,7 @@
     "eslint-plugin-solid": "catalog:peer",
     "eslint-plugin-svelte": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
+    "eslint-plugin-turbo": "catalog:peer",
     "svelte-eslint-parser": "catalog:peer"
   },
   "peerDependenciesMeta": {
@@ -82,6 +83,9 @@
     "eslint-plugin-tailwindcss": {
       "optional": true
     },
+    "eslint-plugin-turbo": {
+      "optional": true
+    },
     "svelte-eslint-parser": {
       "optional": true
     }
@@ -103,7 +107,6 @@
     "eslint-plugin-jsdoc": "^62.0.0",
     "eslint-plugin-jsonc": "^2.20.0",
     "eslint-plugin-n": "^17.17.0",
-    "eslint-plugin-no-only-tests": "^3.3.0",
     "eslint-plugin-perfectionist": "^4.11.0",
     "eslint-plugin-regexp": "^2.7.0",
     "eslint-plugin-toml": "^0.12.0",
@@ -131,6 +134,7 @@
     "eslint-plugin-solid": "catalog:peer",
     "eslint-plugin-svelte": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
+    "eslint-plugin-turbo": "catalog:peer",
     "eslint-typegen": "^2.1.0",
     "prettier": "^3.5.3",
     "svelte": "^5.25.10",

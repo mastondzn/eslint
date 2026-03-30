@@ -314,7 +314,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
 | `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
 | `test/*`   | `vitest/*`             | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                |
-| `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 | `next/*`   | `@next/next/*`         | [@next/eslint-plugin-next](https://nextjs.org/docs/app/api-reference/config/eslint)        |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
@@ -483,7 +482,6 @@ export default maston({
 Auto-fixing for the following rules are disabled when ESLint is running in a code editor:
 
 - [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
-- [`test/no-only-tests`](https://github.com/levibuzolic/eslint-plugin-no-only-tests)
 - [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports)
 
 They are not disabled, but made non-fixable using [this helper](https://github.com/antfu/eslint-flat-config-utils#composerdisablerulesfix).

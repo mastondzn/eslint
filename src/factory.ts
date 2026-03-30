@@ -33,6 +33,7 @@ import {
   tailwindcss,
   test,
   toml,
+  turbo,
   typescript,
   unicorn,
   yaml,
@@ -55,7 +56,6 @@ export const defaultPluginRenaming = {
   '@eslint-react/dom': 'react-dom',
   '@eslint-react/hooks-extra': 'react-hooks-extra',
   '@eslint-react/naming-convention': 'react-naming-convention',
-
   '@typescript-eslint': 'ts',
   'import-x': 'import',
   n: 'node',
@@ -96,6 +96,7 @@ export function maston(
     solid: enableSolid = isPackageExists('solid-js'),
     svelte: enableSvelte = isPackageExists('svelte'),
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
+    turbo: enableTurbo = isPackageExists('turbo'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
   } = options;
@@ -174,7 +175,6 @@ export function maston(
   if (options.test ?? true) {
     configs.push(
       test({
-        isInEditor,
         overrides: getOverrides(options, 'test'),
       }),
     );
@@ -219,6 +219,14 @@ export function maston(
       tailwindcss({
         ...resolveSubOptions(options, 'tailwindcss'),
         overrides: getOverrides(options, 'tailwindcss'),
+      }),
+    );
+  }
+
+  if (enableTurbo) {
+    configs.push(
+      turbo({
+        overrides: getOverrides(options, 'turbo'),
       }),
     );
   }
@@ -295,11 +303,7 @@ export function maston(
 
   if (isInEditor) {
     composer = composer.disableRulesFix(
-      [
-        'unused-imports/no-unused-imports',
-        'test/no-only-tests',
-        'prefer-const',
-      ],
+      ['unused-imports/no-unused-imports', 'prefer-const'],
       {
         builtinRules: async () =>
           // eslint-disable-next-line ts/no-unsafe-return
