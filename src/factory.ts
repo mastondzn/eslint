@@ -29,7 +29,6 @@ import {
   solid,
   sortPackageJson,
   sortTsconfig,
-  svelte,
   tailwindcss,
   test,
   toml,
@@ -94,7 +93,6 @@ export function maston(
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
     solid: enableSolid = isPackageExists('solid-js'),
-    svelte: enableSvelte = isPackageExists('svelte'),
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
     turbo: enableTurbo = isPackageExists('turbo'),
     typescript: enableTypeScript = isPackageExists('typescript'),
@@ -200,15 +198,6 @@ export function maston(
     configs.push(
       solid({
         overrides: getOverrides(options, 'solid'),
-        typescript: !!enableTypeScript,
-      }),
-    );
-  }
-
-  if (enableSvelte) {
-    configs.push(
-      svelte({
-        overrides: getOverrides(options, 'svelte'),
         typescript: !!enableTypeScript,
       }),
     );

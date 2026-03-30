@@ -47,10 +47,8 @@
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-solid": "catalog:peer",
-    "eslint-plugin-svelte": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
-    "eslint-plugin-turbo": "catalog:peer",
-    "svelte-eslint-parser": "catalog:peer"
+    "eslint-plugin-turbo": "catalog:peer"
   },
   "peerDependenciesMeta": {
     "@eslint-react/eslint-plugin": {
@@ -77,16 +75,10 @@
     "eslint-plugin-solid": {
       "optional": true
     },
-    "eslint-plugin-svelte": {
-      "optional": true
-    },
     "eslint-plugin-tailwindcss": {
       "optional": true
     },
     "eslint-plugin-turbo": {
-      "optional": true
-    },
-    "svelte-eslint-parser": {
       "optional": true
     }
   },
@@ -132,13 +124,10 @@
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-solid": "catalog:peer",
-    "eslint-plugin-svelte": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
     "eslint-plugin-turbo": "catalog:peer",
     "eslint-typegen": "^2.1.0",
     "prettier": "^3.5.3",
-    "svelte": "^5.25.10",
-    "svelte-eslint-parser": "catalog:peer",
     "tsup": "^8.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
