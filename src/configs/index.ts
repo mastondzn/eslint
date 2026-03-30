@@ -16,7 +16,6 @@ export * from './sort';
 export * from './tailwindcss';
 export * from './test';
 export * from './toml';
-export * from './turbo';
 export * from './typescript';
 export * from './unicorn';
 export * from './yaml';

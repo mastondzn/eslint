@@ -29,7 +29,6 @@ import {
   tailwindcss,
   test,
   toml,
-  turbo,
   typescript,
   unicorn,
   yaml,
@@ -88,7 +87,6 @@ export function maston(
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
-    turbo: enableTurbo = isPackageExists('turbo'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
   } = options;
@@ -185,14 +183,6 @@ export function maston(
       tailwindcss({
         ...resolveSubOptions(options, 'tailwindcss'),
         overrides: getOverrides(options, 'tailwindcss'),
-      }),
-    );
-  }
-
-  if (enableTurbo) {
-    configs.push(
-      turbo({
-        overrides: getOverrides(options, 'turbo'),
       }),
     );
   }
