@@ -3,7 +3,7 @@
 Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without formatting, with more configs (tailwindcss), and stricter rules aswell.
 
 - Designed to work with TypeScript, JSX, JSON, YAML, Toml, Markdown, etc. Out-of-box.
-- Auto-detects and includes plugins and rules for: Typescript, React, TailwindCSS, Solid
+- Auto-detects and includes plugins and rules for: Typescript, React, TailwindCSS
 - Pretty strict by default, uses typescript-eslint's strict and stylistic recommended rules in both type aware and non type aware files.
 - Opinionated, but [very customizable](#customization)
 - [ESLint v9 Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily with included utils!

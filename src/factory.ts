@@ -24,7 +24,6 @@ import {
   node,
   perfectionist,
   react,
-  solid,
   sortPackageJson,
   sortTsconfig,
   tailwindcss,
@@ -88,7 +87,6 @@ export function maston(
     perfectionist: enablePerfectionist = true,
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
-    solid: enableSolid = isPackageExists('solid-js'),
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
     turbo: enableTurbo = isPackageExists('turbo'),
     typescript: enableTypeScript = isPackageExists('typescript'),
@@ -178,15 +176,6 @@ export function maston(
     configs.push(
       react({
         overrides: getOverrides(options, 'react'),
-      }),
-    );
-  }
-
-  if (enableSolid) {
-    configs.push(
-      solid({
-        overrides: getOverrides(options, 'solid'),
-        typescript: !!enableTypeScript,
       }),
     );
   }

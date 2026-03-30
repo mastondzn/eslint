@@ -12,7 +12,6 @@ export * from './node';
 export * from './perfectionist';
 export * from './react';
 export * from './regexp';
-export * from './solid';
 export * from './sort';
 export * from './tailwindcss';
 export * from './test';

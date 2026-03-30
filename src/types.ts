@@ -235,16 +235,6 @@ export interface OptionsConfig extends OptionsComponentExts {
   react?: boolean | OptionsOverrides;
 
   /**
-   * Enable solid rules.
-   *
-   * Requires installing:
-   * - `eslint-plugin-solid`
-   *
-   * @default auto-detect based on the dependencies
-   */
-  solid?: boolean | OptionsOverrides;
-
-  /**
    * Enable tailwindcss rules.
    *
    * Requires installing:

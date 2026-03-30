@@ -43,7 +43,6 @@
     "eslint": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
-    "eslint-plugin-solid": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
     "eslint-plugin-turbo": "catalog:peer"
   },
@@ -58,9 +57,6 @@
       "optional": true
     },
     "eslint-plugin-react-refresh": {
-      "optional": true
-    },
-    "eslint-plugin-solid": {
       "optional": true
     },
     "eslint-plugin-tailwindcss": {
@@ -108,7 +104,6 @@
     "eslint": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
-    "eslint-plugin-solid": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
     "eslint-plugin-turbo": "catalog:peer",
     "eslint-typegen": "^2.1.0",
