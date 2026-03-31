@@ -102,7 +102,11 @@ export function maston(
   );
 
   if (enableUnicorn) {
-    configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+    configs.push(
+      unicorn({
+        overrides: getOverrides(options, 'unicorn'),
+      }),
+    );
   }
 
   if (enableJsx) {

@@ -1,18 +1,19 @@
 import pluginUnicorn from 'eslint-plugin-unicorn';
 
-import type { OptionsUnicorn, TypedFlatConfigItem } from '../types';
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
 
-export function unicorn(options: OptionsUnicorn = {}): TypedFlatConfigItem[] {
-  const { allRecommended = true, overrides = {} } = options;
+export function unicorn(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
+  const { overrides = {} } = options;
 
   return [
     {
+      name: 'maston/unicorn/setup',
+      plugins: { unicorn: pluginUnicorn },
+    },
+    {
       name: 'maston/unicorn/rules',
-      plugins: {
-        unicorn: pluginUnicorn,
-      },
       rules: {
-        ...(allRecommended ? pluginUnicorn.configs.recommended.rules : {}),
+        ...pluginUnicorn.configs.recommended.rules,
 
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-await-expression-member': 'off',

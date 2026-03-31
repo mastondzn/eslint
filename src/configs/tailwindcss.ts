@@ -10,22 +10,19 @@ export async function tailwindcss(options: OptionsTailwindCSS = {}): Promise<Typ
 
   return [
     {
-      name: 'maston/tailwindcss',
-      plugins: {
-        tailwindcss: pluginTailwind,
-      },
+      name: 'maston/tailwindcss/setup',
+      plugins: { tailwindcss: pluginTailwind },
+      settings: { tailwindcss: pluginOptions },
+    },
+    {
+      name: 'maston/tailwindcss/rules',
       rules: {
         ...renameRules(pluginTailwind.configs.recommended.rules, {
           'better-tailwindcss': 'tailwindcss',
         }),
-
         // this breaks prettier
         'tailwindcss/enforce-consistent-line-wrapping': 'off',
-
         ...overrides,
-      },
-      settings: {
-        tailwindcss: pluginOptions,
       },
     },
   ];
