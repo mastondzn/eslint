@@ -12,7 +12,7 @@ export async function tailwindcss(options: OptionsTailwindCSS = {}): Promise<Typ
     {
       name: 'maston/tailwindcss/setup',
       plugins: { tailwindcss: pluginTailwind },
-      settings: { tailwindcss: pluginOptions },
+      settings: { 'better-tailwindcss': pluginOptions },
     },
     {
       name: 'maston/tailwindcss/rules',
