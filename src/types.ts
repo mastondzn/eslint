@@ -101,8 +101,47 @@ export interface OptionsUnicorn extends OptionsOverrides {
   allRecommended?: boolean;
 }
 
+interface AttributeSelector {
+  kind: 'attribute';
+  name: string;
+  callTarget?: 'all' | 'first' | 'last' | number;
+  match?: {
+    type: 'objectKeys' | 'objectValues' | 'strings';
+    path?: string;
+  }[];
+}
+
+interface VariableSelector {
+  kind: 'variable';
+  name: string;
+  match?: {
+    type: 'objectKeys' | 'objectValues' | 'strings';
+    path?: string;
+  }[];
+}
+
+interface TagSelector {
+  kind: 'tag';
+  name: string;
+  match?: {
+    type: 'objectKeys' | 'objectValues' | 'strings';
+    path?: string;
+  }[];
+}
+
+interface CalleeSelector {
+  kind: 'callee';
+  callTarget?: 'all' | 'first' | 'last' | number;
+  match?: {
+    type: 'objectKeys' | 'objectValues' | 'strings';
+    path?: string;
+  }[];
+  name?: string;
+  path?: string;
+}
+
 /**
- * @see https://www.npmjs.com/package/eslint-plugin-better-tailwindcss#more-settings
+ * @see https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/HEAD/docs/settings/settings.md
  */
 export interface OptionsTailwindCSS extends OptionsOverrides {
   /**
@@ -117,6 +156,15 @@ export interface OptionsTailwindCSS extends OptionsOverrides {
    */
   tailwindConfig?: string;
   tsconfig?: string;
+  detectComponentClasses?: boolean;
+  rootFontSize?: number;
+  messageStyle?: 'string' | 'object';
+  selectors?: (
+    | AttributeSelector
+    | VariableSelector
+    | TagSelector
+    | CalleeSelector
+  )[];
 }
 
 export interface OptionsConfig extends OptionsComponentExts {

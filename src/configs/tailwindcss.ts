@@ -1,5 +1,5 @@
 import type { OptionsTailwindCSS, TypedFlatConfigItem } from '../types';
-import { ensurePackages, interopDefault } from '../utils';
+import { ensurePackages, interopDefault, renameRules } from '../utils';
 
 export async function tailwindcss(
   options: OptionsTailwindCSS = {},
@@ -16,18 +16,20 @@ export async function tailwindcss(
     {
       name: 'maston/tailwindcss',
       plugins: {
-        'better-tailwindcss': pluginTailwind,
+        tailwindcss: pluginTailwind,
       },
       rules: {
-        ...pluginTailwind.configs.recommended.rules,
+        ...renameRules(pluginTailwind.configs.recommended.rules, {
+          'better-tailwindcss': 'tailwindcss',
+        }),
 
         // this breaks prettier
-        'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
+        'tailwindcss/enforce-consistent-line-wrapping': 'off',
 
         ...overrides,
       },
       settings: {
-        'better-tailwindcss': pluginOptions,
+        tailwindcss: pluginOptions,
       },
     },
   ];
