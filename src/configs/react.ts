@@ -1,55 +1,33 @@
 /* eslint-disable perfectionist/sort-objects */
 
+import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
-import type {
-  OptionsFiles,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
 import { GLOB_SRC } from '../globs';
 import { ensurePackages, interopDefault, renameRules } from '../utils';
 
 const ReactRefreshAllowConstantExportPackages = ['vite'];
-const RemixPackages = [
-  '@remix-run/node',
-  '@remix-run/react',
-  '@remix-run/serve',
-  '@remix-run/dev',
-];
-const ReactRouterPackages = [
-  '@react-router/node',
-  '@react-router/react',
-  '@react-router/serve',
-  '@react-router/dev',
-];
+const RemixPackages = ['@remix-run/node', '@remix-run/react', '@remix-run/serve', '@remix-run/dev'];
+const ReactRouterPackages = ['@react-router/node', '@react-router/react', '@react-router/serve', '@react-router/dev'];
 const NextJsPackages = ['next'];
 
-export async function react(
-  options: OptionsOverrides & OptionsFiles = {},
-): Promise<TypedFlatConfigItem[]> {
+export async function react(options: OptionsOverrides & OptionsFiles = {}): Promise<TypedFlatConfigItem[]> {
   const { files = [GLOB_SRC], overrides = {} } = options;
 
-  await ensurePackages([
-    '@eslint-react/eslint-plugin',
-    'eslint-plugin-react-refresh',
-  ]);
+  await ensurePackages(['@eslint-react/eslint-plugin', 'eslint-plugin-react-refresh']);
 
   const [pluginReact, pluginReactRefresh] = await Promise.all([
     interopDefault(import('@eslint-react/eslint-plugin')),
     interopDefault(import('eslint-plugin-react-refresh')),
   ] as const);
 
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
-    (i) => isPackageExists(i),
-  );
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((i) => isPackageExists(i));
   const isUsingRemix = RemixPackages.some((i) => isPackageExists(i));
-  const isUsingReactRouter = ReactRouterPackages.some((i) =>
-    isPackageExists(i),
-  );
+  const isUsingReactRouter = ReactRouterPackages.some((i) => isPackageExists(i));
   const isUsingNext = NextJsPackages.some((i) => isPackageExists(i));
 
-  const plugins = (pluginReact.configs.all as any).plugins;
+  const plugins = pluginReact.configs.all.plugins!;
 
   return [
     {
@@ -76,10 +54,9 @@ export async function react(
       rules: {
         ...renameRules(
           {
-            ...plugins['@eslint-react'].configs.recommended.rules,
-            ...plugins['@eslint-react/dom'].configs.recommended.rules,
-            ...plugins['@eslint-react/naming-convention'].configs.recommended
-              .rules,
+            ...(plugins['@eslint-react'].configs!.recommended as ESLint.ConfigData).rules,
+            ...(plugins['@eslint-react/dom'].configs!.recommended as ESLint.ConfigData).rules,
+            ...(plugins['@eslint-react/naming-convention'].configs!.recommended as ESLint.ConfigData).rules,
           },
           {
             'react-x': 'react',

@@ -1,3 +1,4 @@
+import type { ESLint } from 'eslint';
 import pluginTs from '@typescript-eslint/eslint-plugin';
 import parserTs, { type ParserOptions } from '@typescript-eslint/parser';
 
@@ -98,17 +99,14 @@ export function typescript(
   };
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {
-    ...renameRules(pluginTs.configs['eslint-recommended'].overrides![0].rules, {
-      '@typescript-eslint': 'ts',
-    }),
-
-    ...renameRules(pluginTs.configs['strict-type-checked'].rules, {
-      '@typescript-eslint': 'ts',
-    }),
-
-    ...renameRules(pluginTs.configs['stylistic-type-checked'].rules, {
-      '@typescript-eslint': 'ts',
-    }),
+    ...renameRules(
+      {
+        ...pluginTs.configs['eslint-recommended'].overrides![0].rules,
+        ...pluginTs.configs['strict-type-checked'].rules,
+        ...pluginTs.configs['stylistic-type-checked'].rules,
+      },
+      { '@typescript-eslint': 'ts' },
+    ),
 
     'dot-notation': 'off',
     'no-implied-eval': 'off',
@@ -173,7 +171,7 @@ export function typescript(
       // Install the plugins without globs, so they can be configured separately.
       name: 'maston/typescript/setup',
       plugins: {
-        ts: pluginTs,
+        ts: pluginTs as unknown as ESLint.Plugin,
       },
     },
 
