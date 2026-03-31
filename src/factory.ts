@@ -229,12 +229,8 @@ export function maston(
 
   if (isInEditor) {
     composer = composer.disableRulesFix(['unused-imports/no-unused-imports', 'prefer-const'], {
-      builtinRules: async () =>
-        // eslint-disable-next-line ts/no-unsafe-return
-        import(['eslint', 'use-at-your-own-risk'].join('/')).then(
-          // eslint-disable-next-line ts/no-unsafe-return
-          (r) => r.builtinRules,
-        ),
+      // eslint-disable-next-line ts/no-deprecated
+      builtinRules: async () => import('eslint/use-at-your-own-risk').then((r) => r.builtinRules),
     });
   }
 
