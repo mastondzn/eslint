@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "strict": true,
+    "types": ["node"],
     "esModuleInterop": true,
     "skipLibCheck": true
   },

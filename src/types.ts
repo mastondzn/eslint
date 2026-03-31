@@ -8,10 +8,7 @@ export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = RuleOptions;
 
-export type TypedFlatConfigItem = Omit<
-  Linter.Config<Linter.RulesRecord & Rules>,
-  'plugins'
-> & {
+export type TypedFlatConfigItem = Omit<Linter.Config, 'plugins'> & {
   // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
   /**
    * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -105,28 +102,21 @@ export interface OptionsUnicorn extends OptionsOverrides {
 }
 
 /**
- * @see https://www.npmjs.com/package/eslint-plugin-tailwindcss#more-settings
+ * @see https://www.npmjs.com/package/eslint-plugin-better-tailwindcss#more-settings
  */
 export interface OptionsTailwindCSS extends OptionsOverrides {
   /**
-   * Object/functions that use tailwindcss classes.
-   *
-   * @default ["classnames", "clsx", "ctl"]
+   * The path to the entry file of the css based tailwind config (eg: src/global.css).
+   * If not specified, the plugin will fall back to the default configuration.
    */
-  callees?: string[];
+  entryPoint?: string;
   /**
-   * Path to the tailwind config file.
-   *
-   * @default "tailwind.config.js"
+   * The path to the tailwind.config.js file.
+   * If not specified, the plugin will try to find it automatically or falls back to the default configuration.
+   * The tailwind config is used to determine the sorting order.
    */
-  config?: string;
-  cssFiles?: string[];
-  cssFilesRefreshRate?: number;
-  removeDuplicates?: boolean;
-  skipClassAttribute?: boolean;
-  whitelist?: string[];
-  tags?: string[];
-  classRegex?: string;
+  tailwindConfig?: string;
+  tsconfig?: string;
 }
 
 export interface OptionsConfig extends OptionsComponentExts {

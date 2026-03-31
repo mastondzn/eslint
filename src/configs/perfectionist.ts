@@ -9,6 +9,7 @@ import { pluginPerfectionist } from '../plugins';
 export function perfectionist(
   options: OptionsOverrides = {},
 ): TypedFlatConfigItem[] {
+  // console.log(Object.keys(pluginPerfectionist.configs));
   return [
     {
       name: 'maston/perfectionist/setup',
@@ -16,38 +17,34 @@ export function perfectionist(
         perfectionist: pluginPerfectionist,
       },
       rules: {
-        'perfectionist/sort-exports': ['error', { groupKind: 'types-first' }],
+        'perfectionist/sort-exports': [
+          'error',
+          { groups: [['type-export'], ['value-export']], type: 'unsorted' },
+        ],
         'perfectionist/sort-imports': [
           'error',
           {
             groups: [
-              ['builtin-type'],
-              { newlinesBetween: 'never' },
+              ['type-builtin'],
+              { newlinesBetween: 0 },
               ['builtin'],
 
-              ['external-type'],
-              { newlinesBetween: 'never' },
+              ['type-external'],
+              { newlinesBetween: 0 },
               ['external'],
 
-              ['internal-type', 'parent-type', 'sibling-type', 'index-type'],
-              { newlinesBetween: 'never' },
+              ['type-internal', 'type-parent', 'type-sibling', 'type-index'],
+              { newlinesBetween: 0 },
               ['internal', 'parent', 'sibling', 'index'],
 
-              'object',
+              'ts-equals-import',
               'side-effect',
               'unknown',
             ],
-            newlinesBetween: 'always',
+            newlinesBetween: 1,
           },
         ],
-        'perfectionist/sort-named-exports': [
-          'error',
-          { groupKind: 'types-first' },
-        ],
-        'perfectionist/sort-named-imports': [
-          'error',
-          { groupKind: 'types-first' },
-        ],
+
         ...options.overrides,
       },
     },

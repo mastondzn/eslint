@@ -63,7 +63,6 @@ export async function react(
         react: plugins['@eslint-react'],
         'react-dom': plugins['@eslint-react/dom'],
         'react-hooks': pluginReactHooks,
-        'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
         'react-refresh': pluginReactRefresh,
         'react-web-api': plugins['@eslint-react/web-api'],
@@ -141,11 +140,6 @@ export async function react(
         // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks/src/rules
         'react-hooks/exhaustive-deps': 'warn',
         'react-hooks/rules-of-hooks': 'error',
-
-        // recommended rules from eslint-plugin-react-hooks-extra https://eslint-react.xyz/docs/rules/overview#hooks-extra-rules
-        'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn',
-        'react-hooks-extra/no-unnecessary-use-prefix': 'warn',
-        'react-hooks-extra/prefer-use-state-lazy-initialization': 'warn',
 
         // recommended rules from eslint-plugin-react-web-api https://eslint-react.xyz/docs/rules/overview#web-api-rules
         'react-web-api/no-leaked-event-listener': 'warn',
