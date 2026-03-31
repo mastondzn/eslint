@@ -41,17 +41,6 @@ const flatConfigProps = [
   'settings',
 ] satisfies (keyof TypedFlatConfigItem)[];
 
-export const defaultPluginRenaming = {
-  '@eslint-react': 'react',
-  '@eslint-react/dom': 'react-dom',
-  '@eslint-react/naming-convention': 'react-naming-convention',
-  '@typescript-eslint': 'ts',
-  'import-x': 'import',
-  n: 'node',
-  vitest: 'test',
-  yml: 'yaml',
-};
-
 /**
  * Construct an array of ESLint flat config items.
  *
@@ -68,10 +57,10 @@ export function maston(
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer | Linter.Config[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
-    autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
+    node: enableNode = isPackageExists('@types/node'),
     perfectionist: enablePerfectionist = true,
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
@@ -107,7 +96,6 @@ export function maston(
       overrides: getOverrides(options, 'javascript'),
     }),
     comments(),
-    node(),
     jsdoc(),
     imports(),
     command(),
@@ -168,6 +156,14 @@ export function maston(
     );
   }
 
+  if (enableNode) {
+    configs.push(
+      node({
+        overrides: getOverrides(options, 'node'),
+      }),
+    );
+  }
+
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
@@ -222,10 +218,6 @@ export function maston(
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
 
   composer = composer.append(...configs, ...(userConfigs as any));
-
-  if (autoRenamePlugins) {
-    composer = composer.renamePlugins(defaultPluginRenaming);
-  }
 
   if (isInEditor) {
     composer = composer.disableRulesFix(['unused-imports/no-unused-imports', 'prefer-const'], {

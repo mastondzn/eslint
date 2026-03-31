@@ -1,8 +1,10 @@
 import pluginNode from 'eslint-plugin-n';
 
-import type { TypedFlatConfigItem } from '../types';
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
 
-export function node(): TypedFlatConfigItem[] {
+export function node(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
+  const { overrides = {} } = options;
+
   return [
     {
       name: 'maston/node/rules',
@@ -17,6 +19,8 @@ export function node(): TypedFlatConfigItem[] {
         'node/no-path-concat': 'error',
         'node/prefer-global/buffer': ['error', 'never'],
         'node/process-exit-as-throw': 'error',
+
+        ...overrides,
       },
     },
   ];

@@ -269,17 +269,17 @@ export interface OptionsConfig extends OptionsComponentExts {
   tailwindcss?: boolean | OptionsTailwindCSS;
 
   /**
+   * Enable node rules.
+   *
+   * @default auto-detect based on the dependencies (@types/node)
+   */
+  node?: boolean | OptionsOverrides;
+
+  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
   isInEditor?: boolean;
-
-  /**
-   * Automatically rename plugins in the config.
-   *
-   * @default true
-   */
-  autoRenamePlugins?: boolean;
 }
 
 export type { ConfigNames } from './typegen';
