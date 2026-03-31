@@ -14,9 +14,9 @@ import {
 } from '../globs';
 import { parserPlain } from '../utils';
 
-export async function markdown(
+export function markdown(
   options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const {
     componentExts = [],
     files = [GLOB_MARKDOWN],
