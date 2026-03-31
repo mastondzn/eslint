@@ -4,6 +4,8 @@ import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 
 import type { RuleOptions } from './typegen';
 
+export type InteropModule<T> = T extends { default: infer U } ? U : T;
+
 export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = RuleOptions;
