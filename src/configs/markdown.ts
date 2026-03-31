@@ -1,27 +1,12 @@
 import markdownPlugin from '@eslint/markdown';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 
-import type {
-  OptionsComponentExts,
-  OptionsFiles,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from '../types';
-import {
-  GLOB_MARKDOWN,
-  GLOB_MARKDOWN_CODE,
-  GLOB_MARKDOWN_IN_MARKDOWN,
-} from '../globs';
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs';
 import { parserPlain } from '../utils';
 
-export function markdown(
-  options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {},
-): TypedFlatConfigItem[] {
-  const {
-    componentExts = [],
-    files = [GLOB_MARKDOWN],
-    overrides = {},
-  } = options;
+export function markdown(options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {}): TypedFlatConfigItem[] {
+  const { componentExts = [], files = [GLOB_MARKDOWN], overrides = {} } = options;
 
   return [
     {
@@ -37,10 +22,7 @@ export function markdown(
       // `eslint-plugin-markdown` only creates virtual files for code blocks,
       // but not the markdown file itself. We use `eslint-merge-processors` to
       // add a pass-through processor for the markdown file itself.
-      processor: mergeProcessors([
-        markdownPlugin.processors.markdown,
-        processorPassThrough,
-      ]),
+      processor: mergeProcessors([markdownPlugin.processors.markdown, processorPassThrough]),
     },
     {
       files,
@@ -50,10 +32,7 @@ export function markdown(
       name: 'maston/markdown/parser',
     },
     {
-      files: [
-        GLOB_MARKDOWN_CODE,
-        ...componentExts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),
-      ],
+      files: [GLOB_MARKDOWN_CODE, ...componentExts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`)],
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {

@@ -2,12 +2,7 @@ import type { ESLint } from 'eslint';
 import pluginTs from '@typescript-eslint/eslint-plugin';
 import parserTs, { type ParserOptions } from '@typescript-eslint/parser';
 
-import type {
-  OptionsComponentExts,
-  OptionsFiles,
-  OptionsTypeScript,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsComponentExts, OptionsFiles, OptionsTypeScript, TypedFlatConfigItem } from '../types';
 import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
 import { renameRules } from '../utils';
 
@@ -29,11 +24,7 @@ export function typescript(
     ...actualParserOptions
   } = parserOptions as ParserOptions;
 
-  const files = options.files ?? [
-    GLOB_TS,
-    GLOB_TSX,
-    ...componentExts.map((ext) => `**/*.${ext}`),
-  ];
+  const files = options.files ?? [GLOB_TS, GLOB_TSX, ...componentExts.map((ext) => `**/*.${ext}`)];
 
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const ignoresTypeAware = options.ignoresTypeAware ?? [`${GLOB_MARKDOWN}/**`];
@@ -54,10 +45,7 @@ export function typescript(
     'no-redeclare': 'off',
     'no-use-before-define': 'off',
     'no-useless-constructor': 'off',
-    'ts/ban-ts-comment': [
-      'error',
-      { 'ts-expect-error': 'allow-with-description' },
-    ],
+    'ts/ban-ts-comment': ['error', { 'ts-expect-error': 'allow-with-description' }],
     'ts/consistent-type-definitions': ['error', 'interface'],
     'ts/consistent-type-imports': [
       'error',
@@ -88,10 +76,7 @@ export function typescript(
       },
     ],
     'ts/no-unused-vars': 'off',
-    'ts/no-use-before-define': [
-      'error',
-      { classes: false, functions: false, variables: true },
-    ],
+    'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
     'ts/no-useless-constructor': 'off',
     'ts/no-wrapper-object-types': 'error',
     'ts/triple-slash-reference': 'off',
@@ -112,10 +97,7 @@ export function typescript(
     'no-implied-eval': 'off',
     'ts/await-thenable': 'error',
     'ts/dot-notation': ['error', { allowKeywords: true }],
-    'ts/no-confusing-void-expression': [
-      'error',
-      { ignoreArrowShorthand: true, ignoreVoidOperator: true },
-    ],
+    'ts/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true, ignoreVoidOperator: true }],
     'ts/no-floating-promises': 'error',
     'ts/no-for-in-array': 'error',
     'ts/no-implied-eval': 'error',
@@ -135,20 +117,14 @@ export function typescript(
     'ts/unbound-method': 'error',
   };
 
-  function makeParser(
-    typeAware: boolean,
-    files: string[],
-    ignores?: string[],
-  ): TypedFlatConfigItem {
+  function makeParser(typeAware: boolean, files: string[], ignores?: string[]): TypedFlatConfigItem {
     return {
       files,
       ...(ignores ? { ignores } : {}),
       languageOptions: {
         parser: parserTs,
         parserOptions: {
-          extraFileExtensions: componentExts.map((ext) =>
-            ext.startsWith('.') ? ext : `.${ext}`,
-          ),
+          extraFileExtensions: componentExts.map((ext) => (ext.startsWith('.') ? ext : `.${ext}`)),
           sourceType: 'module',
           ...(typeAware
             ? {
@@ -177,9 +153,7 @@ export function typescript(
 
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
     makeParser(false, files),
-    ...(isTypeAware
-      ? [makeParser(true, filesTypeAware, ignoresTypeAware)]
-      : []),
+    ...(isTypeAware ? [makeParser(true, filesTypeAware, ignoresTypeAware)] : []),
 
     {
       files,

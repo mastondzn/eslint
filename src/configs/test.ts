@@ -1,15 +1,9 @@
 import pluginVitest from '@vitest/eslint-plugin';
 
-import type {
-  OptionsFiles,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
 import { GLOB_TESTS } from '../globs';
 
-export function test(
-  options: OptionsFiles & OptionsOverrides = {},
-): TypedFlatConfigItem[] {
+export function test(options: OptionsFiles & OptionsOverrides = {}): TypedFlatConfigItem[] {
   const { files = GLOB_TESTS, overrides = {} } = options;
 
   return [
@@ -23,10 +17,7 @@ export function test(
       files,
       name: 'maston/test/rules',
       rules: {
-        'test/consistent-test-it': [
-          'error',
-          { fn: 'it', withinDescribe: 'it' },
-        ],
+        'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
         'test/no-identical-title': 'error',
         'test/no-import-node-test': 'error',
         'test/prefer-hooks-in-order': 'error',

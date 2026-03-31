@@ -7,9 +7,7 @@ import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
-export function perfectionist(
-  options: OptionsOverrides = {},
-): TypedFlatConfigItem[] {
+export function perfectionist(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
   // console.log(Object.keys(pluginPerfectionist.configs));
   return [
     {
@@ -18,10 +16,7 @@ export function perfectionist(
         perfectionist: pluginPerfectionist,
       },
       rules: {
-        'perfectionist/sort-exports': [
-          'error',
-          { groups: [['type-export'], ['value-export']], type: 'unsorted' },
-        ],
+        'perfectionist/sort-exports': ['error', { groups: [['type-export'], ['value-export']], type: 'unsorted' }],
         'perfectionist/sort-imports': [
           'error',
           {

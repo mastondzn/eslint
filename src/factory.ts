@@ -4,12 +4,7 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
 import type { RuleOptions } from './typegen';
-import type {
-  Awaitable,
-  ConfigNames,
-  OptionsConfig,
-  TypedFlatConfigItem,
-} from './types';
+import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types';
 import {
   command,
   comments,
@@ -70,12 +65,7 @@ export const defaultPluginRenaming = {
 // eslint-disable-next-line ts/promise-function-async
 export function maston(
   options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
-  ...userConfigs: Awaitable<
-    | TypedFlatConfigItem
-    | TypedFlatConfigItem[]
-    | FlatConfigComposer
-    | Linter.Config[]
-  >[]
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer | Linter.Config[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
     autoRenamePlugins = true,
@@ -95,9 +85,7 @@ export function maston(
     isInEditor = isInEditorEnv();
     if (isInEditor)
       // eslint-disable-next-line no-console
-      console.log(
-        '[@mastondzn/eslint] Detected running in editor, some rules are disabled.',
-      );
+      console.log('[@mastondzn/eslint] Detected running in editor, some rules are disabled.');
   }
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
@@ -105,16 +93,10 @@ export function maston(
   if (enableGitignore) {
     const options: FlatGitignoreOptions = {
       name: 'maston/gitignore',
-      ...(typeof enableGitignore === 'boolean'
-        ? { strict: false }
-        : enableGitignore),
+      ...(typeof enableGitignore === 'boolean' ? { strict: false } : enableGitignore),
     };
 
-    configs.push(
-      interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-        r(options),
-      ]),
-    );
+    configs.push(interopDefault(import('eslint-config-flat-gitignore')).then((r) => [r(options)]));
   }
 
   // Base configs
@@ -231,13 +213,10 @@ export function maston(
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
-  const fusedConfig = flatConfigProps.reduce<TypedFlatConfigItem>(
-    (acc, key) => {
-      if (key in options) acc[key] = options[key] as any;
-      return acc;
-    },
-    {},
-  );
+  const fusedConfig = flatConfigProps.reduce<TypedFlatConfigItem>((acc, key) => {
+    if (key in options) acc[key] = options[key] as any;
+    return acc;
+  }, {});
   if (Object.keys(fusedConfig).length > 0) configs.push([fusedConfig]);
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
@@ -249,17 +228,14 @@ export function maston(
   }
 
   if (isInEditor) {
-    composer = composer.disableRulesFix(
-      ['unused-imports/no-unused-imports', 'prefer-const'],
-      {
-        builtinRules: async () =>
+    composer = composer.disableRulesFix(['unused-imports/no-unused-imports', 'prefer-const'], {
+      builtinRules: async () =>
+        // eslint-disable-next-line ts/no-unsafe-return
+        import(['eslint', 'use-at-your-own-risk'].join('/')).then(
           // eslint-disable-next-line ts/no-unsafe-return
-          import(['eslint', 'use-at-your-own-risk'].join('/')).then(
-            // eslint-disable-next-line ts/no-unsafe-return
-            (r) => r.builtinRules,
-          ),
-      },
-    );
+          (r) => r.builtinRules,
+        ),
+    });
   }
 
   return composer;
@@ -272,9 +248,7 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
   key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
   // eslint-disable-next-line ts/no-unsafe-return
-  return typeof options[key] === 'boolean'
-    ? ({} as any)
-    : options[key] || ({} as any);
+  return typeof options[key] === 'boolean' ? ({} as any) : options[key] || ({} as any);
 }
 
 export function getOverrides(

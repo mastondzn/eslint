@@ -1,16 +1,10 @@
 import pluginYaml from 'eslint-plugin-yml';
 import * as parserYaml from 'yaml-eslint-parser';
 
-import type {
-  OptionsFiles,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
 import { GLOB_YAML } from '../globs';
 
-export function yaml(
-  options: OptionsOverrides & OptionsFiles = {},
-): TypedFlatConfigItem[] {
+export function yaml(options: OptionsOverrides & OptionsFiles = {}): TypedFlatConfigItem[] {
   const { files = [GLOB_YAML], overrides = {} } = options;
 
   return [

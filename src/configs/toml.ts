@@ -1,16 +1,10 @@
 import pluginToml from 'eslint-plugin-toml';
 import * as parserToml from 'toml-eslint-parser';
 
-import type {
-  OptionsFiles,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
 import { GLOB_TOML } from '../globs';
 
-export function toml(
-  options: OptionsOverrides & OptionsFiles = {},
-): TypedFlatConfigItem[] {
+export function toml(options: OptionsOverrides & OptionsFiles = {}): TypedFlatConfigItem[] {
   const { files = [GLOB_TOML], overrides = {} } = options;
 
   return [

@@ -33,9 +33,7 @@ export interface OptionsTypeScript extends OptionsOverrides {
   /**
    * Additional parser options for TypeScript.
    */
-  parserOptions?: Partial<
-    Omit<ParserOptions, 'projectService' | 'tsconfigRootDir'>
-  >;
+  parserOptions?: Partial<Omit<ParserOptions, 'projectService' | 'tsconfigRootDir'>>;
 
   /**
    * When this is provided, type aware rules will be enabled.
@@ -153,12 +151,7 @@ export interface OptionsTailwindCSS extends OptionsOverrides {
   detectComponentClasses?: boolean;
   rootFontSize?: number;
   messageStyle?: 'string' | 'object';
-  selectors?: (
-    | AttributeSelector
-    | VariableSelector
-    | TagSelector
-    | CalleeSelector
-  )[];
+  selectors?: (AttributeSelector | VariableSelector | TagSelector | CalleeSelector)[];
 }
 
 export interface OptionsConfig extends OptionsComponentExts {

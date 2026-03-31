@@ -1,14 +1,8 @@
 import { configs } from 'eslint-plugin-regexp';
 
-import type {
-  OptionsOverrides,
-  OptionsRegExp,
-  TypedFlatConfigItem,
-} from '../types';
+import type { OptionsOverrides, OptionsRegExp, TypedFlatConfigItem } from '../types';
 
-export function regexp(
-  options: OptionsRegExp & OptionsOverrides = {},
-): TypedFlatConfigItem[] {
+export function regexp(options: OptionsRegExp & OptionsOverrides = {}): TypedFlatConfigItem[] {
   const config = configs['flat/recommended'] as TypedFlatConfigItem;
 
   const rules = {

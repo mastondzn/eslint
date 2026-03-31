@@ -18,9 +18,7 @@ const packageJson = JSON.parse(
 ) as { name?: string };
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
-const isCwdInScope =
-  isPackageExists('@mastondzn/eslint') ||
-  packageJson.name === '@mastondzn/eslint';
+const isCwdInScope = isPackageExists('@mastondzn/eslint') || packageJson.name === '@mastondzn/eslint';
 
 export const parserPlain = {
   meta: {
@@ -72,15 +70,11 @@ export async function combine(
  * }]
  * ```
  */
-export function renameRules<T>(
-  rules: Record<string, T>,
-  map: Record<string, string>,
-): Record<string, T> {
+export function renameRules<T>(rules: Record<string, T>, map: Record<string, string>): Record<string, T> {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
       for (const [from, to] of Object.entries(map)) {
-        if (key.startsWith(`${from}/`))
-          return [to + key.slice(from.length), value];
+        if (key.startsWith(`${from}/`)) return [to + key.slice(from.length), value];
       }
       return [key, value];
     }),
@@ -124,9 +118,7 @@ export function toArray<T>(value: T | T[]): T[] {
   return Array.isArray(value) ? value : [value];
 }
 
-export async function interopDefault<T>(
-  m: Awaitable<T>,
-): Promise<T extends { default: infer U } ? U : T> {
+export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
   const resolved = await m;
   // eslint-disable-next-line ts/no-unsafe-return
   return (resolved as any).default ?? resolved;
@@ -136,14 +128,10 @@ export function isPackageInScope(name: string): boolean {
   return isPackageExists(name, { paths: [scopeUrl] });
 }
 
-export async function ensurePackages(
-  packages: (string | undefined)[],
-): Promise<void> {
+export async function ensurePackages(packages: (string | undefined)[]): Promise<void> {
   if (process.env.CI || !process.stdout.isTTY || !isCwdInScope) return;
 
-  const nonExistingPackages = packages.filter(
-    (i) => i && !isPackageInScope(i),
-  ) as string[];
+  const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i)) as string[];
   if (nonExistingPackages.length === 0) return;
 
   const p = await import('@clack/prompts');
@@ -151,9 +139,7 @@ export async function ensurePackages(
     message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
   });
   if (result)
-    await import('@antfu/install-pkg').then(async (i) =>
-      i.installPackage(nonExistingPackages, { dev: true }),
-    );
+    await import('@antfu/install-pkg').then(async (i) => i.installPackage(nonExistingPackages, { dev: true }));
 }
 
 export function isInEditorEnv(): boolean {
