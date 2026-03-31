@@ -8,9 +8,8 @@ import type {
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_SRC } from '../globs';
-import { ensurePackages, interopDefault } from '../utils';
+import { ensurePackages, interopDefault, renameRules } from '../utils';
 
-// react refresh
 const ReactRefreshAllowConstantExportPackages = ['vite'];
 const RemixPackages = [
   '@remix-run/node',
@@ -33,17 +32,13 @@ export async function react(
 
   await ensurePackages([
     '@eslint-react/eslint-plugin',
-    'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
   ]);
 
-  const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
-    [
-      interopDefault(import('@eslint-react/eslint-plugin')),
-      interopDefault(import('eslint-plugin-react-hooks')),
-      interopDefault(import('eslint-plugin-react-refresh')),
-    ] as const,
-  );
+  const [pluginReact, pluginReactRefresh] = await Promise.all([
+    interopDefault(import('@eslint-react/eslint-plugin')),
+    interopDefault(import('eslint-plugin-react-refresh')),
+  ] as const);
 
   const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => isPackageExists(i),
@@ -62,13 +57,13 @@ export async function react(
       plugins: {
         react: plugins['@eslint-react'],
         'react-dom': plugins['@eslint-react/dom'],
-        'react-hooks': pluginReactHooks,
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
-        'react-refresh': pluginReactRefresh,
         'react-web-api': plugins['@eslint-react/web-api'],
+        'react-refresh': pluginReactRefresh,
       },
     },
     {
+      name: 'maston/react/rules',
       files,
       languageOptions: {
         parserOptions: {
@@ -78,66 +73,20 @@ export async function react(
         },
         sourceType: 'module',
       },
-      name: 'maston/react/rules',
       rules: {
-        // recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
-        'react/no-access-state-in-setstate': 'error',
-        'react/no-array-index-key': 'warn',
-        'react/no-children-count': 'warn',
-        'react/no-children-for-each': 'warn',
-        'react/no-children-map': 'warn',
-        'react/no-children-only': 'warn',
-        'react/no-children-to-array': 'warn',
-        'react/no-clone-element': 'warn',
-        'react/no-component-will-mount': 'error',
-        'react/no-component-will-receive-props': 'error',
-        'react/no-component-will-update': 'error',
-        'react/no-context-provider': 'warn',
-        'react/no-create-ref': 'error',
-        'react/no-direct-mutation-state': 'error',
-        'react/no-duplicate-key': 'warn',
-        'react/no-forward-ref': 'warn',
-        'react/no-missing-key': 'error',
-        'react/no-nested-component-definitions': 'error',
-        'react/no-redundant-should-component-update': 'error',
-        'react/no-set-state-in-component-did-mount': 'warn',
-        'react/no-set-state-in-component-did-update': 'warn',
-        'react/no-set-state-in-component-will-update': 'warn',
-        'react/no-unsafe-component-will-mount': 'warn',
-        'react/no-unsafe-component-will-receive-props': 'warn',
-        'react/no-unsafe-component-will-update': 'warn',
-        'react/no-unstable-context-value': 'warn',
-        'react/no-unstable-default-props': 'warn',
-        'react/no-unused-class-component-members': 'warn',
-        'react/no-unused-state': 'warn',
-        'react/no-use-context': 'warn',
-
-        // recommended rules from eslint-plugin-react-dom https://eslint-react.xyz/docs/rules/overview#dom-rules
-        'react-dom/no-dangerously-set-innerhtml': 'warn',
-        'react-dom/no-dangerously-set-innerhtml-with-children': 'error',
-        'react-dom/no-find-dom-node': 'error',
-        'react-dom/no-flush-sync': 'error',
-        'react-dom/no-hydrate': 'error',
-        'react-dom/no-missing-button-type': 'warn',
-        'react-dom/no-missing-iframe-sandbox': 'warn',
-        'react-dom/no-namespace': 'error',
-        'react-dom/no-render': 'error',
-        'react-dom/no-render-return-value': 'error',
-        'react-dom/no-script-url': 'warn',
-        'react-dom/no-unsafe-iframe-sandbox': 'warn',
-        'react-dom/no-unsafe-target-blank': 'warn',
-        'react-dom/no-use-form-state': 'error',
-        'react-dom/no-void-elements-with-children': 'error',
-
-        // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks/src/rules
-        'react-hooks/exhaustive-deps': 'warn',
-        'react-hooks/rules-of-hooks': 'error',
-
-        // recommended rules from eslint-plugin-react-web-api https://eslint-react.xyz/docs/rules/overview#web-api-rules
-        'react-web-api/no-leaked-event-listener': 'warn',
-        'react-web-api/no-leaked-interval': 'warn',
-        'react-web-api/no-leaked-resize-observer': 'warn',
-        'react-web-api/no-leaked-timeout': 'warn',
+        ...renameRules(
+          {
+            ...plugins['@eslint-react'].configs.recommended.rules,
+            ...plugins['@eslint-react/dom'].configs.recommended.rules,
+            ...plugins['@eslint-react/naming-convention'].configs.recommended
+              .rules,
+          },
+          {
+            'react-x': 'react',
+            '@eslint-react/dom': 'react-dom',
+            '@eslint-react/naming-convention': 'react-naming-convention',
+          },
+        ),
 
         // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
         'react-refresh/only-export-components': [

@@ -217,7 +217,6 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * Requires installing:
    * - `@eslint-react/eslint-plugin`
-   * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-react-refresh`
    *
    * @default auto-detect based on the dependencies
