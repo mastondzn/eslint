@@ -1,6 +1,7 @@
 import type { ParserOptions } from '@typescript-eslint/parser';
-import type { Linter } from 'eslint';
+import type { ESLint } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { ConfigWithExtends } from 'eslint-flat-config-utils';
 
 import type { RuleOptions } from './typegen';
 
@@ -10,7 +11,21 @@ export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = RuleOptions;
 
-export type TypedFlatConfigItem = Linter.Config;
+export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> & {
+  /**
+   * An object containing a name-value mapping of plugin names to plugin objects.
+   * When `files` is specified, these plugins are only available to the matching files.
+   *
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   */
+  plugins?: Record<string, ESLint.Plugin>;
+
+  /**
+   * An object containing the configured rules. When `files` or `ignores` are
+   * specified, these rule configurations are only available to the matching files.
+   */
+  rules?: Rules;
+};
 
 export interface OptionsFiles {
   /**
@@ -83,14 +98,6 @@ export interface OptionsRegExp {
 
 export interface OptionsIsInEditor {
   isInEditor?: boolean;
-}
-
-export interface OptionsUnicorn extends OptionsOverrides {
-  /**
-   * Include all rules recommended by `eslint-plugin-unicorn`.
-   * @default true
-   */
-  allRecommended?: boolean;
 }
 
 interface AttributeSelector {
@@ -200,7 +207,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default true
    */
-  unicorn?: boolean | OptionsUnicorn;
+  unicorn?: boolean | OptionsOverrides;
 
   /**
    * Enable test support.
