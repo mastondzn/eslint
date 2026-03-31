@@ -40,6 +40,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
               'keywords',
               'categories',
               'sideEffects',
+              'imports',
               'exports',
               'main',
               'module',
@@ -78,6 +79,14 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
             pathPattern: '^(?:resolutions|overrides|pnpm.overrides)$',
           },
           {
+            order: { type: 'asc' },
+            pathPattern: String.raw`^workspaces\.catalog$`,
+          },
+          {
+            order: { type: 'asc' },
+            pathPattern: String.raw`^workspaces\.catalogs\.[^.]+$`,
+          },
+          {
             order: ['types', 'import', 'require', 'default'],
             pathPattern: '^exports.*$',
           },
@@ -111,7 +120,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
 export function sortTsconfig(): TypedFlatConfigItem[] {
   return [
     {
-      files: ['**/tsconfig.json', '**/tsconfig.*.json'],
+      files: ['**/[jt]sconfig.json', '**/[jt]sconfig.*.json'],
       name: 'maston/sort/tsconfig-json',
       rules: {
         'jsonc/sort-keys': [

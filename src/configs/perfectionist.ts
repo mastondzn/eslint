@@ -8,13 +8,15 @@ import type { OptionsOverrides, TypedFlatConfigItem } from '../types';
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
 export function perfectionist(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
-  // console.log(Object.keys(pluginPerfectionist.configs));
   return [
     {
       name: 'maston/perfectionist/setup',
       plugins: {
         perfectionist: pluginPerfectionist,
       },
+    },
+    {
+      name: 'maston/perfectionist/rules',
       rules: {
         'perfectionist/sort-exports': ['error', { groups: [['type-export'], ['value-export']], type: 'unsorted' }],
         'perfectionist/sort-imports': [

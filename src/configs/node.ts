@@ -7,10 +7,11 @@ export function node(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
 
   return [
     {
+      name: 'maston/node/setup',
+      plugins: { node: pluginNode },
+    },
+    {
       name: 'maston/node/rules',
-      plugins: {
-        node: pluginNode,
-      },
       rules: {
         'node/handle-callback-err': ['error', '^(err|error)$'],
         'node/no-deprecated-api': 'error',

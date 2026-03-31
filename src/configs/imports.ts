@@ -6,11 +6,14 @@ import type { TypedFlatConfigItem } from '../types';
 export function imports(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'maston/imports/rules',
+      name: 'maston/imports/setup',
       plugins: {
         antfu: pluginAntfu,
         import: pluginImport,
       },
+    },
+    {
+      name: 'maston/imports/rules',
       rules: {
         'antfu/import-dedupe': 'error',
         'antfu/no-import-dist': 'error',

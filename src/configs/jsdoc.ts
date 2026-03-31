@@ -5,10 +5,13 @@ import type { TypedFlatConfigItem } from '../types';
 export function jsdoc(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'maston/jsdoc/rules',
+      name: 'maston/jsdoc/setup',
       plugins: {
         jsdoc: jsdocPlugin,
       },
+    },
+    {
+      name: 'maston/jsdoc/rules',
       rules: {
         'jsdoc/check-access': 'warn',
         'jsdoc/check-param-names': 'warn',
