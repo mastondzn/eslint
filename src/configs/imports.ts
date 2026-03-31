@@ -1,5 +1,7 @@
+import pluginAntfu from 'eslint-plugin-antfu';
+import pluginImport from 'eslint-plugin-import-x';
+
 import type { TypedFlatConfigItem } from '../types';
-import { pluginAntfu, pluginImport } from '../plugins';
 
 export function imports(): TypedFlatConfigItem[] {
   return [

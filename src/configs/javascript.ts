@@ -1,3 +1,5 @@
+import pluginAntfu from 'eslint-plugin-antfu';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
 import type {
@@ -5,7 +7,6 @@ import type {
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
-import { pluginAntfu, pluginUnusedImports } from '../plugins';
 
 export function javascript(
   options: OptionsIsInEditor & OptionsOverrides = {},

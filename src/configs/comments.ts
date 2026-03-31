@@ -1,5 +1,6 @@
+import pluginComments from '@eslint-community/eslint-plugin-eslint-comments';
+
 import type { TypedFlatConfigItem } from '../types';
-import { pluginComments } from '../plugins';
 
 export function comments(): TypedFlatConfigItem[] {
   return [

@@ -1,5 +1,6 @@
+import pluginUnicorn from 'eslint-plugin-unicorn';
+
 import type { OptionsUnicorn, TypedFlatConfigItem } from '../types';
-import { pluginUnicorn } from '../plugins';
 
 export function unicorn(options: OptionsUnicorn = {}): TypedFlatConfigItem[] {
   const { allRecommended = true, overrides = {} } = options;
