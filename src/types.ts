@@ -228,7 +228,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    * Enable tailwindcss rules.
    *
    * Requires installing:
-   * - `eslint-plugin-tailwindcss`
+   * - `eslint-plugin-better-tailwindcss`
    *
    * @default auto-detect based on the dependencies
    */
