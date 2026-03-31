@@ -1,5 +1,5 @@
 import type { ParserOptions } from '@typescript-eslint/parser';
-import type { ESLint } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import type { ConfigWithExtends } from 'eslint-flat-config-utils';
 
@@ -9,7 +9,7 @@ export type InteropModule<T> = T extends { default: infer U } ? U : T;
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions;
+export type Rules = Record<string, Linter.RuleEntry | undefined> & RuleOptions;
 
 export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> & {
   /**
