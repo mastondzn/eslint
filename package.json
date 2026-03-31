@@ -25,11 +25,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "nr typegen && tsup --clean --dts",
-    "stub": "tsup",
+    "build": "nr typegen && tsdown --clean --dts",
+    "stub": "tsdown",
     "dev": "npx @eslint/config-inspector --config eslint.config.ts",
     "build:inspector": "pnpm build && npx @eslint/config-inspector build",
-    "watch": "tsup --watch",
+    "watch": "tsdown --watch",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -103,7 +103,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-typegen": "^2.3.1",
     "prettier": "^3.8.1",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.21.7",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2"
   }
