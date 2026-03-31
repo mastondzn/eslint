@@ -1,12 +1,13 @@
-import type { TypedFlatConfigItem } from '../types';
-import { interopDefault } from '../utils';
+import jsdocPlugin from 'eslint-plugin-jsdoc';
 
-export async function jsdoc(): Promise<TypedFlatConfigItem[]> {
+import type { TypedFlatConfigItem } from '../types';
+
+export function jsdoc(): TypedFlatConfigItem[] {
   return [
     {
       name: 'maston/jsdoc/rules',
       plugins: {
-        jsdoc: await interopDefault(import('eslint-plugin-jsdoc')),
+        jsdoc: jsdocPlugin,
       },
       rules: {
         'jsdoc/check-access': 'warn',

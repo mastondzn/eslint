@@ -1,4 +1,5 @@
-import type { ParserOptions } from '@typescript-eslint/parser';
+import pluginTs from '@typescript-eslint/eslint-plugin';
+import parserTs, { type ParserOptions } from '@typescript-eslint/parser';
 
 import type {
   OptionsComponentExts,
@@ -7,11 +8,11 @@ import type {
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
-import { interopDefault, renameRules } from '../utils';
+import { renameRules } from '../utils';
 
-export async function typescript(
+export function typescript(
   options: OptionsFiles & OptionsComponentExts & OptionsTypeScript = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const {
     componentExts = [],
     overrides = {},
@@ -38,24 +39,15 @@ export async function typescript(
 
   const isTypeAware = projectService;
 
-  const [pluginTs, parserTs] = await Promise.all([
-    interopDefault(import('@typescript-eslint/eslint-plugin')),
-    interopDefault(import('@typescript-eslint/parser')),
-  ] as const);
-
   const rules: TypedFlatConfigItem['rules'] = {
     ...renameRules(
-      pluginTs.configs['eslint-recommended'].overrides![0].rules!,
+      {
+        ...pluginTs.configs['eslint-recommended'].overrides![0].rules,
+        ...pluginTs.configs.strict.rules,
+        ...pluginTs.configs.stylistic.rules,
+      },
       { '@typescript-eslint': 'ts' },
     ),
-
-    ...renameRules(pluginTs.configs.strict.rules!, {
-      '@typescript-eslint': 'ts',
-    }),
-
-    ...renameRules(pluginTs.configs.stylistic.rules!, {
-      '@typescript-eslint': 'ts',
-    }),
 
     'no-dupe-class-members': 'off',
     'no-redeclare': 'off',
@@ -106,16 +98,15 @@ export async function typescript(
   };
 
   const typeAwareRules: TypedFlatConfigItem['rules'] = {
-    ...renameRules(
-      pluginTs.configs['eslint-recommended'].overrides![0].rules!,
-      { '@typescript-eslint': 'ts' },
-    ),
-
-    ...renameRules(pluginTs.configs['strict-type-checked'].rules!, {
+    ...renameRules(pluginTs.configs['eslint-recommended'].overrides![0].rules, {
       '@typescript-eslint': 'ts',
     }),
 
-    ...renameRules(pluginTs.configs['stylistic-type-checked'].rules!, {
+    ...renameRules(pluginTs.configs['strict-type-checked'].rules, {
+      '@typescript-eslint': 'ts',
+    }),
+
+    ...renameRules(pluginTs.configs['stylistic-type-checked'].rules, {
       '@typescript-eslint': 'ts',
     }),
 

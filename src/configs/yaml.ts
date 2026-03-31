@@ -1,20 +1,17 @@
+import pluginYaml from 'eslint-plugin-yml';
+import * as parserYaml from 'yaml-eslint-parser';
+
 import type {
   OptionsFiles,
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_YAML } from '../globs';
-import { interopDefault } from '../utils';
 
-export async function yaml(
+export function yaml(
   options: OptionsOverrides & OptionsFiles = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const { files = [GLOB_YAML], overrides = {} } = options;
-
-  const [pluginYaml, parserYaml] = await Promise.all([
-    interopDefault(import('eslint-plugin-yml')),
-    interopDefault(import('yaml-eslint-parser')),
-  ] as const);
 
   return [
     {

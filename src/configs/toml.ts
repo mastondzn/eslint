@@ -1,20 +1,17 @@
+import pluginToml from 'eslint-plugin-toml';
+import * as parserToml from 'toml-eslint-parser';
+
 import type {
   OptionsFiles,
   OptionsOverrides,
   TypedFlatConfigItem,
 } from '../types';
 import { GLOB_TOML } from '../globs';
-import { interopDefault } from '../utils';
 
-export async function toml(
+export function toml(
   options: OptionsOverrides & OptionsFiles = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
   const { files = [GLOB_TOML], overrides = {} } = options;
-
-  const [pluginToml, parserToml] = await Promise.all([
-    interopDefault(import('eslint-plugin-toml')),
-    interopDefault(import('toml-eslint-parser')),
-  ] as const);
 
   return [
     {
