@@ -212,7 +212,7 @@ export interface OptionsConfig extends OptionsComponentExts {
   /**
    * Enable test support.
    *
-   * @default true
+   * @default auto-detect based on the dependencies (vitest)
    */
   test?: boolean | OptionsOverrides;
 

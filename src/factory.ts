@@ -65,6 +65,7 @@ export function maston(
     react: enableReact = isPackageExists('react'),
     regexp: enableRegexp = true,
     tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
+    test: enableTest = isPackageExists('vitest'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unicorn: enableUnicorn = true,
   } = options;
@@ -135,7 +136,7 @@ export function maston(
     configs.push(regexp(typeof enableRegexp === 'boolean' ? {} : enableRegexp));
   }
 
-  if (options.test ?? true) {
+  if (enableTest) {
     configs.push(
       test({
         overrides: getOverrides(options, 'test'),
