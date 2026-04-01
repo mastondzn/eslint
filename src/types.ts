@@ -157,7 +157,7 @@ export interface OptionsTailwindCSS extends OptionsOverrides {
   tsconfig?: string;
   detectComponentClasses?: boolean;
   rootFontSize?: number;
-  messageStyle?: 'string' | 'object';
+  messageStyle?: 'visual' | 'compact' | 'raw';
   selectors?: (AttributeSelector | VariableSelector | TagSelector | CalleeSelector)[];
 }
 
