@@ -308,9 +308,7 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `yaml/*`                    | `yml/*`                             | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                             |
 | `ts/*`                      | `@typescript-eslint/*`              | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)      |
 | `test/*`                    | `vitest/*`                          | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                     |
-| `react/*`                   | `react-x/*`                         | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
-| `react-dom/*`               | `@eslint-react/dom/*`               | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
-| `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
+| `react/*`                   | `@eslint-react/*`                   | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
 | `tailwindcss/*`             | `better-tailwindcss/*`              | [eslint-plugin-better-tailwindcss](https://github.com/schoero/eslint-plugin-better-tailwindcss) |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:

@@ -50,9 +50,7 @@ This config renames several plugin prefixes. Use these when writing inline `// e
 | `node/*`                    | `n/*`                               | `eslint-plugin-n`                  |
 | `yaml/*`                    | `yml/*`                             | `eslint-plugin-yml`                |
 | `test/*`                    | `vitest/*`                          | `@vitest/eslint-plugin`            |
-| `react/*`                   | `react-x/*`                         | `@eslint-react/eslint-plugin`      |
-| `react-dom/*`               | `@eslint-react/dom/*`               | `@eslint-react/eslint-plugin`      |
-| `react-naming-convention/*` | `@eslint-react/naming-convention/*` | `@eslint-react/eslint-plugin`      |
+| `react/*`                   | `@eslint-react/*`                   | `@eslint-react/eslint-plugin`      |
 | `tailwindcss/*`             | `better-tailwindcss/*`              | `eslint-plugin-better-tailwindcss` |
 
 ## Release flow

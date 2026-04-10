@@ -1,6 +1,5 @@
 /* eslint-disable perfectionist/sort-objects */
 
-import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
 import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';
@@ -34,9 +33,6 @@ export async function react(options: OptionsOverrides & OptionsFiles = {}): Prom
       name: 'maston/react/setup',
       plugins: {
         react: plugins['@eslint-react'],
-        'react-dom': plugins['@eslint-react/dom'],
-        'react-naming-convention': plugins['@eslint-react/naming-convention'],
-        'react-web-api': plugins['@eslint-react/web-api'],
         'react-refresh': pluginReactRefresh,
       },
     },
@@ -53,16 +49,8 @@ export async function react(options: OptionsOverrides & OptionsFiles = {}): Prom
       },
       rules: {
         ...renameRules(
-          {
-            ...(plugins['@eslint-react'].configs!.recommended as ESLint.ConfigData).rules,
-            ...(plugins['@eslint-react/dom'].configs!.recommended as ESLint.ConfigData).rules,
-            ...(plugins['@eslint-react/naming-convention'].configs!.recommended as ESLint.ConfigData).rules,
-          },
-          {
-            'react-x': 'react',
-            '@eslint-react/dom': 'react-dom',
-            '@eslint-react/naming-convention': 'react-naming-convention',
-          },
+          pluginReact.configs.recommended.rules as Record<string, unknown>,
+          { '@eslint-react': 'react' },
         ),
 
         // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
