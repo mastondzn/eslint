@@ -48,10 +48,7 @@ export async function react(options: OptionsOverrides & OptionsFiles = {}): Prom
         sourceType: 'module',
       },
       rules: {
-        ...renameRules(
-          pluginReact.configs.recommended.rules as Record<string, unknown>,
-          { '@eslint-react': 'react' },
-        ),
+        ...renameRules(pluginReact.configs.recommended.rules!, { '@eslint-react': 'react' }),
 
         // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
         'react-refresh/only-export-components': [
