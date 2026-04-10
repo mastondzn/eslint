@@ -43,13 +43,17 @@ There is no test suite. No jest, vitest, or other test runner is configured. Cor
 
 This config renames several plugin prefixes. Use these when writing inline `// eslint-disable` comments in this repo's own source:
 
-| Use this prefix | Original prefix        | Plugin                   |
-| --------------- | ---------------------- | ------------------------ |
-| `ts/*`          | `@typescript-eslint/*` | `@typescript-eslint`     |
-| `import/*`      | `import-x/*`           | `eslint-plugin-import-x` |
-| `node/*`        | `n/*`                  | `eslint-plugin-n`        |
-| `yaml/*`        | `yml/*`                | `eslint-plugin-yml`      |
-| `test/*`        | `vitest/*`             | `@vitest/eslint-plugin`  |
+| Use this prefix             | Original prefix                     | Plugin                             |
+| --------------------------- | ----------------------------------- | ---------------------------------- |
+| `ts/*`                      | `@typescript-eslint/*`              | `@typescript-eslint`               |
+| `import/*`                  | `import-x/*`                        | `eslint-plugin-import-x`           |
+| `node/*`                    | `n/*`                               | `eslint-plugin-n`                  |
+| `yaml/*`                    | `yml/*`                             | `eslint-plugin-yml`                |
+| `test/*`                    | `vitest/*`                          | `@vitest/eslint-plugin`            |
+| `react/*`                   | `react-x/*`                         | `@eslint-react/eslint-plugin`      |
+| `react-dom/*`               | `@eslint-react/dom/*`               | `@eslint-react/eslint-plugin`      |
+| `react-naming-convention/*` | `@eslint-react/naming-convention/*` | `@eslint-react/eslint-plugin`      |
+| `tailwindcss/*`             | `better-tailwindcss/*`              | `eslint-plugin-better-tailwindcss` |
 
 ## Release flow
 

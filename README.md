@@ -301,13 +301,17 @@ Check out the [configs](https://github.com/mastondzn/eslint/blob/main/src/config
 
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm package name), we renamed some plugins to make the overall scope more consistent and easier to write.
 
-| New Prefix | Original Prefix        | Source Plugin                                                                              |
-| ---------- | ---------------------- | ------------------------------------------------------------------------------------------ |
-| `import/*` | `import-x/*`           | [eslint-plugin-import-x](https://github.com/un-es/eslint-plugin-import-x)                  |
-| `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
-| `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
-| `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `test/*`   | `vitest/*`             | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                |
+| New Prefix                  | Original Prefix                     | Source Plugin                                                                                   |
+| --------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `import/*`                  | `import-x/*`                        | [eslint-plugin-import-x](https://github.com/un-es/eslint-plugin-import-x)                       |
+| `node/*`                    | `n/*`                               | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                          |
+| `yaml/*`                    | `yml/*`                             | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                             |
+| `ts/*`                      | `@typescript-eslint/*`              | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)      |
+| `test/*`                    | `vitest/*`                          | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                     |
+| `react/*`                   | `react-x/*`                         | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
+| `react-dom/*`               | `@eslint-react/dom/*`               | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
+| `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)                           |
+| `tailwindcss/*`             | `better-tailwindcss/*`              | [eslint-plugin-better-tailwindcss](https://github.com/schoero/eslint-plugin-better-tailwindcss) |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
