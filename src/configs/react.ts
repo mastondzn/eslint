@@ -1,5 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
-
 import { isPackageExists } from 'local-pkg';
 
 import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types';

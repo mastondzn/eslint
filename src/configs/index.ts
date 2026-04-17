@@ -1,3 +1,4 @@
+// @barrel-file
 export * from './command';
 export * from './comments';
 export * from './disables';
