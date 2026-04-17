@@ -24,7 +24,7 @@ export const barrelFile = defineCommand({
         const { ext, name } = path.parse(e.name);
         if (!['.ts', '.tsx'].includes(ext)) return false;
         if (name === 'index') return false;
-        if (/\.\w\.(?:j|t)sx?$/.test(e.name)) return false;
+        if (/\.\w*\.(?:j|t)sx?$/.test(e.name)) return false;
         return true;
       })
       .map((e) => (e.isDirectory() ? `./${e.name}` : `./${path.parse(e.name).name}`));
