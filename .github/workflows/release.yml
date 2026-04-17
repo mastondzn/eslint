@@ -4,21 +4,53 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
 
 jobs:
   release:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          registry-url: 'https://registry.npmjs.org'
 
-      - run: npx changelogithub
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run build
+        run: pnpm build
+
+        # We make sure ci is passing before releasing
+      - name: Wait for CI to finish
+        uses: lewagon/wait-on-check-action@v1.6.0
+        if: github.event_name == 'push'
+        with:
+          ref: ${{ github.ref }}
+          check-name: ci
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          verbose: true
+          wait-interval: 8
+
+      - name: Create release
+        run: pnpm publish --no-git-checks
+
+      - run: pnpx changelogithub
+        if: always() && github.event_name == 'push'
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

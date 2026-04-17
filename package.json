@@ -24,9 +24,12 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
-    "build": "nr typegen && tsdown --clean --dts",
-    "stub": "tsdown",
+    "build": "nr typegen && tsdown ./src/index.ts --unbundle",
     "dev": "npx @eslint/config-inspector --config eslint.config.ts",
     "build:inspector": "pnpm build && npx @eslint/config-inspector build",
     "watch": "tsdown --watch",
@@ -35,7 +38,7 @@
     "format:check": "prettier --check .",
     "typegen": "tsx scripts/typegen.ts",
     "prepack": "nr build",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
