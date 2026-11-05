@@ -155,6 +155,11 @@ export interface OptionsTailwindCSS extends OptionsOverrides {
    */
   tailwindConfig?: string;
   tsconfig?: string;
+  /**
+   * The working directory used to resolve `tailwindcss` and related config files.
+   * Useful in monorepos where each package has its own Tailwind setup.
+   */
+  cwd?: string;
   detectComponentClasses?: boolean;
   rootFontSize?: number;
   messageStyle?: 'visual' | 'compact' | 'raw';

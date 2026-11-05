@@ -86,6 +86,7 @@ export function maston(
       ...(typeof enableGitignore === 'boolean' ? { strict: false } : enableGitignore),
     };
 
+    // eslint-disable-next-line unicorn/prefer-await -- `maston()` is synchronous; configs may be awaitable
     configs.push(interopDefault(import('eslint-config-flat-gitignore')).then((r) => [r(options)]));
   }
 
@@ -227,7 +228,7 @@ export function maston(
   if (isInEditor) {
     composer = composer.disableRulesFix(['unused-imports/no-unused-imports', 'prefer-const'], {
       // eslint-disable-next-line ts/no-deprecated
-      builtinRules: async () => import('eslint/use-at-your-own-risk').then((r) => r.builtinRules),
+      builtinRules: async () => (await import('eslint/use-at-your-own-risk')).builtinRules,
     });
   }
 

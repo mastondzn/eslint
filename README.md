@@ -6,10 +6,10 @@ Fork of [@antfu/eslint-config](https://github.com/antfu/eslint-config) without f
 - Auto-detects and includes plugins and rules for: Typescript, React, TailwindCSS
 - Pretty strict by default, uses typescript-eslint's strict and stylistic recommended rules in both type aware and non type aware files.
 - Opinionated, but [very customizable](#customization)
-- [ESLint v9 Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily with included utils!
+- [ESLint v10 Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily with included utils!
 - Sorted imports by group (internal, external, parent, index, builtin)
 - Respects `.gitignore` by default
-- Requires ESLint v9.5.0+
+- Requires ESLint v10.4.0+ and Node.js `^22.22.2 || >=24.15.0`
 
 > [!WARNING]
 > Please keep in mind that this is still **_a personal config_** with a lot opinions and rules. Changes might not always be liked by everyone and please every use cases. Conflicts may appear aswell.
@@ -215,7 +215,7 @@ export default maston({
   // override rules (such as for unicorn plugin)
   unicorn: {
     overrides: {
-      'unicorn/prevent-abbreviations': 'error',
+      'unicorn/name-replacements': 'error',
       'unicorn/prefer-string-raw': 'off',
     },
   },
@@ -266,7 +266,6 @@ import {
   node,
   sortPackageJson,
   sortTsconfig,
-  stylistic,
   tailwindcss,
   toml,
   typescript,

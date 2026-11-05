@@ -9,10 +9,13 @@ const configs = await combine(
   {
     plugins: {
       // eslint-disable-next-line ts/no-deprecated
-      '': { rules: Object.fromEntries(builtinRules.entries()) },
+      '': { rules: Object.fromEntries(builtinRules) },
     },
   },
-  ...(await import('../src/configs').then((m) => Object.values(m).map(async (fn) => fn()))),
+  ...(await (async () => {
+    const mod = await import('../src/configs');
+    return Object.values(mod).map(async (fn) => fn());
+  })()),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];

@@ -105,8 +105,7 @@ export function renamePluginInConfigs(
     if (clone.plugins) {
       clone.plugins = Object.fromEntries(
         Object.entries(clone.plugins).map(([key, value]) => {
-          if (key in map) return [map[key], value];
-          return [key, value];
+          return [key in map ? map[key] : key, value];
         }),
       );
     }
@@ -138,8 +137,9 @@ export async function ensurePackages(packages: (string | undefined)[]): Promise<
   const result = await p.confirm({
     message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
   });
-  if (result)
-    await import('@antfu/install-pkg').then(async (i) => i.installPackage(nonExistingPackages, { dev: true }));
+  if (!result) return;
+  const i = await import('@antfu/install-pkg');
+  await i.installPackage(nonExistingPackages, { dev: true });
 }
 
 export function isInEditorEnv(): boolean {

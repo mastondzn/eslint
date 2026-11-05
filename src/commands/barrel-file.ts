@@ -41,10 +41,10 @@ export const barrelFile = defineCommand({
       }
     }
 
-    const missing = expected.filter((e) => !exportedPaths.has(e)).toSorted();
+    const missing = expected.filter((e) => !exportedPaths.has(e)).toSorted((a, b) => a.localeCompare(b));
     if (missing.length === 0) return false;
 
-    const displayNames = missing.map((m) => m.replace(/^\.\//, '')).toSorted();
+    const displayNames = missing.map((m) => m.replace(/^\.\//, '')).toSorted((a, b) => a.localeCompare(b));
 
     ctx.report({
       fix(fixer) {
