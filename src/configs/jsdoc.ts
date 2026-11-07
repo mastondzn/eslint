@@ -1,6 +1,7 @@
 import jsdocPlugin from 'eslint-plugin-jsdoc';
 
 import type { TypedFlatConfigItem } from '../types';
+import { GLOB_SRC } from '../globs';
 
 export function jsdoc(): TypedFlatConfigItem[] {
   return [
@@ -11,6 +12,7 @@ export function jsdoc(): TypedFlatConfigItem[] {
       },
     },
     {
+      files: [GLOB_SRC],
       name: 'maston/jsdoc/rules',
       rules: {
         'jsdoc/check-access': 'warn',
